@@ -1,3 +1,7 @@
-# Typography Detective v5
+# Typography Detective v8
 
-Robust GitHub Pages version. Rebuilt Learn Mode and Test Mode answer selection, scoring, feedback, and progression. Vocabulary hover definitions and Design Guide retained.
+Context-driven typography challenges for MACC Digital Design.
+
+Each challenge uses realistic copy related to the typography problem. The problem is demonstrated through the actual typography rather than relying only on a label. Corrected examples are shown after checking the solution.
+
+Replace the repository index.html with this file and publish with GitHub Pages.
