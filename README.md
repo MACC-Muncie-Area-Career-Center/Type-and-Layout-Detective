@@ -1,7 +1,16 @@
-# Typography Detective v8
+# Typography Detective v9
 
-Context-driven typography challenges for MACC Digital Design.
+MACC Digital Design typography game.
 
-Each challenge uses realistic copy related to the typography problem. The problem is demonstrated through the actual typography rather than relying only on a label. Corrected examples are shown after checking the solution.
+## v9 interface changes
+- Typography Vocabulary is now a non-clickable reference sidebar on the left.
+- Every term has its definition permanently visible.
+- The vocabulary no longer looks like a collection of interactive answer buttons.
+- The challenge area moves directly beneath the Learn/Test mode selector.
+- Vocabulary remains visible while students work.
+- Sidebar becomes a responsive section below the challenge on smaller screens.
+- Existing contextual typography examples, Learn/Test logic, scoring, and feedback remain intact.
 
-Replace the repository index.html with this file and publish with GitHub Pages.
+
+## v10
+- Added a `v10` version badge in the upper-right corner of the black Typography Detective header.
