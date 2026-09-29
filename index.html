@@ -16,7 +16,101 @@
 .vocab:hover:before,.vocab:focus:before{content:"";position:absolute;left:50%;bottom:calc(100% + 4px);transform:translateX(-50%);border:6px solid transparent;border-top-color:#202124;z-index:51}
 @media(max-width:700px){.vocab:active:after,.vocab:focus:after{width:210px}}
 .guide{position:fixed;right:-430px;top:0;width:min(430px,92vw);height:100vh;background:#fff;z-index:20;box-shadow:-8px 0 30px #0002;transition:right .3s;padding:22px;overflow:auto}.guide.open{right:0}.close{float:right;border:0;background:#202124;color:#fff;border-radius:50%;width:34px;height:34px}.guideTab{position:fixed;right:0;top:45%;z-index:19;border:0;background:#202124;color:#fff;padding:14px 10px;border-radius:10px 0 0 10px;writing-mode:vertical-rl;color:#fff}.guide .box{background:var(--soft);border-radius:10px;padding:14px;margin:12px 0;line-height:1.55}@media(max-width:700px){.controlGrid{grid-template-columns:repeat(2,1fr)}.modes{grid-template-columns:1fr}.lengths{grid-template-columns:repeat(3,1fr)}.display{font-size:46px}}
-</style></head><body><div class="app"><header class="hero"><h1>TYPOGRAPHY DETECTIVE</h1><p>Learn to diagnose and adjust what happens inside a text box.</p></header><section class="panel"><h2>Choose Your Mode</h2><div class="modes"><button id="learnMode" class="mode active"><strong>🟢 Learn Mode</strong><small>Identify the typographic adjustments that work together and learn why.</small></button><button id="testMode" class="mode"><strong>🔵 Test Mode</strong><small>Choose a length and work through typography challenges.</small></button></div></section><section class="panel">
+
+/* --- VISUAL DIAGNOSTIC EMPHASIS --- */
+.issueMark{
+  background:#ffe08a !important;
+  box-shadow:0 0 0 3px rgba(180,35,24,.18);
+  border-radius:4px;
+  padding:2px 5px;
+  position:relative;
+}
+.issueLine{
+  background:linear-gradient(90deg,rgba(255,224,138,.75),rgba(255,224,138,.22),transparent);
+  border-left:5px solid #b42318;
+  padding-left:10px !important;
+  border-radius:4px;
+}
+.issueBlock{
+  background:#fff1ee !important;
+  border:2px dashed #b42318 !important;
+  box-shadow:0 0 0 4px rgba(180,35,24,.08) !important;
+  border-radius:8px;
+  padding:10px !important;
+}
+.issueLabel{
+  display:inline-block;
+  margin:0 0 8px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#b42318;
+  color:white;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+.issueGuide{
+  margin-top:10px;
+  padding:9px 11px;
+  background:#fff8e6;
+  border-left:4px solid #e0a800;
+  color:#624900;
+  font-size:12px;
+  font-weight:700;
+  border-radius:4px;
+}
+
+
+.problemBanner .problemText strong,
+.problemBanner .problemText b{color:#8f2118}
+
+
+.contextExample{background:#fff;border:2px solid #d7d0c6;border-radius:12px;padding:24px 28px;min-height:250px;color:#242424;text-align:left}
+.contextExample.corrected{border-color:#65a779;background:#fbfffc}
+.contextExample .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;font-weight:900;color:#81786e;margin-bottom:12px}
+.contextExample h2{margin:0 0 16px;font-family:Georgia,serif;font-size:30px;line-height:1.05}
+.contextExample p{font-size:16px;line-height:1.55;margin:0 0 16px;max-width:680px}
+.badLeading{line-height:.78!important}
+.badTracking{letter-spacing:13px!important}
+.badKerning{font-size:64px;font-weight:800;letter-spacing:1px}
+.badKerning::first-letter{margin-right:22px}
+.badParaSpace{margin-top:0!important}
+.alignDemo{display:flex;flex-direction:column;gap:12px}
+.alignDemo p{margin:0;width:300px}
+.badAlign{margin-left:65px!important}
+.badJustify{text-align:justify;word-spacing:15px}
+.badHyphen{width:235px!important}
+.badTabs div,.badList div{margin:10px 0}
+.badTabs span{margin-left:55px}
+.badList div:nth-child(2){margin-left:28px}.badList div:nth-child(3){margin-left:5px}.badList div:nth-child(4){margin-left:35px}
+.badStyles h2:nth-of-type(2){font-size:21px}.badStyles h2:nth-of-type(3){font-size:36px}
+.badCharacter{font-size:23px;letter-spacing:2px;text-decoration:underline}
+.badPairing{font-family:cursive;letter-spacing:3px}
+.pairBody{font-family:Georgia,serif}
+.badLineLength{max-width:none!important}
+.badWidow{width:190px!important;margin-left:auto!important}
+.boxDemo{display:flex;flex-direction:column;gap:14px}
+.boxDemo>div{width:280px;border:1px solid #bbb2a6;padding:12px;font-weight:800}
+.boxDemo small{font-weight:400}
+.badBox{margin-left:60px}
+
+
+.hero{position:relative}
+.versionBadge{
+  position:absolute;
+  top:12px;
+  right:14px;
+  color:#bdbdbd;
+  font:700 11px/1 Arial,sans-serif;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:6px;
+  padding:5px 7px;
+}
+</style></head><body><div class="app"><header class="hero"><div class="versionBadge">v10</div><h1>TYPOGRAPHY DETECTIVE</h1><p>Learn to diagnose and adjust what happens inside a text box.</p></header><section class="panel"><h2>Choose Your Mode</h2><div class="modes"><button id="learnMode" class="mode active"><strong>🟢 Learn Mode</strong><small>Identify the typographic adjustments that work together and learn why.</small></button><button id="testMode" class="mode"><strong>🔵 Test Mode</strong><small>Choose a length and work through typography challenges.</small></button></div></section><section class="panel">
 <h2>Typography Controls</h2>
 <p class="note">These are the tools students will practice recognizing. The challenge will present a visual/text problem and the student selects the controls that would solve it.</p>
 <div class="controlGrid">
@@ -38,12 +132,80 @@
 <button class="vocab" data-tip="How separate text boxes use coordinated paragraph alignment and text edges to function as one typographic system.">Text-box Alignment</button>
 </div>
 </section>
-<section id="setup" class="panel hidden"><h2>Choose Test Length</h2><div class="lengths"><button class="btn" data-n="10">10</button><button class="btn" data-n="20">20</button><button class="btn" data-n="30">30</button><button class="btn" data-n="40">40</button><button class="btn" data-n="50">50</button></div></section><section id="learn" class="panel"><div class="stats"><span>Challenge: <b id="round">1</b></span><span>Score: <b id="score">0</b></span><span>Streak: <b id="streak">0</b></span></div><div id="brief" class="instructions"></div><div class="stage"><div id="visual"></div></div><div class="solutionLabel"><strong>BUILD YOUR SOLUTION</strong><span>Select every typography adjustment you think will improve the text.</span></div>
+<section id="setup" class="panel hidden"><h2>Choose Test Length</h2><div class="lengths"><button class="btn" data-n="10">10</button><button class="btn" data-n="20">20</button><button class="btn" data-n="30">30</button><button class="btn" data-n="40">40</button><button class="btn" data-n="50">50</button></div></section><section id="learn" class="panel"><div class="stats"><span>Challenge: <b id="round">1</b></span><span>Score: <b id="score">0</b></span><span>Streak: <b id="streak">0</b></span></div><div id="brief" class="instructions"></div><div class="stage"><div id="visual"></div></div><div class="solutionLabel"><strong>BUILD YOUR SOLUTION</strong><span>First identify what looks wrong in the example. Then select every typography adjustment you think will improve it.</span></div>
 <div id="choices" class="choices"></div><div id="feedback" class="feedback"></div><div id="explain" class="panel hidden"></div><div class="actions"><button id="check" class="btn primary">Check My Solutions</button> <button id="next" class="btn hidden">Next Challenge</button></div></section><section id="test" class="panel hidden"><div class="stats"><span>Question: <b id="q">1</b> / <b id="total">10</b></span><span>Score: <b id="tscore">0</b></span></div><div id="tbrief" class="instructions"></div><div class="stage"><div id="tvisual"></div></div><div id="tchoices" class="choices"></div><div id="tfeedback" class="feedback"></div></section><section id="results" class="panel hidden"></section><section class="panel note"><b>Typography reminder:</b> Leading, tracking, kerning, paragraph spacing, alignment, justification, hyphenation, tabs, lists, font pairing, line length, and paragraph/character styles solve different problems.</section></div><button id="guideTab" class="guideTab">💡 Design Guide</button><aside id="guide" class="guide"><button id="close" class="close">×</button><h2>💡 Typography Design Guide</h2><p id="guideIntro">Use these reminders to connect a visual problem to the correct typography control.</p><div class="box"><b>Leading</b><br>Controls vertical distance between lines.</div><div class="box"><b>Tracking</b><br>Changes spacing across a range of characters.</div><div class="box"><b>Kerning</b><br>Adjusts space between specific character pairs.</div><div class="box"><b>Paragraph spacing</b><br>Space Before/After separates paragraphs without empty lines.</div><div class="box"><b>Alignment & Justification</b><br>Change how text sits inside its text box. Full justification can create rivers in narrow columns.</div><div class="box"><b>Hyphenation</b><br>Controls where words can break.</div><div class="box"><b>Tabs & Lists</b><br>Use predictable columns, indents, bullets, and numbers.</div><div class="box"><b>Paragraph styles</b><br>Control repeated paragraph-level formatting.</div><div class="box"><b>Character styles</b><br>Control repeated formatting on selected words or characters.</div><div class="box"><b>Font pairing</b><br>Choose complementary roles with useful contrast.</div></aside><script>
 const D=[["Crowded Lines","Leading",["Increase the leading between lines.","Keep the paragraph font size consistent."],"Leading controls vertical distance between lines. Too little leading makes text dense."],["Air Between Ideas","Paragraph Spacing",["Use consistent space after each paragraph.","Remove extra blank paragraph breaks.","Keep the same leading within each paragraph."],"Paragraph Before/After separates ideas without pressing Enter repeatedly."],["Letters Fighting","Tracking",["Reduce the tracking of the heading.","Judge the word as a visual shape, not just individual letters."],"Tracking changes spacing across a range of characters."],["Awkward Pair","Kerning",["Adjust the kerning of the problem letter pair.","Leave overall tracking unchanged."],"Kerning fixes specific character pairs; tracking affects a range."],["The Ragged Edge","Alignment",["Change the paragraph to left alignment.","Keep the text edge consistent throughout the text block."],"Alignment should support scanning and reading."],["Forced Justification","Justification",["Use left-aligned/ragged-right text for the narrow paragraph.","Avoid forcing full justification when the column is too narrow."],"Justification changes word spacing to align both edges and can create rivers in narrow columns."],["Hyphen Highway","Hyphenation",["Reduce excessive hyphenation.","Consider less restrictive alignment if the column remains too narrow."],"Hyphenation can help fit justified text, but too much hurts reading flow."],["The Tab Test","Tabs",["Replace repeated spaces with a tab stop.","Set a consistent tab position for the prices."],"Tabs create predictable columns; repeated spaces are fragile."],["List Disorder","Bulleted Lists",["Set a consistent bullet position and text indent.","Align wrapped lines with the list text, not the bullet."],"Lists need predictable bullet, text, and wrapped-line alignment."],["Numbered Steps","Numbered Lists",["Create a consistent number column.","Use a hanging indent for wrapped list text."],"A predictable number column and hanging indent keep steps readable."],["Style Consistency","Paragraph Styles",["Create and apply one body paragraph style.","Use the style consistently instead of manual formatting."],"Paragraph styles make repeated formatting consistent and editable."],["Character Style","Character Styles",["Create a character style for emphasized terms.","Apply the same character style consistently."],"Character styles control selected words without changing the whole paragraph."],["Font Pairing","Font Pairing",["Choose typefaces with complementary roles.","Give headline and body type clear, readable roles."],"Good pairing creates useful contrast without unnecessary competition."],["Paragraph Hierarchy","Space Before / After",["Use paragraph-after spacing for the heading-to-body relationship.","Remove manual blank lines.","Keep heading spacing consistent."],"Paragraph spacing creates hierarchy without empty paragraphs."],["The Long Line","Line Length",["Reduce usable text width or increase text size appropriately.","Keep line length comfortable for the reading task."],"Very long lines make it harder to track from line to line."],["Widow Alert","Widows & Orphans",["Keep enough lines together to avoid a stranded line.","Use paragraph pagination controls rather than random line breaks."],"Widows and orphans interrupt reading continuity."],["Mixed Signals","Text Box Alignment",["Use a consistent alignment setting for related text boxes.","Coordinate the text edges of related boxes."],"Separate text boxes can still form one typographic system."],["Leading vs Paragraph Space","Leading vs Paragraph Spacing",["Use leading for line-to-line readability.","Use paragraph spacing to separate paragraphs."],"Leading and paragraph spacing solve different problems."],["Tracking vs Kerning","Tracking vs Kerning",["Use kerning for the individual problem pair.","Leave the rest of the heading tracking consistent."],"Use the smallest appropriate spacing control."],["Style System","Paragraph + Character Styles",["Create paragraph styles for repeated text structures.","Use character styles for repeated inline emphasis.","Keep the style system consistent."],"Paragraph styles control paragraphs; character styles control selected characters."]],V=["<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"tightlead\">Typography should make language readable.<br>Good typography creates rhythm and hierarchy.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"display loose\">TYPOGRAPHY</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"display\">AVATAR</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"center\">DESIGN<br><small>Make the message easy to follow.</small></span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"just\">Typography should help the reader move through information without distraction. Uneven word spacing can create distracting rivers.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">Design Book ........ $24.00 &nbsp; Grid Guide ........ $18.00<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">\u2022 &nbsp; Alignment and spacing<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">1. &nbsp; Define the problem<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"serif\">Design</span> <span class=\"sans\">makes information easier to understand.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"long\">Typography works best when the reader can comfortably travel from the end of one line back to the beginning of the next.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>"],C=["<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"tightlead\">Typography should make language readable.<br>Good typography creates rhythm and hierarchy.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"display \">TYPOGRAPHY</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"display\">AVATAR</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"center\">DESIGN<br><small>Make the message easy to follow.</small></span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"just\">Typography should help the reader move through information without distraction. Uneven word spacing can create distracting rivers.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">Design Book ........ $24.00 &nbsp; Grid Guide ........ $18.00<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">\u2022 &nbsp; Alignment and spacing<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">1. &nbsp; Define the problem<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"serif\">Design</span> <span class=\"sans\">makes information easier to understand.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"long\">Typography works best when the reader can comfortably travel from the end of one line back to the beginning of the next.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>"];let S={cur:null,sel:new Set(),locked:false,round:0,score:0,streak:0,total:0,q:0,tscore:0,tlock:false};
 const $=x=>document.getElementById(x),pick=a=>a[Math.floor(Math.random()*a.length)],shuffle=a=>a.slice().sort(()=>Math.random()-.5);
-function updateSelectionCount(){const label=document.querySelector('.solutionLabel span');if(label)label.textContent=S.sel.size?`${S.sel.size} adjustment${S.sel.size===1?'':'s'} selected — choose all that apply.`:'Select every typography adjustment you think will improve the text.';}
+function updateSelectionCount(){const label=document.querySelector('.solutionLabel span');if(label)label.textContent=S.sel.size?`${S.sel.size} adjustment${S.sel.size===1?'':'s'} selected — choose all that apply.`:'First identify what looks wrong in the example. Then select every typography adjustment you think will improve it.';}
 function renderChoices(el,items,fn){el.innerHTML='';shuffle(items).forEach(text=>{const b=document.createElement('button');b.type='button';b.className='choice';b.dataset.answer=text;b.textContent=text;b.onclick=()=>fn(text,b);el.appendChild(b)})}
+
+function contextualExample(ch, corrected=false){
+  const cls=corrected?"contextExample corrected":"contextExample";
+  const p=(body)=>`<div class="${cls}">${body}</div>`;
+  switch(ch.topic){
+    case "Leading":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Why Typography Matters</h2>
+      <p class="${corrected?"":"badLeading"}">Good typography makes information easier to read and understand. When lines of text are packed too closely together, the reader's eye has difficulty moving from one line to the next.</p>
+      <p>Designers use spacing to guide readers through information and create a comfortable rhythm.</p>`);
+    case "Tracking":
+      return p(`<div class="eyebrow">${ch.title}</div><h2 class="${corrected?"":"badTracking"}">DESIGN FOR PEOPLE</h2>
+      <p>Display type needs enough space to remain clear while still feeling connected as a phrase.</p>`);
+    case "Kerning":
+      return p(`<div class="eyebrow">${ch.title}</div><div class="${corrected?"":"badKerning"}">WATER</div>
+      <p>The identity should feel balanced and intentional. Individual letter pairs should appear evenly spaced.</p>`);
+    case "Paragraph Spacing":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Design Process</h2>
+      <p>Research helps designers understand the audience and the problem they need to solve.</p>
+      <p class="${corrected?"":"badParaSpace"}">Sketching allows designers to explore many possible solutions before choosing a direction.</p>
+      <p>Iteration improves the final result by revealing what works and what needs adjustment.</p>`);
+    case "Alignment":
+      return p(`<div class="eyebrow">${ch.title}</div><div class="alignDemo">
+      <p>Research and discover<br>the problem first.</p>
+      <p class="${corrected?"":"badAlign"}">Create several<br>possible solutions.</p>
+      <p>Refine the strongest<br>direction.</p></div>`);
+    case "Justification":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Community Story</h2>
+      <p class="${corrected?"":"badJustify"}">A community project brings people together around a shared goal. Designers organize the information so readers can quickly understand what is happening, where it is happening, and how they can participate.</p>`);
+    case "Hyphenation":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Travel Notes</h2>
+      <p class="${corrected?"":"badHyphen"}">A narrow brochure column contains several long words that are forced onto new lines, creating uneven spacing and awkward breaks that interrupt the reading rhythm.</p>`);
+    case "Tabs":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Event Schedule</h2>
+      <div class="${corrected?"":"badTabs"}"><div>Opening Reception <span>6:00 PM</span></div><div>Guest Speaker <span>7:15 PM</span></div><div>Student Showcase <span>8:00 PM</span></div></div>`);
+    case "Bulleted Lists":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Materials</h2>
+      <div class="${corrected?"":"badList"}"><div>• Sketchbook</div><div>• Pencil</div><div>• Ruler</div><div>• Computer mouse</div></div>`);
+    case "Numbered Lists":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Project Steps</h2>
+      <div class="${corrected?"":"badList"}"><div>1. Research the audience</div><div>2. Sketch several ideas</div><div>3. Select a direction</div><div>4. Refine the final design</div></div>`);
+    case "Paragraph Styles":
+      return p(`<div class="eyebrow">${ch.title}</div><div class="${corrected?"":"badStyles"}">
+      <h2>Project One</h2><p>Brand identity exploration and final presentation.</p>
+      <h2>Project Two</h2><p>Editorial layout exploration and final presentation.</p>
+      <h2>Project Three</h2><p>Poster design exploration and final presentation.</p></div>`);
+    case "Character Styles":
+      return p(`<div class="eyebrow">${ch.title}</div>
+      <p>This portfolio includes <span class="${corrected?"":"badCharacter"}">important project information</span> that needs consistent emphasis throughout the document.</p>
+      <p>Each caption should use the same emphasis for project names and key terms.</p>`);
+    case "Font Pairing":
+      return p(`<div class="eyebrow">${ch.title}</div><h2 class="${corrected?"":"badPairing"}">The Art of Making</h2>
+      <p class="pairBody">Typography creates hierarchy, mood, and clarity. Supporting text should complement the headline rather than compete with it.</p>`);
+    case "Line Length":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Design and Reading</h2>
+      <p class="${corrected?"":"badLineLength"}">Readers move through lines of text in a predictable rhythm. When a line becomes extremely long, the eye has farther to travel before returning to the beginning of the next line.</p>`);
+    case "Widows / Orphans":
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Annual Report</h2>
+      <p>Our design program helps students develop visual communication skills through projects that combine research, typography, layout, and iteration.</p>
+      <p class="${corrected?"":"badWidow"}">Students present their work at the end of each term.</p>`);
+    case "Text-box Alignment":
+      return p(`<div class="eyebrow">${ch.title}</div><div class="boxDemo">
+      <div>Project Name<br><small>Brand Identity</small></div>
+      <div class="${corrected?"":"badBox"}">Project Name<br><small>Editorial Layout</small></div>
+      <div>Project Name<br><small>Poster Design</small></div></div>`);
+    default:
+      return p(`<div class="eyebrow">${ch.title}</div><h2>Typography Example</h2><p>${ch.problem}</p>`);
+  }
+}
 function learn(){S.round++;S.cur=pick(D);S.sel=new Set();S.locked=false;$('round').textContent=S.round;$('score').textContent=S.score;$('streak').textContent=S.streak;const i=D.indexOf(S.cur);$('brief').innerHTML=`<b>${S.cur[0]}</b><br><b>${S.cur[1]}</b><br>Look closely at the text treatment shown below.<br><br><strong>Choose the typography controls that would fix the problem. There may be more than one correct answer.</strong>`;$('visual').innerHTML=V[i];$('feedback').textContent='';$('feedback').className='feedback';$('explain').classList.add('hidden');$('check').classList.remove('hidden');$('next').classList.add('hidden');
 let answers=S.cur[2].slice(), pool=D.flatMap(x=>x[2]).filter(x=>!answers.includes(x));while(answers.length<Math.min(5,S.cur[2].length+2)&&pool.length)answers.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);renderChoices($('choices'),answers,(text,b)=>{if(S.locked)return;if(S.sel.has(text)){S.sel.delete(text);b.classList.remove('selected')}else{S.sel.add(text);b.classList.add('selected')}updateSelectionCount()});updateSelectionCount()}
 function checkLearn(){if(S.locked)return;if(!S.sel.size){$('feedback').textContent='Choose at least one adjustment before checking.';$('feedback').className='feedback bad';return}S.locked=true;const correct=new Set(S.cur[2]),right=[...S.sel].filter(x=>correct.has(x)),wrong=[...S.sel].filter(x=>!correct.has(x)),miss=[...correct].filter(x=>!S.sel.has(x)),perfect=!wrong.length&&!miss.length;[...$('choices').children].forEach(b=>{b.disabled=true;if(correct.has(b.dataset.answer))b.classList.add('correct');if(S.sel.has(b.dataset.answer)&&!correct.has(b.dataset.answer))b.classList.add('wrong')});if(perfect){S.score++;S.streak++;$('feedback').textContent='🎉 Excellent typography diagnosis!';$('feedback').className='feedback good'}else if(right.length){S.streak=0;$('feedback').textContent='👍 Good start — you found part of the solution.';$('feedback').className='feedback good'}else{S.streak=0;$('feedback').textContent="🔎 Let's slow down and rebuild the typography fundamentals.";$('feedback').className='feedback bad'}$('score').textContent=S.score;$('streak').textContent=S.streak;const i=D.indexOf(S.cur);$('visual').innerHTML=C[i];let concept=S.cur[3];$('explain').innerHTML=perfect?`<h3>🎉 What you did well</h3><p>You identified every important adjustment.</p><p><b>Why:</b> ${concept}</p>`:right.length?`<h3>👍 What you got right</h3><p><b>Correct:</b> ${right.join('; ')}.</p><p><b>Still to notice:</b> ${miss.join('; ')}.</p><p>${concept}</p>`:`<h3>🔎 Let's review the fundamentals</h3><p>The goal is to connect the visual symptom to the typography control that changes it.</p><p><b>${S.cur[1]}:</b> ${concept}</p>`;$('explain').classList.remove('hidden');$('check').classList.add('hidden');$('next').classList.remove('hidden');openGuide(perfect?'Great job!':right.length?'Good start — keep going.':'Let’s review the basics.')}
