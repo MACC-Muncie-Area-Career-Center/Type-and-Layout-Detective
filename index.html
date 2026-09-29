@@ -2,67 +2,82 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Typography Detective</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Type & Layout Detective: 60 before-and-after cases for learning typography and layout. Compare a flawed design with its corrected version and name the fix.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2317202b'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='700' text-anchor='middle' fill='%23eef1f5'%3EAa%3C/text%3E%3C/svg%3E">
+<style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Type &amp; Layout Detective</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Lobster&family=Newsreader:wght@500;600&family=Pacifico&family=Source+Sans+3:ital,wght@0,400;0,700;0,800;1,400&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Lobster&family=Newsreader:wght@500;600&family=Oswald:wght@400;500;600&family=Pacifico&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
-/* Layout: masthead, then a case card (two proof windows + answers) beside a sticky vocabulary rail. Proof windows stay white "paper" in both themes. */
+/* Layout: masthead, a practice toolbar, then the case card (two artboards on a pasteboard + answers) beside a sticky issue rail. Artboards depict printed/screen pieces, so their colors are fixed. */
 :root{
-  --bg:#eef1f5; --surface:#ffffff; --stage:#dfe4eb; --ink:#17202b; --muted:#5a6574; --line:#d3d9e1;
+  --bg:#eef1f5; --surface:#ffffff; --stage:#d9dee6; --paste:#c9cfd8; --ink:#17202b; --muted:#5a6574; --line:#d3d9e1;
   --pencil:#2f62c9; --pencil-soft:#e2eafb;
   --good:#1e7547; --good-soft:#e3f3ea; --bad:#b3261e; --bad-soft:#fbe8e6;
-  --sheet:#ffffff; --sheet-ink:#1b1b1b; --mark:#2f62c9;
   --display:"Newsreader",Georgia,serif; --ui:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#11151b; --surface:#19202a; --stage:#0b0e12; --ink:#e6eaf0; --muted:#9aa5b3; --line:#2b3441;
-  --pencil:#86a8ff; --pencil-soft:#1e2a44; --good:#62c994; --good-soft:#15301f; --bad:#ff8d84; --bad-soft:#3a1d1b;
-  --sheet:#fbfaf7; --sheet-ink:#1b1b1b; --mark:#2f62c9; color-scheme:dark}}
+  --bg:#11151b; --surface:#19202a; --stage:#0b0e12; --paste:#2a313b; --ink:#e6eaf0; --muted:#9aa5b3; --line:#2b3441;
+  --pencil:#86a8ff; --pencil-soft:#1e2a44; --good:#62c994; --good-soft:#15301f; --bad:#ff8d84; --bad-soft:#3a1d1b; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#11151b; --surface:#19202a; --stage:#0b0e12; --ink:#e6eaf0; --muted:#9aa5b3; --line:#2b3441;
-  --pencil:#86a8ff; --pencil-soft:#1e2a44; --good:#62c994; --good-soft:#15301f; --bad:#ff8d84; --bad-soft:#3a1d1b;
-  --sheet:#fbfaf7; --sheet-ink:#1b1b1b; --mark:#2f62c9; color-scheme:dark}
+  --bg:#11151b; --surface:#19202a; --stage:#0b0e12; --paste:#2a313b; --ink:#e6eaf0; --muted:#9aa5b3; --line:#2b3441;
+  --pencil:#86a8ff; --pencil-soft:#1e2a44; --good:#62c994; --good-soft:#15301f; --bad:#ff8d84; --bad-soft:#3a1d1b; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--ui)}
-.wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:24px 48px}
-button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1260px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:24px 48px}
+button,select{font:inherit;color:inherit}
+button{cursor:pointer}
 :focus-visible{outline:2px solid var(--pencil);outline-offset:2px}
 
 .mast{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
 .kicker{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--pencil);margin:0 0 10px}
 h1{font:600 clamp(32px,5vw,46px)/1.02 var(--display);letter-spacing:-.01em;margin:0 0 10px;text-wrap:balance}
-.lede{margin:0;max-width:60ch;color:var(--muted)}
+.lede{margin:0;max-width:64ch;color:var(--muted)}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
 .seg button{border:0;background:none;padding:8px 20px;border-radius:999px;font-weight:600;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px;align-items:start}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:24px;align-items:start}
 main{min-width:0;display:grid;gap:18px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:clamp(16px,2.4vw,24px);min-width:0}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding-block:12px}
+.toolbar label{font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.toolbar select{min-width:0;max-width:100%;flex:1 1 240px;padding:9px 10px;border:1px solid var(--line);border-radius:7px;background:var(--surface)}
+.toolbar .info{font-size:13px;color:var(--muted)}
 .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font:500 12px/1.2 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.titleRow{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin:8px 0 16px}
+.titleRow{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin:8px 0 6px}
 h2{font:600 24px/1.2 var(--display);margin:0;text-wrap:balance}
+.piece{margin:0 0 14px;color:var(--muted);font-size:14px}
 .chip{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:var(--pencil-soft);color:var(--pencil)}
 
 .stageWrap{container:stage/inline-size;background:var(--stage);padding:14px;border-radius:8px}
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .compare.wide{grid-template-columns:1fr}
-@container stage (max-width:640px){.compare{grid-template-columns:1fr}}
+@container stage (max-width:600px){.compare{grid-template-columns:1fr}}
 .frame{margin:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);min-width:0}
 .frame figcaption{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .tag{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:4px;font-weight:600}
 .frame.bad .tag{background:var(--bad-soft);color:var(--bad)}
 .frame.good .tag{background:var(--good-soft);color:var(--good)}
-.sheet{background:var(--sheet);color:var(--sheet-ink);padding:24px 20px;min-height:240px;overflow-x:auto}
-
-/* Sample typography: everything explicit so only the intended property differs */
-.pg{font-family:"Source Serif 4",Georgia,serif;font-size:15px;line-height:1.45;color:var(--sheet-ink)}
-.pg p,.pg h3,.pg div{margin:0}
-.pg .sans{font-family:"Source Sans 3","Helvetica Neue",Arial,sans-serif}
-.pg .lines div{white-space:nowrap}
-.compare.hinting .lk{outline:2px dashed var(--mark);outline-offset:5px;border-radius:2px}
+.paste{background:var(--paste);padding:18px}
+.fit{position:relative;width:100%}
+.art{position:absolute;top:0;left:0;transform-origin:0 0;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.25),0 6px 18px rgba(0,0,0,.12);font-family:"Source Sans 3","Helvetica Neue",Arial,sans-serif;color:#1c1c1c;text-align:left}
+.art *{margin:0}
+.art .lines>div{white-space:nowrap}
+.ab{position:absolute}
+.ph{position:relative;overflow:hidden;background:linear-gradient(165deg,var(--a,#9cc0d6),var(--b,#e4d3b0))}
+.ph.ab{position:absolute}
+.ph::before{content:"";position:absolute;width:22%;aspect-ratio:1;border-radius:50%;background:rgba(255,250,235,.8);right:16%;top:14%}
+.ph::after{content:"";position:absolute;left:-15%;right:-15%;bottom:-38%;height:70%;background:rgba(35,60,52,.4);border-radius:50% 50% 0 0}
+.gd{position:absolute;display:none;pointer-events:none;z-index:5}
+.gv{top:0;bottom:0;border-left:1.5px dashed #0aa2e8}
+.gh{left:0;right:0;border-top:1.5px dashed #0aa2e8}
+.gr{border:1.5px dashed #0aa2e8}
+.compare.hinting .gd{display:block}
+.compare.hinting .lk{outline:2px dashed #d61f8c;outline-offset:3px}
 
 .hintRow{display:flex;justify-content:flex-end;margin-top:10px}
 .ghost{background:none;border:1px solid var(--line);border-radius:6px;padding:7px 12px;font-size:13px;font-weight:500;color:var(--muted)}
@@ -94,7 +109,6 @@ legend{font-weight:600;margin-bottom:10px;padding:0}
 .primary{background:var(--ink);color:var(--bg);border:0;border-radius:7px;padding:11px 20px;font-weight:600}
 .primary:disabled{opacity:.4;cursor:not-allowed}
 .secondary{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:10px 18px;font-weight:600}
-
 .lengths{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
 .lengths button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:14px 22px;min-width:110px;text-align:left}
 .lengths b{display:block;font:600 26px/1 var(--display)}
@@ -107,14 +121,20 @@ legend{font-weight:600;margin-bottom:10px;padding:0}
 
 .vocab{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);max-height:calc(100vh - 32px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
 .vocab h2{font-size:20px}
-.vocab>p{font-size:12.5px;color:var(--muted);margin:6px 0 12px}
-.terms{display:grid;gap:6px;margin:0}
-.term{border:1px solid transparent;border-radius:7px;padding:7px 9px;transition:background .2s}
-.term dt{font-weight:600;font-size:13.5px}
-.term dd{margin:2px 0 0;font-size:12.5px;line-height:1.45;color:var(--muted)}
+.vocab>p{font-size:12.5px;color:var(--muted);margin:6px 0 10px}
+.group{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--pencil);margin:14px 0 6px}
+.terms{display:grid;gap:4px}
+.term{display:block;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:7px;padding:7px 9px;transition:background .2s}
+.term:hover{background:var(--bg)}
+.term .tn{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:13.5px}
+.term .tp{font:500 11px/1.6 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.term .tp.done{color:var(--good)}
+.term .td{display:block;margin-top:2px;font-size:12.5px;line-height:1.45;color:var(--muted)}
 .term.on{background:var(--pencil-soft);border-color:var(--pencil)}
+.term.sel{border-color:var(--line)}
+.reset{margin-top:12px;background:none;border:0;padding:0;font-size:12px;color:var(--muted);text-decoration:underline}
 .colophon{margin-top:28px;font-size:12px;color:var(--muted)}
-@media (max-width:960px){.layout{grid-template-columns:1fr}.vocab{position:static;max-height:none}.terms{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}}
+@media (max-width:980px){.layout{grid-template-columns:1fr}.vocab{position:static;max-height:none}.terms{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -124,8 +144,8 @@ legend{font-weight:600;margin-bottom:10px;padding:0}
   <header class="mast">
     <div>
       <p class="kicker">Spot the difference · name the fix</p>
-      <h1>Typography Detective</h1>
-      <p class="lede">Window A has a typography problem. Window B shows the same text after one adjustment. Compare them, then choose the adjustment that was made.</p>
+      <h1>Type &amp; Layout Detective</h1>
+      <p class="lede">60 cases from real design work: posters, menus, magazine pages, résumés, web pages and apps. Version A has one typography or layout problem. Version B is the same piece after one fix. Compare them and choose the fix that was made.</p>
     </div>
     <div class="seg" role="group" aria-label="Mode">
       <button id="mLearn" type="button" aria-pressed="true">Learn</button>
@@ -135,23 +155,26 @@ legend{font-weight:600;margin-bottom:10px;padding:0}
 
   <div class="layout">
     <main>
+      <div class="card toolbar">
+        <label for="scopeSel">Cases</label>
+        <select id="scopeSel"></select>
+        <span id="scopeInfo" class="info"></span>
+      </div>
+
       <section id="setup" class="card" hidden>
         <h2>Choose a test length</h2>
-        <p class="muted" style="margin:6px 0 0">No hints in Test mode. Every question is a different case.</p>
-        <div class="lengths">
-          <button type="button" data-n="5"><b>5</b><small>Quick check</small></button>
-          <button type="button" data-n="10"><b>10</b><small>Standard</small></button>
-          <button type="button" data-n="22"><b>22</b><small>Every case</small></button>
-        </div>
+        <p id="setupInfo" class="muted" style="margin:6px 0 0"></p>
+        <div id="lengths" class="lengths"></div>
       </section>
 
       <section id="play" class="card">
         <div class="meta"><span id="caseLabel">Case</span><span id="progress"></span></div>
         <div class="titleRow"><h2 id="caseTitle">What changed between A and B?</h2><span id="termChip" class="chip" hidden></span></div>
+        <p id="piece" class="piece"></p>
         <div class="stageWrap"><div id="compare" class="compare"></div></div>
         <div class="hintRow"><button id="hintBtn" type="button" class="ghost" aria-pressed="false">Show where to look</button></div>
         <fieldset>
-          <legend>Which adjustment turned A into B?</legend>
+          <legend>Which fix turned A into B?</legend>
           <div id="opts" class="opts"></div>
         </fieldset>
         <div id="feedback" aria-live="polite"></div>
@@ -165,191 +188,686 @@ legend{font-weight:600;margin-bottom:10px;padding:0}
     </main>
 
     <aside class="vocab" aria-labelledby="vocabHead">
-      <h2 id="vocabHead">Vocabulary</h2>
-      <p>After each answer, the related term is highlighted.</p>
-      <dl id="terms" class="terms"></dl>
+      <h2 id="vocabHead">Issues &amp; Tools</h2>
+      <p>Select an issue to practice its three cases. The count shows how many you have answered correctly on this device.</p>
+      <div id="terms"></div>
+      <button id="resetBtn" type="button" class="reset">Reset my progress</button>
     </aside>
   </div>
-  <p class="colophon">Headings set in Newsreader, interface in IBM Plex Sans. Sample text in Source Serif 4 and Source Sans 3.</p>
+  <p class="colophon">Cyan dashed lines are guides, drawn the way layout software shows them; pink outlines mark what changed. Photos are placeholders, and names and places are fictional.</p>
 </div>
 
 <script>
-const VOCAB=[
- ["leading","Leading","Vertical distance from one baseline to the next. Written with size, e.g. 10/14 means 10 pt type on 14 pt leading."],
- ["tracking","Tracking","Even spacing added or removed across a range of letters, measured in thousandths of an em."],
- ["kerning","Kerning","Spacing adjusted between one specific pair of letters, such as T and o."],
- ["space","Space Before / After","Space added above or below a paragraph. Separates ideas without typing extra returns."],
- ["align","Alignment","How lines sit in the frame: left, right, centered, or justified."],
- ["justify","Justification","Stretches word spacing so lines are flush on both edges. In narrow columns it creates rivers of white space."],
- ["hyphen","Hyphenation","Rules for breaking words at line ends. Limit consecutive hyphens to two or fewer."],
- ["tabs","Tabs","Stops at exact positions that line text up in columns. Typed spaces never line up in proportional fonts."],
- ["lists","Bulleted & Numbered Lists","Automatic lists with a hanging indent, so bullets or numbers hang left and wrapped lines align with the text."],
- ["pstyle","Paragraph Styles","A saved set of paragraph formatting (font, size, leading, spacing, alignment) applied to whole paragraphs."],
- ["cstyle","Character Styles","A saved set of formatting applied to selected words, such as key terms, inside a paragraph."],
- ["pairing","Font Pairing","Combining typefaces with distinct jobs, such as a serif headline and a sans-serif body."],
- ["measure","Line Length (Measure)","Characters per line. Body text reads best at about 45 to 75."],
- ["widows","Widows, Orphans & Runts","Stranded lines: a paragraph's first line alone at a column's bottom (orphan), its last line alone at the top (widow), or a single word on the last line (runt)."],
- ["frames","Text Frame Alignment","Separate text frames lined up on shared edges so they read as one group."],
- ["quotes","Quotes & Dashes","Curly quotes and apostrophes, en dashes for ranges (9–5), and em dashes for breaks in a sentence."],
- ["scale","Horizontal Scale","Artificially stretching or squeezing letters. Distorts stroke weights; keep it at 100%."]
-];
+const SE="'Source Serif 4',Georgia,serif",SA="'Source Sans 3','Helvetica Neue',Arial,sans-serif",OS="Oswald,Impact,sans-serif";
+const gv=x=>`<div class="gd gv" style="left:${x}px"></div>`,gh=y=>`<div class="gd gh" style="top:${y}px"></div>`,gr=m=>`<div class="gd gr" style="inset:${m}px"></div>`;
+const ph=(style,a,b,cls="")=>`<div class="ph ${cls}" style="${style};--a:${a};--b:${b}"></div>`;
+const nb=n=>"&nbsp;".repeat(n);
+const lines=(a,style="",cls="")=>`<div class="lines ${cls}" style="${style}">${a.map(l=>`<div>${l}</div>`).join("")}</div>`;
 
-const nb=n=>'&nbsp;'.repeat(n);
+const ISSUES=[
+ ["leading","type","Leading","Vertical distance from one baseline to the next, written with the type size as 14/21. Too tight and lines collide; too loose and they drift apart."],
+ ["tracking","type","Tracking","Even spacing added or removed across a whole range of letters, measured in thousandths of an em."],
+ ["kerning","type","Kerning","Spacing adjusted between one specific pair of letters, such as T and o or A and V."],
+ ["paraspace","type","Paragraph Spacing","Space Before and Space After separate paragraphs and attach headings to their text, without typing extra returns."],
+ ["justify","type","Justification & Hyphenation","How line ends are handled. Justified text stretches word spaces; hyphenation breaks words. Overdone, both create gaps and interruptions."],
+ ["tabs","type","Tabs & Number Columns","Tab stops place text at exact positions. Numbers in a column should be right- or decimal-aligned."],
+ ["lists","type","Lists & Hanging Indents","Automatic lists where the bullet or number hangs to the left and every wrapped line aligns with the text."],
+ ["styles","type","Paragraph & Character Styles","Saved formatting applied to whole paragraphs or to selected words, so every heading, caption, or key term matches."],
+ ["typeface","type","Typeface Choice","Choosing faces suited to their job, limiting a piece to a few, and never distorting them with fake stretching."],
+ ["measure","type","Line Length","Characters per line. Body text reads best at about 45 to 75; much longer or shorter makes reading harder."],
+ ["widows","type","Widows, Orphans & Runts","Stranded lines: a first line alone at a column's bottom (orphan), a last line alone at the top (widow), or one word alone on the last line (runt)."],
+ ["punct","type","Punctuation & Spaces","Curly quotes, correct dashes, single spaces after periods, and hanging punctuation for a clean text edge."],
+ ["margins","layout","Margins & Safe Area","The empty border between content and the edge of the page or screen. Text too close to the trim can be cut off."],
+ ["edge","layout","Edge Alignment","Lining elements up on a shared left or right edge so they read as one organized group."],
+ ["center","layout","Center Axis","The invisible vertical line that centered elements share. Every centered item must sit on the same axis."],
+ ["proximity","layout","Proximity & Grouping","Related items sit closer to each other than to unrelated items, so space shows what belongs together."],
+ ["spacing","layout","Consistent Spacing","Repeated items use equal gaps. Uneven gaps look like mistakes and suggest relationships that aren't there."],
+ ["gutter","layout","Gutters & Columns","The space between columns, or between a photo and its text, and columns that share a top edge."],
+ ["padding","layout","Padding","Space between content and the edge of its own container, such as a button, box, or label."],
+ ["valign","layout","Vertical Alignment","How items in a row line up top to bottom: icons centered on their labels, prices on a shared baseline."]
+];
+const IS=Object.fromEntries(ISSUES.map(([k,c,n,d])=>[k,{k,c,n,d}]));
+
 const C=[
- {key:"leading",title:"Crowded lines",
-  html:b=>`<p class="lk" style="font-size:16px;line-height:${b?.78:1.5}">Typography is the craft of arranging type so written language is legible and readable. Good spacing lets the eye glide from the end of one line to the start of the next.</p>`,
-  yes:"Increased the leading (the space between lines)",
-  no:[["Added space after the paragraph","There is only one paragraph. The space that changed is between lines inside it."],["Increased the tracking","The letters inside each word are spaced exactly the same in both windows."]],
-  diff:"Size/leading: 16/12.5 → 16/24",
-  why:"When leading is smaller than the type size, descenders collide with the ascenders on the next line and the text turns into a dark mass."},
- {key:"leading",title:"Floating lines",
-  html:b=>`<p class="lk" style="font-size:16px;line-height:${b?3.4:1.45}">Loose leading breaks a paragraph into floating strips. Each line starts to look like a separate item instead of part of one continuous thought.</p>`,
-  yes:"Reduced the leading",
-  no:[["Reduced the font size","The letters are the same height in both windows. Only the gaps between lines changed."],["Removed space before and after paragraphs","This is a single paragraph, so paragraph spacing never came into play. The gaps are between its own lines."]],
-  diff:"Size/leading: 16/54 → 16/23",
-  why:"Too much leading is as harmful as too little. Lines drift apart and stop reading as one block of text."},
- {key:"tracking",title:"Letters drifting apart",
-  html:b=>`<h3 class="lk sans" style="font-size:30px;font-weight:700;line-height:1.1;letter-spacing:${b?'.5em':'.02em'}">GRAND OPENING</h3><p class="sans" style="margin-top:12px;font-size:15px">Saturday, 10 AM · Main Street Gallery</p>`,
-  yes:"Reduced the tracking on the headline",
-  no:[["Kerned one letter pair in the headline","Every gap in the headline shrank by the same amount. Kerning changes one pair at a time."],["Reduced the headline size","The capitals are the same height in both windows."]],
-  diff:"Headline tracking: +500 → +20",
-  why:"Tracking changes spacing evenly across a range of letters. Spread too wide, a word falls apart into separate letters."},
- {key:"tracking",title:"Letters colliding",
-  html:b=>`<p class="lk" style="font-size:16px;letter-spacing:${b?'-.085em':'0'}">The museum's new wing opens this spring with three galleries dedicated to modern printmaking and book arts.</p>`,
-  yes:"Increased the tracking of the paragraph",
-  no:[["Increased the leading","The distance between lines is identical. The change is between the letters inside each line."],["Switched to a wider typeface","The letterforms are identical. Only the gaps between them changed."]],
-  diff:"Tracking: −85 → 0",
-  why:"Tight tracking can work on large display type, but on body text it makes letters touch and slows reading."},
- {key:"kerning",title:"One gap too wide",
-  html:b=>`<div class="lk" style="font-size:68px;font-weight:700;line-height:1"><span style="display:inline-block;margin-right:${b?'.3em':'-.05em'}">T</span>oday</div><p style="margin-top:14px;font-size:15px">Daily specials, written fresh each morning.</p>`,
-  yes:"Kerned the pair T–o",
-  no:[["Reduced the tracking across the whole word","The spacing of o‑d‑a‑y is identical in both windows. Only one pair moved."],["Changed the typeface","The letterforms are identical in both windows."]],
-  diff:"Kerning T/o: +300 → −50",
-  why:"Kerning fixes the space between one specific pair. Letters like T, V, W and A leave visual holes that a manual kern tucks in."},
- {key:"space",title:"Paragraphs run together",
-  html:b=>["Research comes first. Designers study the audience, the content, and the limits of the project before drawing anything.","Sketching comes next. Quick thumbnails explore many layouts before any one of them is refined.","Iteration closes the loop. Each round of feedback shows what works and what needs to change."].map(t=>`<p class="lk" style="font-size:15px;margin-bottom:${b?0:12}px">${t}</p>`).join(""),
-  yes:"Added space after each paragraph",
-  no:[["Increased the leading","Lines inside each paragraph are exactly as close together as before. Only the gaps between paragraphs grew."],["Added a first-line indent","No line in window B is indented."]],
-  diff:"Space After: 0 → 12 px",
-  why:"With no space and no indent, readers cannot see where one paragraph ends and the next begins. Space After separates ideas without typing extra returns."},
- {key:"space",title:"A heading far from its text",
-  html:b=>`<p style="font-size:14px">Our studio has produced identity work for more than forty regional clients since 2012.</p><h3 class="lk sans" style="font-size:19px;font-weight:700;line-height:1.2;margin:${b?'0 0 34px':'26px 0 6px'}">Our Services</h3><p style="font-size:14px">We design logos, signage, publications, and websites that share one clear voice.</p>`,
-  yes:"Added space before the heading and reduced space after it",
-  no:[["Made the heading larger","The heading is the same size in both windows."],["Increased the leading of the body text","Line spacing inside both paragraphs is unchanged."]],
-  diff:"Heading Space Before: 0 → 26 px · Space After: 34 → 6 px",
-  why:"A heading belongs to the text that follows it. More space above and less below groups it with its own section instead of the previous one."},
- {key:"align",title:"Four alignments in one frame",
-  html:b=>{const a=b?["center","right","center","left"]:["left","left","left","left"];const t=["Monday: hand lettering with brush pens and markers.","Wednesday: grid systems for posters, flyers, and magazine spreads.","Friday: critique session and final portfolio review."];return `<h3 class="lk sans" style="font-size:20px;font-weight:700;margin-bottom:10px;text-align:${a[0]}">Workshop Schedule</h3>`+t.map((x,i)=>`<p class="lk" style="font-size:15px;margin-bottom:8px;text-align:${a[i+1]}">${x}</p>`).join("")},
-  yes:"Set every paragraph to left alignment",
-  no:[["Justified all the paragraphs","The right edge in window B is still ragged. Justified text would be flush on both sides."],["Centered all the paragraphs","Every line in window B starts at the same left edge."]],
-  diff:"Alignment: center / right / center / left → left throughout",
-  why:"Related text should share one alignment. Mixed alignment gives the eye no consistent edge to return to."},
- {key:"justify",title:"Rivers in a narrow column",
-  html:b=>`<p class="lk" style="width:190px;font-size:15px;text-align:${b?'justify':'left'}">Contemporary accessibility recommendations emphasize comprehensible typography, generous spacing, and consistent navigation throughout.</p>`,
-  yes:"Changed the alignment from justified to left (ragged right)",
-  no:[["Widened the column","The column is the same width in both windows."],["Turned on hyphenation","No word in window B is broken with a hyphen."]],
-  diff:"Alignment: Justify → Align Left",
-  why:"Justified text stretches word spaces to fill each line. In a narrow column with long words, the gaps get huge and form rivers of white space."},
- {key:"hyphen",title:"A ladder of hyphens",
-  html:b=>`<div class="lk lines" style="font-size:16px">${(b?["Our spring bro-","chure intro-","duces new work-","shops in print-","making, book-","binding, and let-","terpress."]:["Our spring","brochure","introduces new","workshops in","printmaking,","bookbinding, and","letterpress."]).map(l=>`<div>${l}</div>`).join("")}</div>`,
-  yes:"Turned off hyphenation",
-  no:[["Increased the tracking","Letter spacing is identical in both windows."],["Changed the alignment to justified","Window B is ragged right, not justified."]],
-  diff:"Hyphenate: on, no limit → off",
-  why:"An occasional hyphen helps a ragged edge. Six in a row turn reading into a series of interruptions. InDesign's Hyphen Limit setting (2 or fewer) prevents this."},
- {key:"tabs",title:"Times that won't line up",
-  html:b=>{const r=[["Doors open","6:00 PM",5],["Keynote","7:15 PM",8],["Student showcase","8:00 PM",2],["Awards","9:30 PM",11]];return `<h3 class="sans" style="font-size:18px;font-weight:700;margin-bottom:10px">Friday Program</h3><div class="lk sans" style="font-size:15px;width:240px">`+r.map(([l,t,n])=>b?`<div style="margin-bottom:6px;white-space:nowrap">${l}${nb(n)}${t}</div>`:`<div style="margin-bottom:6px;display:flex;justify-content:space-between;font-variant-numeric:tabular-nums"><span>${l}</span><span>${t}</span></div>`).join("")+`</div>`},
-  yes:"Replaced the typed spaces with a right-aligned tab stop",
-  no:[["Increased the word spacing","The event names are spaced the same. Only the times moved, into one column."],["Center-aligned each line","Every event name in window B starts at the left edge."]],
-  diff:"Typed spaces → right tab stop at 240 px",
-  why:"In a proportional font every letter has a different width, so typed spaces never line up. A tab stop puts the column at an exact position."},
- {key:"lists",title:"Bullets buried in text",
-  html:b=>{const t=["Bring a sketchbook with at least forty blank pages for thumbnails","A 12-inch steel ruler and a sharp craft knife","Two fine-tip black pens, 0.3 mm and 0.5 mm"];return `<div class="lk" style="width:260px;font-size:15px">`+t.map(x=>b?`<div style="margin-bottom:8px">•&ensp;${x}</div>`:`<div style="margin-bottom:8px;display:grid;grid-template-columns:1.1em 1fr"><span>•</span><span>${x}</span></div>`).join("")+`</div>`},
-  yes:"Applied a hanging indent so wrapped lines align with the text",
-  no:[["Increased the leading","Line spacing inside each item is the same in both windows."],["Converted the bullets to a numbered list","Window B still uses bullets."]],
-  diff:"Left Indent 0 / First Line 0 → Left Indent 1.1 em / First Line −1.1 em",
-  why:"With a hanging indent the bullet hangs to the left and every line of text shares one edge, so the bullets stay clear and easy to scan."},
- {key:"lists",title:"Numbers pushing text around",
-  html:b=>{const t=["Export the layout as a print-ready PDF with bleed","Print a proof at 100% scale","Mark corrections in blue pencil on the proof","Update the file and export a new version"];return `<div class="lk" style="width:270px;font-size:15px">`+t.map((x,i)=>b?`<div style="margin-bottom:8px">${i+8}. ${x}</div>`:`<div style="margin-bottom:8px;display:grid;grid-template-columns:1.5em 1fr;gap:.45em"><span style="text-align:right;font-variant-numeric:tabular-nums">${i+8}.</span><span>${x}</span></div>`).join("")+`</div>`},
-  yes:"Used an automatic numbered list with aligned numbers and a hanging indent",
-  no:[["Increased the tracking of the numbers","The numerals are spaced the same. What changed is where the text starts."],["Right-aligned the whole list","In window B the item text starts at one shared left edge."]],
-  diff:"Typed numbers → numbered list, numbers right-aligned, hanging indent",
-  why:"When numbers go from 9 to 10, typed numbering pushes the text over and wraps lines under the numbers. A real numbered list keeps every line of text on one edge."},
- {key:"pstyle",title:"Three headings, three looks",
-  html:b=>{const bad=["font:700 22px/1.2 'Source Serif 4',Georgia,serif","font:italic 400 16px/1.2 'Source Sans 3',Arial,sans-serif","font:800 26px/1.1 'Source Sans 3',Arial,sans-serif;text-transform:uppercase"],good="font:700 19px/1.2 'Source Serif 4',Georgia,serif";const s=[["Harbor Coffee","Brand identity and packaging system."],["Field Notes","Editorial layouts for a quarterly magazine."],["City Jazz Festival","Poster series and outdoor signage."]];return s.map(([h,p],i)=>`<div style="margin-bottom:14px"><h3 class="lk" style="${b?bad[i]:good};margin-bottom:3px">${h}</h3><p style="font-size:14px">${p}</p></div>`).join("")},
-  yes:"Applied one paragraph style to all three headings",
-  no:[["Applied a character style to the body text","The body text is identical in both windows. Only the headings changed."],["Increased the space between sections","The spacing between sections is identical."]],
-  diff:"3 manual heading formats → one \"Project Head\" style: Serif Bold 19/23",
-  why:"Headings at the same level should look the same. A paragraph style guarantees it, and editing the style updates every heading at once."},
- {key:"cstyle",title:"Emphasis all over the place",
-  html:b=>{const w=b?[`<b class="lk">kerning</b>`,`<i class="lk" style="text-decoration:underline">tracking</i>`,`<span class="lk" style="color:#c0392b;text-transform:uppercase;font-size:12px;letter-spacing:.08em">leading</span>`]:[`<b class="lk">kerning</b>`,`<b class="lk">tracking</b>`,`<b class="lk">leading</b>`];return `<p style="font-size:16px;line-height:1.6">Three spacing controls matter most: ${w[0]} for one letter pair, ${w[1]} for a range of letters, and ${w[2]} for the distance between lines. Learn which one each problem needs.</p>`},
-  yes:"Applied one character style to every key term",
-  no:[["Applied a new paragraph style","The rest of the paragraph (font, size, spacing, alignment) is unchanged. Only three words changed."],["Changed the font of the whole paragraph","The surrounding words use the same typeface in both windows."]],
-  diff:"3 local overrides → one \"Key Term\" character style (Bold)",
-  why:"Emphasis only means something when it is consistent. A character style gives every key term the same treatment, and you can change it in one place."},
- {key:"pairing",title:"Two fonts fighting",
-  html:b=>`<h3 class="lk" style="font:${b?"400 32px/1.2 'Lobster',cursive":"700 30px/1.15 'Source Serif 4',Georgia,serif"};margin-bottom:10px">The Art of Making</h3><p class="lk" style="font:${b?"400 15px/1.6 'Pacifico',cursive":"400 15px/1.6 'Source Sans 3',Arial,sans-serif"}">Our open studio invites the public to watch printmakers, binders, and letter carvers at work. Admission is free every first Friday.</p>`,
-  yes:"Replaced both fonts with a serif headline and a sans-serif body",
-  no:[["Increased the body text size","The size setting is the same. The letterforms themselves changed."],["Added tracking to the headline","The headline letters in window B are not spread out. It is a different typeface."]],
-  diff:"Lobster + Pacifico → Source Serif 4 Bold + Source Sans 3",
-  why:"Two decorative scripts compete for attention, and a script is hard to read as body text. A good pair gives each face one clear job."},
- {key:"measure",title:"A line that never ends",wide:true,
-  html:b=>`<p class="lk" style="font-size:13px;line-height:1.5;width:${b?640:320}px">Readers move through text in a steady rhythm: across the line, then back to the start of the next. When a line runs far past 75 characters, the return trip gets long and the eye can land on the wrong line. Most body text reads best at roughly 45 to 75 characters per line, counting spaces.</p>`,
-  yes:"Narrowed the text frame to shorten the line length",
-  no:[["Increased the font size","The type is the same size in both windows."],["Increased the leading","Line spacing is identical. Only the width of the lines changed."]],
-  diff:"Measure: about 115 characters per line → about 55",
-  why:"Very long lines make it hard to find the start of the next line. Aim for about 45 to 75 characters per line in body text."},
- {key:"widows",title:"One word alone",
-  html:b=>`<div class="lk lines" style="font-size:16px;line-height:1.5">${(b?["Good typography is invisible:","readers notice the message,","not the letters that carry","it."]:["Good typography is invisible:","readers notice the message, not","the letters that carry it."]).map(l=>`<div>${l}</div>`).join("")}</div>`,
-  yes:"Rebalanced the line breaks so the last line is not a single word",
-  no:[["Justified the paragraph","The right edge in window B is still ragged."],["Reduced the font size","The letters are the same size in both windows."]],
-  diff:"Last line: 1 word → 5 words",
-  why:"A short word alone on the last line (a runt) leaves a hole and looks like a mistake. Fix it with a small tracking change or No Break on the last words."},
- {key:"widows",title:"Stranded at the bottom",
-  html:b=>{const p1=["Letterpress uses","raised metal type","that is inked and","pressed into paper."],p2=["The second session","covers mixing ink","and locking type","into the press."];const L=a=>a.map(l=>`<div>${l}</div>`).join("");const c1=b?L(p1)+`<div class="lk" style="margin-top:12px">${p2[0]}</div>`:L(p1),c2=b?L(p2.slice(1)):`<div class="lk">${L(p2)}</div>`;return `<div class="lines" style="display:flex;gap:18px;font-size:14px;line-height:1.5"><div style="width:140px">${c1}</div><div style="width:140px;border-left:1px solid #d4d4d4;padding-left:18px">${c2}</div></div>`},
-  yes:"Used Keep Options so the paragraph's first line moves with the rest",
-  no:[["Reduced the leading to fit more lines","Line spacing is identical in both windows."],["Justified both columns","Both columns in window B are still ragged right."]],
-  diff:"Keep Options: off → keep first 2 lines together",
-  why:"An orphan is the first line of a paragraph stranded at the bottom of a column. Keep Options moves it to the next column so the paragraph stays together."},
- {key:"frames",title:"Frames out of line",
-  html:b=>{const o=b?[0,38,12]:[0,0,0];const f=[["Brand Identity","Harbor Coffee · 2025"],["Editorial Layout","Field Notes magazine · 2025"],["Poster Series","City Jazz Festival · 2026"]];return f.map(([h,s],i)=>`<div class="lk sans" style="width:210px;margin:0 0 10px ${o[i]}px;border:1px solid #8fa9d9;padding:8px 10px;font-size:14px"><b>${h}</b><br>${s}</div>`).join("")},
-  yes:"Aligned all three text frames to one shared left edge",
-  no:[["Centered the text inside each frame","The text is still left-aligned inside each frame. The frames themselves moved."],["Increased the space between the frames","The vertical gaps between frames are identical."]],
-  diff:"Frame X positions: 0 / 38 / 12 px → 0 / 0 / 0",
-  why:"Separate frames read as one group when they share an edge. Small random offsets look like mistakes, not decisions."},
- {key:"quotes",title:"Typewriter punctuation",
-  html:b=>`<p class="lk" style="font-size:22px;line-height:1.4">${b?"&quot;Don&#39;t miss it,&quot; she said -- the show runs 9-5, May 3-7.":"&ldquo;Don&rsquo;t miss it,&rdquo; she said&mdash;the show runs 9&ndash;5, May 3&ndash;7."}</p>`,
-  yes:"Replaced straight quotes and hyphens with curly quotes, an em dash, and en dashes",
-  no:[["Kerned the punctuation","The marks are different characters, not the same ones moved closer."],["Changed the typeface","The letters are identical. Only the punctuation changed."]],
-  diff:"&quot; &#39; -- - → &ldquo;&rdquo; &rsquo; &mdash; &ndash;",
-  why:"Straight marks are typewriter leftovers. Typeset text uses curly quotes and apostrophes, an en dash for ranges (9–5), and an em dash for a break in a sentence."},
- {key:"scale",title:"Stretched letters",
-  html:b=>`<div class="lk sans" style="font-size:30px;font-weight:700;line-height:1.1;display:inline-block;transform-origin:left;transform:scaleX(${b?1.6:1})">Studio Night</div><p class="sans" style="margin-top:14px;font-size:15px">Open house, Friday at 7 PM.</p>`,
-  yes:"Reset the horizontal scale to 100%",
-  no:[["Reduced the tracking","The gaps between letters are not what changed. The letters themselves are wider in window A."],["Reduced the font size","The letters are the same height in both windows."]],
-  diff:"Horizontal Scale: 160% → 100%",
-  why:"Stretching distorts type: vertical strokes get heavy while horizontal ones stay thin. For more width, choose a wider version of the typeface or resize the type."}
-];
+/* ───────── LEADING ───────── */
+{issue:"leading",piece:"Magazine essay page",title:"Crowded lines",
+ html:b=>({w:320,h:360,bg:"#fffdf8",body:`
+ <div class="ab" style="left:28px;top:28px;font:700 11px/1 ${SA};letter-spacing:.18em;color:#9a3b2e">ESSAY</div>
+ <div class="ab" style="left:28px;top:46px;width:264px;font:700 25px/1.12 ${SE}">Why We Still Read on Paper</div>
+ <p class="ab lk" style="left:28px;top:122px;width:264px;font:400 14px/${b?.78:1.5} ${SE};color:#2b2b2b">A printed page stays still. It does not scroll, refresh, or ask for attention. Readers remember where a passage sat on the page, and good spacing lets the eye glide from the end of one line to the start of the next.</p>`}),
+ yes:"Increased the leading in the body text",
+ no:[["Added space after the paragraph","There is only one paragraph. The space that changed is between lines inside it."],["Increased the tracking","The letters inside each word are spaced the same in both."]],
+ diff:"Body size/leading: 14/11 → 14/21",
+ why:"When leading is smaller than the type size, descenders collide with the ascenders below and the paragraph turns into a dark mass."},
+{issue:"leading",piece:"Community flyer, 8.5 × 11 in.",title:"Floating lines",
+ html:b=>({w:300,h:400,bg:"#fff4e0",body:`
+ <div class="ab" style="left:28px;top:30px;font:700 11px/1 ${SA};letter-spacing:.14em;color:#2f6b3a">SATURDAY, APRIL 18 · 9 AM</div>
+ <div class="ab" style="left:28px;top:50px;font:600 38px/.95 ${OS};text-transform:uppercase;color:#2f6b3a">Community<br>Garden Day</div>
+ <p class="ab lk" style="left:28px;top:150px;width:244px;font:400 14px/${b?3.1:1.45} ${SA};color:#333">Bring gloves and a water bottle. We will build forty new raised beds, share seeds, and serve lunch at noon.</p>
+ <div class="ab" style="left:28px;bottom:28px;font:700 14px/1 ${SA};color:#2f6b3a">Riverside Park · Free for everyone</div>`}),
+ yes:"Reduced the leading",
+ no:[["Reduced the font size","The letters are the same height in both. Only the gaps between lines changed."],["Removed space between paragraphs","This is a single paragraph, so paragraph spacing never came into play."]],
+ diff:"Size/leading: 14/43 → 14/20",
+ why:"Too much leading breaks a paragraph into floating strips. Each line starts to look like a separate item instead of part of one thought."},
+{issue:"leading",piece:"Novel cover",title:"A title that crashes into itself",
+ html:b=>({w:260,h:380,bg:"#2e4a3f",body:`
+ <div class="ab lk" style="left:26px;top:44px;font:700 46px/${b?.7:1.02} ${SE};color:#f1e6cf">The Long<br>Quiet<br>Summer</div>
+ <div class="ab" style="left:26px;right:26px;top:230px;border-top:1px solid #c9b98f"></div>
+ <div class="ab" style="left:26px;bottom:30px;font:600 11px/1 ${SA};letter-spacing:.2em;color:#c9b98f">A NOVEL · MAYA ELLISON</div>`}),
+ yes:"Increased the leading of the title",
+ no:[["Reduced the title size","The title letters are the same size in both."],["Increased the tracking of the title","The letters within each word are spaced the same in both."]],
+ diff:"Title size/leading: 46/32 → 46/47",
+ why:"Display type can use tighter leading than body text, but not so tight that descenders like g and y crash into the next line."},
 
+/* ───────── TRACKING ───────── */
+{issue:"tracking",piece:"Storefront window sign",title:"Letters drifting apart",
+ html:b=>({w:340,h:230,bg:"#f7f1e4",body:`
+ <div class="ab" style="left:28px;top:26px;font:700 11px/1 ${SA};letter-spacing:.16em;color:#b0412e">MAIN STREET GALLERY</div>
+ <div class="ab lk" style="left:28px;top:50px;width:290px;font:700 32px/1.1 ${SA};letter-spacing:${b?".5em":".02em"};color:#1f2a30">GRAND OPENING</div>
+ <div class="ab" style="left:28px;top:150px;font:400 15px/1.3 ${SA};color:#333">Saturday, 10 AM<br>Live music and free coffee</div>`}),
+ yes:"Reduced the tracking on the headline",
+ no:[["Kerned one letter pair in the headline","Every gap in the headline shrank by the same amount. Kerning changes one pair at a time."],["Reduced the headline size","The capitals are the same height in both."]],
+ diff:"Headline tracking: +500 → +20",
+ why:"Tracking changes spacing evenly across a range of letters. Spread too wide, a word falls apart into separate letters and stops reading as a word."},
+{issue:"tracking",piece:"Museum wall label",title:"Letters colliding",
+ html:b=>({w:320,h:270,bg:"#fbfaf7",body:`
+ <div class="ab" style="left:28px;top:28px;font:700 20px/1.1 ${SE}">Harbor at Dusk</div>
+ <div class="ab" style="left:28px;top:56px;font:italic 400 13px/1 ${SE};color:#666">Oil on canvas, 1912</div>
+ <p class="ab lk" style="left:28px;top:88px;width:264px;font:400 14px/1.5 ${SA};letter-spacing:${b?"-.08em":"0"};color:#2b2b2b">The painter worked from a rented room above the docks, returning to the same view each evening. Notice how the lamps on the water are built from single strokes of thick yellow paint.</p>`}),
+ yes:"Increased the tracking of the label text",
+ no:[["Increased the leading","The distance between lines is the same. The change is between letters inside each line."],["Switched to a wider typeface","The letterforms are identical. Only the gaps between them changed."]],
+ diff:"Body tracking: −80 → 0",
+ why:"Tight tracking can work on large display type, but on reading text it makes letters touch and slows the reader down."},
+{issue:"tracking",piece:"Company letterhead",title:"A crowded wordmark",
+ html:b=>({w:340,h:200,bg:"#ffffff",body:`
+ <div class="ab lk" style="left:30px;top:48px;font:500 40px/1 ${OS};letter-spacing:${b?"-.06em":".14em"};color:#1d3b33">NORTHWIND</div>
+ <div class="ab" style="left:30px;top:102px;font:600 11px/1 ${SA};letter-spacing:.3em;color:#6a7a74">OUTDOOR SUPPLY CO.</div>
+ <div class="ab" style="left:30px;right:30px;top:130px;border-top:2px solid #1d3b33"></div>
+ <div class="ab" style="left:30px;top:146px;font:400 11px/1.4 ${SA};color:#555">418 Lake Avenue · Duluth, MN · northwindsupply.co</div>`}),
+ yes:"Increased the tracking on the wordmark",
+ no:[["Kerned a single letter pair","Every gap in the wordmark widened by the same amount, not just one pair."],["Switched to a lighter weight","The letters are the same weight in both."]],
+ diff:"Wordmark tracking: −60 → +140",
+ why:"All-caps words usually need extra tracking. Capitals are designed to sit next to lowercase letters, so set tight they crowd together and lose their shapes."},
+
+/* ───────── KERNING ───────── */
+{issue:"kerning",piece:"Café window lettering",title:"One gap too wide",
+ html:b=>({w:320,h:220,bg:"#ffffff",body:`
+ <div class="ab lk" style="left:28px;top:34px;font:700 72px/1 ${SE};color:#2a211b"><span style="display:inline-block;margin-right:${b?".3em":"-.05em"}">T</span>oday</div>
+ <div class="ab" style="left:28px;top:124px;font:400 15px/1.4 ${SA};color:#555">Soup, half sandwich, and a cookie<br><b style="color:#2a211b">$12</b></div>`}),
+ yes:"Kerned the pair T–o",
+ no:[["Reduced the tracking across the whole word","The spacing of o‑d‑a‑y is identical in both. Only one pair moved."],["Changed the typeface","The letterforms are identical in both."]],
+ diff:"Kerning T/o: +300 → −50",
+ why:"Kerning fixes the space between one specific pair. Letters like T, V, W and A leave visual holes that a manual kern tucks in."},
+{issue:"kerning",piece:"Surf shop logo",title:"A hole in the middle",
+ html:b=>({w:320,h:220,bg:"#0f4c5c",body:`
+ <div class="ab lk" style="left:30px;top:40px;font:600 84px/1 ${OS};color:#f4e9d8">W<span style="margin-right:${b?".24em":"-.05em"}">A</span>VE</div>
+ <div class="ab" style="left:32px;top:148px;font:600 12px/1 ${SA};letter-spacing:.24em;color:#9fd3c7">SURF &amp; SKATE · EST. 2009</div>`}),
+ yes:"Kerned the pair A–V",
+ no:[["Reduced the size of the A","The A is the same height as the other letters in both."],["Tightened the tracking across the whole logo","The W–A and V–E gaps are identical in both. Only A–V changed."]],
+ diff:"Kerning A/V: +240 → −50",
+ why:"A and V have diagonal sides that leave a big triangle of space between them. Large logo type needs that one pair kerned by hand."},
+{issue:"kerning",piece:"Travel magazine masthead",title:"A letter left behind",
+ html:b=>({w:340,h:220,bg:"#f4ede1",body:`
+ <div class="ab lk" style="left:30px;top:36px;font:700 70px/1 ${SE};color:#1d3557"><span style="margin-right:${b?".26em":"-.07em"}">V</span>oyage</div>
+ <div class="ab" style="left:32px;top:128px;font:600 11px/1 ${SA};letter-spacing:.22em;color:#8a5a3c">THE TRAVEL ISSUE · SPRING 2026</div>
+ <div class="ab" style="left:30px;right:30px;top:152px;border-top:1px solid #1d3557"></div>`}),
+ yes:"Kerned the pair V–o",
+ no:[["Reduced the tracking across the masthead","The spacing of o‑y‑a‑g‑e is identical in both."],["Switched the masthead to italic","The letters are upright in both."]],
+ diff:"Kerning V/o: +260 → −70",
+ why:"A capital V leaves open space at its base, so the lowercase letter after it needs to tuck underneath. Without that kern, the V looks detached."},
+
+/* ───────── PARAGRAPH SPACING ───────── */
+{issue:"paraspace",piece:"Studio newsletter",title:"Paragraphs run together",
+ html:b=>({w:320,h:400,bg:"#ffffff",body:`<div class="ab" style="left:28px;right:28px;top:28px">
+ <div style="font:700 10.5px/1 ${SA};letter-spacing:.16em;color:#1f6f5c;margin-bottom:8px">STUDIO NEWSLETTER · MARCH</div>
+ <div style="font:700 22px/1.15 ${SE};margin-bottom:14px">How We Work</div>
+ ${["Research comes first. We study the audience, the content, and the limits of the project before drawing anything.","Sketching comes next. Quick thumbnails explore many layouts before any one of them is refined.","Iteration closes the loop. Each round of feedback shows what works and what needs to change."].map(t=>`<p class="lk" style="font:400 14px/1.45 ${SE};color:#2b2b2b;margin-bottom:${b?0:12}px">${t}</p>`).join("")}</div>`}),
+ yes:"Added space after each paragraph",
+ no:[["Increased the leading","Lines inside each paragraph are exactly as close together as before. Only the gaps between paragraphs grew."],["Added a first-line indent","No line in B is indented."]],
+ diff:"Space After: 0 → 12 px",
+ why:"With no space and no indent, readers cannot see where one paragraph ends and the next begins. Space After separates ideas without typing extra returns."},
+{issue:"paraspace",piece:"Design studio website",title:"A heading far from its text",
+ html:b=>({w:340,h:320,bg:"#ffffff",body:`
+ <div class="ab" style="left:24px;top:20px;font:700 15px/1 ${SA}">Reyes Design</div>
+ <div class="ab" style="left:24px;right:24px;top:48px;border-top:1px solid #e3e3e3"></div>
+ <div class="ab" style="left:24px;right:24px;top:70px">
+ <p style="font:400 14px/1.5 ${SE};color:#333">We have produced identity work for more than forty regional clients since 2012.</p>
+ <h3 class="lk" style="font:700 19px/1.2 ${SA};margin:${b?"0 0 34px":"26px 0 6px"}">Our Services</h3>
+ <p style="font:400 14px/1.5 ${SE};color:#333">We design logos, signage, publications, and websites that share one clear voice.</p></div>`}),
+ yes:"Added space before the heading and reduced space after it",
+ no:[["Made the heading larger","The heading is the same size in both."],["Increased the leading of the body text","Line spacing inside both paragraphs is unchanged."]],
+ diff:"Heading Space Before: 0 → 26 px · Space After: 34 → 6 px",
+ why:"A heading belongs to the text that follows it. More space above and less below groups it with its own section instead of the one before."},
+{issue:"paraspace",piece:"Business letter",title:"Gaps made with the Return key",
+ html:b=>{const g=b?[0,30,6]:[12,12,12];const P=["Thank you for meeting with me last week to discuss new signage for the Riverside Library.","As promised, I have attached three design directions. Each uses the library's existing colors and works at sizes from door decals to a building banner.","I would be glad to walk your board through the options at its April meeting."];
+ return{w:320,h:430,bg:"#ffffff",body:`<div class="ab" style="left:32px;right:32px;top:30px;font:400 13px/1.5 ${SE};color:#2b2b2b">
+ <div style="font:700 14px/1 ${SA};letter-spacing:.06em;margin-bottom:22px">REYES DESIGN</div>
+ <p style="margin-bottom:12px">March 3, 2026</p><p style="margin-bottom:12px">Dear Ms. Patel,</p>
+ ${P.map((t,i)=>`<p class="lk" style="margin-bottom:${g[i]}px">${t}</p>`).join("")}
+ <p style="margin-top:${b?0:0}px">Sincerely,<br>Jordan Reyes</p></div>`}},
+ yes:"Replaced the uneven gaps with one consistent Space After",
+ no:[["Increased the leading","The lines inside each paragraph are spaced the same in both."],["Added a first-line indent","No paragraph in B is indented."]],
+ diff:"Gaps after paragraphs: 0 / 30 / 6 px → 12 / 12 / 12 px",
+ why:"Typing extra returns gives random gaps. One Space After setting makes every paragraph break the same size."},
+
+/* ───────── JUSTIFICATION & HYPHENATION ───────── */
+{issue:"justify",piece:"Newspaper column",title:"Rivers in a narrow column",
+ html:b=>({w:300,h:400,bg:"#f6f3ec",body:`
+ <div class="ab" style="left:28px;right:28px;top:22px;padding-bottom:8px;border-bottom:2px solid #222;font:700 12px/1 ${SE};letter-spacing:.12em">THE RIVER CITY LEDGER</div>
+ <div class="ab" style="left:28px;top:52px;width:244px;font:700 20px/1.15 ${SE}">Council Approves New Bike Lanes</div>
+ <p class="ab lk" style="left:28px;top:112px;width:180px;font:400 14px/1.45 ${SE};color:#222;text-align:${b?"justify":"left"}">Construction begins in June on protected bike lanes along Wayne Street. Transportation administrators estimate the improvements will substantially reduce neighborhood congestion and accommodate approximately eight hundred additional commuters.</p>`}),
+ yes:"Changed the alignment from justified to align left",
+ no:[["Widened the column","The column is the same width in both."],["Turned on hyphenation","No word in B is broken with a hyphen."]],
+ diff:"Alignment: Justify → Align Left",
+ why:"Justified text stretches word spaces to fill each line. In a narrow column with long words, the gaps get huge and form rivers of white space."},
+{issue:"justify",piece:"Brochure panel",title:"A ladder of hyphens",
+ html:b=>({w:260,h:360,bg:"#ffffff",body:`
+ <div class="ab" style="left:28px;top:28px;font:700 20px/1.15 ${SE};color:#8a3b2e">Spring Workshops</div>
+ ${lines(b?["Our spring bro-","chure intro-","duces new work-","shops in print-","making, book-","binding, and let-","terpress."]:["Our spring","brochure","introduces new","workshops in","printmaking,","bookbinding, and","letterpress."],`position:absolute;left:28px;top:70px;font:400 16px/1.5 ${SE};color:#2b2b2b`,"lk")}`}),
+ yes:"Turned off hyphenation",
+ no:[["Increased the tracking","Letter spacing is identical in both."],["Changed the alignment to justified","B is ragged right, not justified."]],
+ diff:"Hyphenate: on, no limit → off",
+ why:"An occasional hyphen helps a ragged edge. Six in a row turn reading into a series of interruptions. A Hyphen Limit of 2 or fewer prevents this."},
+{issue:"justify",piece:"Concert program booklet",title:"A stretched last line",
+ html:b=>({w:300,h:320,bg:"#fbf8f1",body:`
+ <div class="ab" style="left:28px;top:28px;font:700 11px/1 ${SA};letter-spacing:.18em;color:#7a4b8c">PROGRAM NOTES</div>
+ <div class="ab" style="left:28px;top:46px;font:700 22px/1.15 ${SE}">About the Ensemble</div>
+ <p class="ab lk" style="left:28px;top:90px;width:244px;font:400 14px/1.5 ${SE};color:#2b2b2b;text-align:justify;text-align-last:${b?"justify":"left"}">The Riverside Chamber Players have performed together since 2011, bringing classical and new music to schools, libraries, and city parks every season. This is their fifteenth anniversary tour.</p>`}),
+ yes:"Set the last line to align left instead of force-justifying it",
+ no:[["Turned off justification for the whole paragraph","The other lines in B are still flush on both edges."],["Widened the column","The column is the same width in both."]],
+ diff:"Justify All Lines → Justify with Last Line Aligned Left",
+ why:"Justified paragraphs should end with a normal, left-aligned last line. Forcing it to full width spreads a few words across the whole column."},
+
+/* ───────── TABS & NUMBER COLUMNS ───────── */
+{issue:"tabs",piece:"Awards night program",title:"Times that won't line up",
+ html:b=>{const r=[["Doors open","6:00 PM",5],["Keynote","7:15 PM",8],["Student showcase","8:00 PM",2],["Awards","9:30 PM",11]];
+ return{w:320,h:260,bg:"#ffffff",body:`<div class="ab" style="left:32px;top:30px;font:700 11px/1 ${SA};letter-spacing:.18em;color:#b0412e">FRIDAY, MAY 8</div>
+ <div class="ab" style="left:32px;top:48px;font:700 22px/1.1 ${SE}">Evening Program</div>
+ <div class="ab lk" style="left:32px;top:96px;width:240px;font:400 15px/1.3 ${SA}">${r.map(([l,t,n])=>b?`<div style="margin-bottom:10px;white-space:nowrap">${l}${nb(n)}${t}</div>`:`<div style="margin-bottom:10px;display:flex;justify-content:space-between;font-variant-numeric:tabular-nums"><span>${l}</span><span>${t}</span></div>`).join("")}</div>`}},
+ yes:"Replaced the typed spaces with a right-aligned tab stop",
+ no:[["Increased the word spacing","The event names are spaced the same. Only the times moved, into one column."],["Center-aligned each line","Every event name in B starts at the left edge."]],
+ diff:"Typed spaces → right tab stop at 240 px",
+ why:"In a proportional font every letter has a different width, so typed spaces never line up. A tab stop puts the column at an exact position."},
+{issue:"tabs",piece:"Client invoice",title:"Amounts you can't compare",
+ html:b=>{const r=[["Brand identity design","$1,250.00"],["Business cards (500)","$85.00"],["Website homepage","$640.00"],["Photo editing (4 hrs)","$180.00"]];const A=b?"left:252px":"right:24px;text-align:right";
+ return{w:360,h:300,bg:"#ffffff",body:`${gv(336)}
+ <div class="ab" style="left:24px;top:24px;font:700 12px/1 ${SA};letter-spacing:.2em">INVOICE</div><div class="ab" style="right:24px;top:24px;font:400 12px/1 ${SA};color:#666">No. 2026-014</div>
+ <div class="ab" style="left:24px;top:70px;font:700 11px/1 ${SA};color:#666">DESCRIPTION</div><div class="ab lk" style="${A};top:70px;font:700 11px/1 ${SA};color:#666">AMOUNT</div>
+ <div class="ab" style="left:24px;right:24px;top:88px;border-top:1px solid #ccc"></div>
+ ${r.map(([d,a],i)=>`<div class="ab" style="left:24px;top:${100+i*30}px;font:400 13px/1.3 ${SA}">${d}</div><div class="ab lk" style="${A};top:${100+i*30}px;font:400 13px/1.3 ${SA};font-variant-numeric:tabular-nums">${a}</div>`).join("")}
+ <div class="ab" style="left:24px;right:24px;top:222px;border-top:1.5px solid #222"></div>
+ <div class="ab" style="left:24px;top:234px;font:700 14px/1.3 ${SA}">Total due</div><div class="ab lk" style="${A};top:234px;font:700 14px/1.3 ${SA};font-variant-numeric:tabular-nums">$2,155.00</div>`}},
+ yes:"Right-aligned the amounts so the digits and decimal points line up",
+ no:[["Made the amounts bold","Only the total is bold, in both invoices."],["Widened the table","The table's rules start and end in the same places in both."]],
+ diff:"Amount column: flush left → right tab at the margin",
+ why:"Numbers are compared by place value. Right-aligning a money column lines up the ones, tens, and cents so readers can compare amounts at a glance."},
+{issue:"tabs",piece:"Coffee shop menu board",title:"Dots typed by hand",
+ html:b=>{const r=[["Espresso","$3.00"],["Cappuccino","$4.25"],["Latte","$4.50"],["Cold Brew","$4.75"],["Hot Chocolate","$3.75"]];const dots=".".repeat(80);
+ return{w:300,h:320,bg:"#2b2522",body:`<div class="ab" style="left:28px;top:28px;font:700 28px/1 ${SE};color:#f3e9dc">Coffee</div>
+ <div class="ab lk" style="left:28px;top:80px;width:244px;font:400 16px/1.3 ${SA};color:#f3e9dc">${r.map(([n,p])=>b?`<div style="margin-bottom:12px;white-space:nowrap">${n}${".".repeat(12)}${p}</div>`:`<div style="margin-bottom:12px;display:flex;font-variant-numeric:tabular-nums"><span>${n}</span><span style="flex:1;overflow:hidden;white-space:nowrap;margin:0 4px;color:#a8998a">${dots}</span><span>${p}</span></div>`).join("")}</div>`}},
+ yes:"Set a right tab stop with a dot leader",
+ no:[["Made the item names bold","The names are the same weight in both."],["Centered each line","Every item name in B starts at the same left edge."]],
+ diff:"12 typed periods → right tab stop at 244 px with a dot leader",
+ why:"A fixed number of typed periods can't reach a fixed point, because every name is a different length. A tab with a leader fills the gap exactly and lines the prices up."},
+
+/* ───────── LISTS ───────── */
+{issue:"lists",piece:"Course supply list",title:"Bullets buried in text",
+ html:b=>{const t=["A sketchbook with at least forty blank pages for thumbnails","A 12-inch steel ruler and a sharp craft knife","Two fine-tip black pens, 0.3 mm and 0.5 mm"];
+ return{w:300,h:320,bg:"#ffffff",body:`<div class="ab" style="left:28px;top:28px;font:700 11px/1 ${SA};letter-spacing:.16em;color:#1f4e5f">ART 110 · FOUNDATIONS</div>
+ <div class="ab" style="left:28px;top:46px;font:700 22px/1.1 ${SE}">Supply List</div>
+ <div class="ab lk" style="left:28px;top:92px;width:244px;font:400 15px/1.45 ${SE}">${t.map(x=>b?`<div style="margin-bottom:10px">•&ensp;${x}</div>`:`<div style="margin-bottom:10px;display:grid;grid-template-columns:1.1em 1fr"><span>•</span><span>${x}</span></div>`).join("")}</div>`}},
+ yes:"Applied a hanging indent so wrapped lines align with the text",
+ no:[["Increased the leading","Line spacing inside each item is the same in both."],["Converted the bullets to a numbered list","B still uses bullets."]],
+ diff:"Left Indent 0 / First Line 0 → Left Indent 1.1 em / First Line −1.1 em",
+ why:"With a hanging indent the bullet hangs to the left and every line of text shares one edge, so the bullets stay visible and easy to scan."},
+{issue:"lists",piece:"Print production checklist",title:"Numbers pushing text around",
+ html:b=>{const t=["Export the layout as a print-ready PDF with bleed","Print a proof at 100% scale","Mark corrections in blue pencil on the proof","Update the file and export a new version"];
+ return{w:320,h:320,bg:"#ffffff",body:`<div class="ab" style="left:28px;top:28px;font:700 22px/1.1 ${SE}">Before You Print</div>
+ <div class="ab" style="left:28px;top:60px;font:400 13px/1 ${SA};color:#666">Steps 8–11 of the checklist</div>
+ <div class="ab lk" style="left:28px;top:92px;width:264px;font:400 15px/1.45 ${SA}">${t.map((x,i)=>b?`<div style="margin-bottom:10px">${i+8}. ${x}</div>`:`<div style="margin-bottom:10px;display:grid;grid-template-columns:1.4em 1fr;gap:.45em"><span style="text-align:right;font-variant-numeric:tabular-nums">${i+8}.</span><span>${x}</span></div>`).join("")}</div>`}},
+ yes:"Used an automatic numbered list with aligned numbers and a hanging indent",
+ no:[["Increased the tracking of the numbers","The numerals are spaced the same. What changed is where the text starts."],["Right-aligned the whole list","In B the item text starts at one shared left edge."]],
+ diff:"Typed numbers → numbered list, numbers right-aligned, hanging indent",
+ why:"When numbers go from 9 to 10, typed numbering pushes the text over and wraps lines under the numbers. A real numbered list keeps every line of text on one edge."},
+{issue:"lists",piece:"Job posting",title:"Four kinds of bullets",
+ html:b=>{const t=["A portfolio showing both print and digital work","Working knowledge of InDesign and Illustrator","Clear written communication","Two years of studio or agency experience"];const g=["•&ensp;","-&nbsp;","*&nbsp;&nbsp;","•&nbsp;"],ind=[0,10,0,4];
+ return{w:320,h:360,bg:"#ffffff",body:`<div class="ab" style="left:28px;top:28px;font:700 20px/1.15 ${SE}">We're Hiring: Junior Designer</div>
+ <div class="ab" style="left:28px;top:66px;font:700 11px/1 ${SA};letter-spacing:.16em;color:#1f6f5c">REQUIREMENTS</div>
+ <div class="ab lk" style="left:28px;top:88px;width:264px;font:400 15px/1.45 ${SA}">${t.map((x,i)=>b?`<div style="margin:0 0 10px ${ind[i]}px">${g[i]}${x}</div>`:`<div style="margin-bottom:10px;display:grid;grid-template-columns:1.1em 1fr"><span>•</span><span>${x}</span></div>`).join("")}</div>`}},
+ yes:"Replaced the typed bullets with one automatic bulleted list",
+ no:[["Increased the leading","Line spacing inside each item is the same in both."],["Converted the list to numbers","B still uses bullets."]],
+ diff:"Typed •, -, * with mixed indents → one bullet style with a hanging indent",
+ why:"Typing bullets by hand leads to mixed symbols and indents. An automatic list gives every item the same marker, indent, and wrap."},
+
+/* ───────── STYLES ───────── */
+{issue:"styles",piece:"Portfolio page",title:"Three headings, three looks",
+ html:b=>{const bad=[`font:700 22px/1.2 ${SE}`,`font:italic 400 16px/1.2 ${SA}`,`font:800 26px/1.1 ${SA};text-transform:uppercase`],good=`font:700 19px/1.2 ${SE}`;const s=[["Harbor Coffee","Brand identity and packaging system."],["Field Notes","Editorial layouts for a quarterly magazine."],["City Jazz Festival","Poster series and outdoor signage."]];
+ return{w:300,h:330,bg:"#ffffff",body:`<div class="ab" style="left:28px;top:26px;font:700 11px/1 ${SA};letter-spacing:.18em;color:#888">SELECTED WORK</div>
+ <div class="ab" style="left:28px;right:28px;top:52px">${s.map(([h,p],i)=>`<div style="margin-bottom:18px"><h3 class="lk" style="${b?bad[i]:good};margin-bottom:4px">${h}</h3><p style="font:400 14px/1.4 ${SE};color:#444">${p}</p></div>`).join("")}</div>`}},
+ yes:"Applied one paragraph style to all three headings",
+ no:[["Applied a character style to the body text","The body text is identical in both. Only the headings changed."],["Increased the space between projects","The spacing between projects is identical."]],
+ diff:"3 manual heading formats → one \"Project Head\" paragraph style",
+ why:"Headings at the same level should look the same. A paragraph style guarantees it, and editing the style updates every heading at once."},
+{issue:"styles",piece:"Textbook page",title:"Emphasis all over the place",
+ html:b=>{const w=b?[`<b class="lk">kerning</b>`,`<i class="lk" style="text-decoration:underline">tracking</i>`,`<span class="lk" style="color:#c0392b;text-transform:uppercase;font-size:12px;letter-spacing:.08em">leading</span>`]:[`<b class="lk">kerning</b>`,`<b class="lk">tracking</b>`,`<b class="lk">leading</b>`];
+ return{w:320,h:300,bg:"#fffdf8",body:`<div class="ab" style="left:28px;top:26px;font:700 11px/1 ${SA};letter-spacing:.16em;color:#1f4e5f">CHAPTER 3 · SPACING</div>
+ <div class="ab" style="left:28px;top:44px;font:700 22px/1.15 ${SE}">Three Kinds of Space</div>
+ <p class="ab" style="left:28px;top:88px;width:264px;font:400 15px/1.6 ${SE};color:#2b2b2b">Three spacing controls matter most: ${w[0]} for one letter pair, ${w[1]} for a range of letters, and ${w[2]} for the distance between lines. Learn which one each problem needs.</p>`}},
+ yes:"Applied one character style to every key term",
+ no:[["Applied a new paragraph style","The rest of the paragraph (font, size, spacing, alignment) is unchanged. Only three words changed."],["Changed the font of the whole paragraph","The surrounding words use the same typeface in both."]],
+ diff:"3 local overrides → one \"Key Term\" character style (Bold)",
+ why:"Emphasis only means something when it is consistent. A character style gives every key term the same treatment, and you can change it in one place."},
+{issue:"styles",piece:"Studio tour photo page",title:"Captions that don't match",
+ html:b=>{const cap=["The type case room","Our proof press","The drying rack"],bad=[`font:italic 400 11px/1.35 ${SE};color:#666`,`font:700 11px/1.35 ${SA};text-transform:uppercase;letter-spacing:.06em;color:#222`,`font:400 10px/1.35 ${SA};color:#b3261e`],good=`font:italic 400 11px/1.35 ${SE};color:#666`;const xs=[24,146,268],c=[["#b8a07e","#efe2c8"],["#8aa4c9","#d7e4f0"],["#7fa88f","#dfe8c9"]];
+ return{w:400,h:230,bg:"#ffffff",body:`<div class="ab" style="left:24px;top:24px;font:700 20px/1 ${SE}">Studio Tour</div>
+ ${xs.map((x,i)=>ph(`left:${x}px;top:62px;width:108px;height:84px`,c[i][0],c[i][1],"ab")+`<div class="ab lk" style="left:${x}px;top:154px;width:108px;${b?bad[i]:good}">${cap[i]}</div>`).join("")}`}},
+ yes:"Applied one caption style to all three captions",
+ no:[["Resized the photos","The photos are the same size in both."],["Moved the captions closer to the photos","The captions start at the same height in both."]],
+ diff:"3 manual caption formats → one \"Caption\" style: Serif Italic 11",
+ why:"Captions that do the same job should look the same. Mismatched styling makes readers wonder whether one caption means something different."},
+
+/* ───────── TYPEFACE CHOICE ───────── */
+{issue:"typeface",piece:"Open studio postcard",title:"Two fonts fighting",
+ html:b=>({w:320,h:260,bg:"#ffffff",body:`<div class="ab lk" style="left:28px;top:28px;width:264px;font:${b?`400 32px/1.2 Lobster,cursive`:`700 30px/1.15 ${SE}`}">The Art of Making</div>
+ <p class="ab lk" style="left:28px;top:84px;width:264px;font:${b?`400 15px/1.6 Pacifico,cursive`:`400 15px/1.6 ${SA}`};color:#333">Our open studio invites the public to watch printmakers, binders, and letter carvers at work. Admission is free every first Friday.</p>`}),
+ yes:"Replaced both fonts with a serif headline and a sans-serif body",
+ no:[["Increased the body text size","The size setting is the same. The letterforms themselves changed."],["Added tracking to the headline","The headline letters in B are not spread out. It is a different typeface."]],
+ diff:"Lobster + Pacifico → Source Serif 4 Bold + Source Sans 3",
+ why:"Two decorative scripts compete for attention, and a script is hard to read as body text. A good pair gives each face one clear job."},
+{issue:"typeface",piece:"Event flyer",title:"Stretched letters",
+ html:b=>({w:320,h:240,bg:"#f3f0ff",body:`<div class="ab lk" style="left:28px;top:40px;font:700 26px/1.1 ${SA};display:inline-block;white-space:nowrap;transform-origin:left;transform:scaleX(${b?1.6:1});color:#3b2a7a">Studio Night</div>
+ <p class="ab" style="left:28px;top:96px;width:264px;font:400 15px/1.5 ${SA};color:#333">Open house, Friday at 7 PM. See student work, try a screen print, and meet the faculty.</p>`}),
+ yes:"Reset the horizontal scale to 100%",
+ no:[["Reduced the tracking","The letters themselves are wider in A. The gaps between them are not what changed."],["Reduced the font size","The letters are the same height in both."]],
+ diff:"Horizontal Scale: 160% → 100%",
+ why:"Stretching distorts type: vertical strokes get heavy while horizontal ones stay thin. For more width, choose a wider version of the typeface or resize the type."},
+{issue:"typeface",piece:"Bake sale flyer",title:"Five typefaces on one flyer",
+ html:b=>{const f=b?[`400 34px/1.1 Lobster,cursive`,`600 16px/1.2 ${OS}`,`400 14px/1.5 ${SE}`,`400 15px/1.3 Pacifico,cursive`,`400 12px/1.3 'Courier New',monospace`]:[`600 38px/1.05 ${OS}`,`600 16px/1.2 ${SA}`,`400 14px/1.5 ${SA}`,`600 15px/1.3 ${SA}`,`400 12px/1.3 ${SA}`];
+ return{w:300,h:380,bg:"#fff6ec",body:`<div class="ab lk" style="left:28px;top:30px;font:${f[0]};color:#b0412e">BAKE SALE</div>
+ <div class="ab lk" style="left:28px;top:84px;font:${f[1]};color:#333;letter-spacing:.04em">LINCOLN ELEMENTARY PTA</div>
+ <p class="ab lk" style="left:28px;top:120px;width:244px;font:${f[2]};color:#333">Cookies, pies, and bread baked by our families. Every dollar goes to the new library reading corner.</p>
+ <div class="ab lk" style="left:28px;top:230px;font:${f[3]};color:#b0412e">Saturday, Oct 3 · 9 AM – noon</div>
+ <div class="ab lk" style="left:28px;bottom:28px;font:${f[4]};color:#666">School gym · Cash and cards accepted</div>`}},
+ yes:"Cut the flyer down to two typefaces",
+ no:[["Made all the text the same size","Sizes still vary in B, from the large headline to the small footer."],["Centered all the text","Everything in B is still flush left."]],
+ diff:"Lobster, Oswald, Source Serif, Pacifico, Courier → Oswald + Source Sans",
+ why:"Every new typeface adds a new voice. Two faces, one for display and one for text, give enough contrast while keeping the piece unified."},
+
+/* ───────── LINE LENGTH ───────── */
+{issue:"measure",piece:"Blog article on a desktop screen",title:"A line that never ends",wide:true,
+ html:b=>({w:700,h:240,bg:"#ffffff",body:`<div class="ab" style="left:30px;top:26px;font:700 22px/1.1 ${SE}">How Readers Move Through Text</div>
+ <p class="ab lk" style="left:30px;top:68px;width:${b?640:330}px;font:400 13px/1.55 ${SE};color:#2b2b2b">Readers move through text in a steady rhythm: across the line, then back to the start of the next. When a line runs far past 75 characters, the return trip gets long and the eye can land on the wrong line. Most body text reads best at roughly 45 to 75 characters per line, counting spaces.</p>`}),
+ yes:"Narrowed the text column to shorten the line length",
+ no:[["Increased the font size","The type is the same size in both."],["Increased the leading","Line spacing is identical. Only the width of the lines changed."]],
+ diff:"Measure: about 115 characters per line → about 55",
+ why:"Very long lines make it hard to find the start of the next line. Aim for about 45 to 75 characters per line in body text."},
+{issue:"measure",piece:"Museum brochure sidebar",title:"Two words per line",
+ html:b=>({w:300,h:440,bg:"#f4f1ea",body:`<div class="ab" style="left:28px;top:28px;font:700 20px/1.1 ${SE}">Hours &amp; Access</div>
+ <p class="ab lk" style="left:28px;top:66px;width:${b?92:236}px;font:400 14px/1.45 ${SA};color:#2b2b2b">The gallery is open Tuesday through Sunday, 10 AM to 5 PM. Admission is free, and every floor is wheelchair accessible.</p>`}),
+ yes:"Widened the text column",
+ no:[["Reduced the font size","The type is the same size in both."],["Turned on hyphenation","No word in B is broken with a hyphen."]],
+ diff:"Measure: about 12 characters per line → about 38",
+ why:"Lines that are too short break phrases apart and make the eye jump back constantly. The ragged edge also becomes extreme."},
+{issue:"measure",piece:"Magazine feature spread",title:"One column across the whole page",wide:true,
+ html:b=>({w:560,h:300,bg:"#fffdf8",body:`<div class="ab" style="left:28px;top:26px;font:700 22px/1.1 ${SE}">Printing by Hand, Again</div>
+ <div class="ab lk" style="left:28px;top:66px;width:504px;${b?"":"column-count:2;column-gap:24px;"}font:400 11.5px/1.55 ${SE};color:#2b2b2b">Five years ago, the studio on Calhoun Street had no printing equipment at all. Today it runs two restored proof presses, a paper cutter older than its owners, and a waiting list for wedding invitations. The owners say clients want something they can hold, and that a printed piece gets kept long after an email is deleted. Other studios are following. Regional print fairs keep growing, and design programs are adding letterpress electives. Students learn to set type by hand, one letter at a time, which teaches spacing in a way software cannot. The work is slow, but the results have a texture that screens cannot copy.</div>`}),
+ yes:"Split the text into two narrower columns",
+ no:[["Reduced the font size","The type is the same size in both."],["Increased the leading","The line spacing is the same in both."]],
+ diff:"One 504 px column (~100 characters) → two 240 px columns (~48 characters)",
+ why:"A wide page doesn't mean a wide line. Dividing the text into columns keeps each line at a readable length."},
+
+/* ───────── WIDOWS / ORPHANS / RUNTS ───────── */
+{issue:"widows",piece:"Quote postcard",title:"One word alone",
+ html:b=>({w:320,h:240,bg:"#eef3f0",body:`${lines(b?["Good typography is invisible:","readers notice the message,","not the letters that carry","it."]:["Good typography is invisible:","readers notice the message, not","the letters that carry it."],`position:absolute;left:28px;top:40px;font:400 17px/1.5 ${SE};color:#1f3b33`,"lk")}
+ <div class="ab" style="left:28px;bottom:30px;font:700 11px/1 ${SA};letter-spacing:.16em;color:#5f7a70">DESIGN WEEK · FORT WAYNE</div>`}),
+ yes:"Rebalanced the line breaks so the last line is not a single word",
+ no:[["Justified the paragraph","The right edge in B is still ragged."],["Reduced the font size","The letters are the same size in both."]],
+ diff:"Last line: 1 word → 5 words",
+ why:"A short word alone on the last line (a runt) leaves a hole and looks like a mistake. Fix it with a small tracking change or No Break on the last words."},
+{issue:"widows",piece:"Newsletter, two columns",title:"Stranded at the bottom",
+ html:b=>{const p1=["Letterpress uses","raised metal type","that is inked and","pressed into paper."],p2=["The second session","covers mixing ink","and locking type","into the press."];const L=a=>a.map(l=>`<div>${l}</div>`).join("");
+ const c1=b?L(p1)+`<div class="lk" style="margin-top:14px">${p2[0]}</div>`:L(p1),c2=b?L(p2.slice(1)):`<div class="lk">${L(p2)}</div>`;
+ return{w:340,h:250,bg:"#ffffff",body:`<div class="ab" style="left:28px;top:24px;font:700 18px/1 ${SE}">Workshop Notes</div>
+ <div class="ab lines" style="left:28px;top:60px;display:flex;gap:18px;font:400 14px/1.5 ${SE};color:#2b2b2b"><div style="width:130px;height:150px">${c1}</div><div style="width:136px;border-left:1px solid #d4d4d4;padding-left:18px;height:150px">${c2}</div></div>`}},
+ yes:"Used Keep Options so the paragraph's first line moves with the rest",
+ no:[["Reduced the leading to fit more lines","Line spacing is identical in both."],["Justified both columns","Both columns in B are still ragged right."]],
+ diff:"Keep Options: off → keep first 2 lines together",
+ why:"An orphan is the first line of a paragraph stranded at the bottom of a column. Keep Options moves it to the next column so the paragraph stays together."},
+{issue:"widows",piece:"Gallery newsletter, two columns",title:"A lonely line at the top",
+ html:b=>{const p1=["The spring show opens","on April 4 with work","from forty students","across four programs,","and runs through May."],p2=["Gallery hours are","extended on Fridays","until 8 PM."];const L=a=>a.map(l=>`<div>${l}</div>`).join("");const k=b?4:3;
+ return{w:360,h:260,bg:"#ffffff",body:`<div class="ab" style="left:28px;top:24px;font:700 18px/1 ${SE}">Spring Exhibition</div>
+ <div class="ab lines" style="left:28px;top:60px;display:flex;gap:18px;font:400 14px/1.5 ${SE};color:#2b2b2b"><div style="width:140px;height:160px">${L(p1.slice(0,k))}</div><div style="width:146px;border-left:1px solid #d4d4d4;padding-left:18px;height:160px"><div class="lk">${L(p1.slice(k))}</div><div style="margin-top:14px">${L(p2)}</div></div></div>`}},
+ yes:"Used Keep Options to keep the paragraph's last two lines together",
+ no:[["Reduced the leading","Line spacing is identical in both."],["Justified both columns","Both columns in B are still ragged right."]],
+ diff:"Keep Options: off → keep last 2 lines together",
+ why:"A widow is the last line of a paragraph stranded at the top of the next column or page. Moving one more line with it keeps the ending attached."},
+
+/* ───────── PUNCTUATION & SPACES ───────── */
+{issue:"punct",piece:"Theater postcard",title:"Typewriter punctuation",
+ html:b=>({w:320,h:220,bg:"#fbf6ee",body:`<p class="ab lk" style="left:28px;top:36px;width:264px;font:400 22px/1.4 ${SE};color:#2b2b2b">${b?"&quot;Don&#39;t miss it,&quot; she said -- the show runs 9-5, May 3-7.":"&ldquo;Don&rsquo;t miss it,&rdquo; she said&mdash;the show runs 9&ndash;5, May 3&ndash;7."}</p>
+ <div class="ab" style="left:28px;bottom:26px;font:700 11px/1 ${SA};letter-spacing:.16em;color:#8a3b2e">CIVIC THEATRE · SPRING SEASON</div>`}),
+ yes:"Replaced straight quotes and hyphens with curly quotes, an em dash, and en dashes",
+ no:[["Kerned the punctuation","The marks are different characters, not the same ones moved closer."],["Changed the typeface","The letters are identical. Only the punctuation changed."]],
+ diff:"\" ' -- - → “ ” ’ — –",
+ why:"Straight marks are typewriter leftovers. Typeset text uses curly quotes and apostrophes, an en dash for ranges (9–5), and an em dash for a break in a sentence."},
+{issue:"punct",piece:"Magazine column with pull quote",title:"A dent in the edge",
+ html:b=>({w:320,h:380,bg:"#ffffff",body:`${gv(32)}
+ <p class="ab" style="left:32px;top:28px;width:256px;font:400 12.5px/1.55 ${SE};color:#333">Students often fill every open area of a page. The instinct is to use all the space available. Experienced designers do the opposite: they protect open space and let it guide the eye.</p>
+ <p class="ab lk" style="left:32px;top:150px;width:256px;text-indent:${b?0:"-.42em"};font:italic 400 24px/1.25 ${SE};color:#b0412e">&ldquo;Spacing is not empty. It is where the reader breathes.&rdquo;</p>
+ <p class="ab" style="left:32px;top:262px;width:256px;font:400 12.5px/1.55 ${SE};color:#333">In this spread, the pull quote breaks the column, gives the reader a pause, and previews the article's main idea.</p>`}),
+ yes:"Hung the opening quotation mark outside the text edge",
+ no:[["Indented the whole pull quote","The second and third lines of the quote start at the same edge in both."],["Made the pull quote larger","The quote is the same size in both."]],
+ diff:"Opening quote: inside the text edge → hanging punctuation",
+ why:"A quotation mark at the start of a line makes the first line look indented. Hanging it in the margin keeps the letters on the same clean edge as the body text."},
+{issue:"punct",piece:"Cover letter",title:"Double spaces after periods",
+ html:b=>{const s=b?"&nbsp; ":" ";return{w:320,h:280,bg:"#ffffff",body:`<div class="ab" style="left:32px;top:30px;font:700 14px/1 ${SA};letter-spacing:.06em">JORDAN REYES</div>
+ <p class="ab" style="left:32px;top:62px;font:400 14px/1.5 ${SE}">Dear Hiring Committee,</p>
+ <p class="ab lk" style="left:32px;top:94px;width:256px;font:400 17px/1.6 ${SE};color:#2b2b2b">I am applying for the junior designer role.${s}My portfolio includes packaging, signage, and two annual reports.${s}I work well on a team.${s}I would welcome the chance to talk.</p>`}},
+ yes:"Replaced the double spaces after periods with single spaces",
+ no:[["Reduced the tracking","The letters inside each word are spaced the same in both."],["Changed the alignment to justified","B is still ragged right."]],
+ diff:"Two spaces after each period → one",
+ why:"Double spaces are a typewriter habit. In proportional type they open holes in the paragraph. Use a single space after every sentence."},
+
+/* ───────── MARGINS ───────── */
+{issue:"margins",piece:"Event poster, 18 × 24 in.",title:"Text on the trim",
+ html:b=>{const m=b?8:30;return{w:300,h:400,bg:"#1f3a5f",body:`${gr(30)}
+ <div class="ab lk" style="left:${m}px;top:${m}px;font:700 11px/1 ${SA};letter-spacing:.18em;color:#f2b84b">MIDWEST DESIGN WEEK</div>
+ <div class="ab lk" style="left:${m}px;top:${m+26}px;font:600 50px/.94 ${OS};text-transform:uppercase;color:#f4efe6">Make<br>Things<br>Better</div>
+ <div class="ab lk" style="left:${m}px;bottom:${m+24}px;font:600 16px/1.2 ${SA};color:#f4efe6">Oct 24–26 · Fort Wayne, IN</div>
+ <div class="ab lk" style="left:${m}px;bottom:${m}px;font:400 12px/1 ${SA};color:#b9c6d6">midwestdesignweek.org</div>`}},
+ yes:"Increased the margins so all the text sits inside one safe area",
+ no:[["Reduced the headline size","The headline is the same size in both. It moved in from the edge."],["Centered the text on the poster","The text is still flush left in B."]],
+ diff:"Margins: 8 px → 30 px on every side",
+ why:"Text pressed against the edge looks accidental, and in print it risks being trimmed off. Generous, equal margins frame the content."},
+{issue:"margins",piece:"Book page",title:"A text block pushed to one side",
+ html:b=>{const x=b?16:40;return{w:300,h:400,bg:"#fbf8f1",body:`${gv(40)}${gv(260)}
+ <div class="ab lk" style="left:${x}px;top:30px;width:220px">
+ <div style="font:600 10px/1 ${SA};letter-spacing:.2em;color:#999;text-align:center;margin-bottom:22px">CHAPTER TWO</div>
+ <p style="font:400 13px/1.6 ${SE};color:#2b2b2b;text-indent:1.2em">The bus left the city before dawn. Nora watched the streetlights thin out until there were only farms, dark fields, and the long gray line of the highway ahead.</p>
+ <p style="font:400 13px/1.6 ${SE};color:#2b2b2b;text-indent:1.2em">She had packed one bag, a sketchbook, and the letter from her grandmother, folded so many times that the creases had worn thin.</p>
+ <div style="font:400 11px/1 ${SE};color:#888;text-align:center;margin-top:26px">27</div></div>`}},
+ yes:"Balanced the left and right margins",
+ no:[["Narrowed the text block","The text block is 220 px wide in both."],["Increased the leading","The line spacing is the same in both."]],
+ diff:"Margins: 16 px left / 64 px right → 40 / 40",
+ why:"Uneven side margins make the text block look like it slid across the page. Balanced margins (or a deliberate, consistent inner and outer margin in a book) look intentional."},
+{issue:"margins",piece:"Phone news app",title:"Text running into the screen edge",
+ html:b=>{const m=b?4:20;return{w:300,h:520,bg:"#ffffff",body:`<div class="ab" style="left:0;right:0;top:0;height:40px;background:#f7f7f7;border-bottom:1px solid #e5e5e5;font:700 14px/40px ${SA};text-align:center">Riverside Now</div>
+ ${ph("left:0;top:40px;width:300px;height:160px","#8aa4c9","#e8d8b8","ab")}
+ <div class="ab lk" style="left:${m}px;right:${m}px;top:214px">
+ <div style="font:700 11px/1 ${SA};letter-spacing:.14em;color:#1f6f5c;margin-bottom:8px">CITY</div>
+ <div style="font:700 22px/1.15 ${SE};margin-bottom:10px">New Bike Lanes Open on Wayne Street</div>
+ <p style="font:400 15px/1.5 ${SA};color:#333">Riders tried out the protected lanes this morning. The city says the project finished two weeks ahead of schedule and under budget.</p></div>`}},
+ yes:"Added side margins to the text",
+ no:[["Reduced the text size","The type is the same size in both."],["Made the photo smaller","The photo still runs edge to edge in B."]],
+ diff:"Text side margins: 4 px → 20 px (photo still bleeds)",
+ why:"Photos can run to the screen edge on purpose. Text cannot: it needs a margin so letters don't touch the edge or disappear under a rounded phone corner."},
+
+/* ───────── EDGE ALIGNMENT ───────── */
+{issue:"edge",piece:"Business card, 3.5 × 2 in.",title:"Three alignments on one card",
+ html:b=>({w:350,h:200,bg:"#ffffff",body:`${gv(24)}
+ <div class="ab" style="right:24px;top:24px;width:34px;height:34px;background:#d9572b;color:#fff;font:700 18px/34px ${SE};text-align:center">R</div>
+ <div class="ab lk" style="${b?"left:0;right:0;text-align:center":"left:24px"};top:28px;font:700 21px/1.1 ${SE}">Jordan Reyes</div>
+ <div class="ab lk" style="left:24px;top:58px;font:400 12.5px/1 ${SA};color:#6a6a6a;letter-spacing:.04em">GRAPHIC DESIGNER</div>
+ <div class="ab lk" style="${b?"right:24px;text-align:right":"left:24px"};bottom:24px;font:400 12px/1.55 ${SA};color:#333">260-555-0142<br>jordan@reyesdesign.co<br>reyesdesign.co</div>`}),
+ yes:"Aligned all the text to one shared left edge",
+ no:[["Centered all the text","Every line of text in B starts at the same left edge."],["Moved the contact information closer to the name","The contact lines sit at the same height in both."]],
+ diff:"Name centered · title flush left · contact flush right → all flush left",
+ why:"A small card has no room for three alignments. One strong left edge ties the name, title, and contact details together."},
+{issue:"edge",piece:"Résumé, experience section",title:"Dates that won't line up",
+ html:b=>{const j=[["Senior Designer","Lumen Studio, Chicago","2022–Present",214],["Designer","Northside Press, Fort Wayne","2019–2022",250],["Design Intern","City of Fort Wayne, Communications","2018",232]];
+ return{w:360,h:300,bg:"#ffffff",body:`${gv(336)}
+ <div class="ab" style="left:24px;top:22px;font:700 20px/1 ${SE}">Jordan Reyes</div>
+ <div class="ab" style="left:24px;top:48px;font:400 12px/1 ${SA};color:#666">Graphic Designer · Fort Wayne, IN</div>
+ <div class="ab" style="left:24px;right:24px;top:72px;border-top:1px solid #ddd"></div>
+ <div class="ab" style="left:24px;top:88px;font:700 11px/1 ${SA};letter-spacing:.16em;color:#1f4e5f">EXPERIENCE</div>
+ ${j.map(([t,c,d,x],i)=>`<div class="ab" style="left:24px;top:${112+i*56}px;font:700 13.5px/1.3 ${SA}">${t}</div><div class="ab" style="left:24px;top:${131+i*56}px;font:400 12px/1.3 ${SA};color:#666">${c}</div><div class="ab lk" style="${b?`left:${x}px`:"right:24px;text-align:right"};top:${113+i*56}px;font:400 12px/1.3 ${SA};color:#555">${d}</div>`).join("")}`}},
+ yes:"Right-aligned the dates to one shared edge",
+ no:[["Made the dates bold","The dates are the same weight in both."],["Increased the space between jobs","Each job sits at the same height in both."]],
+ diff:"Dates: three different left edges → right-aligned at the margin",
+ why:"Dates are scanned as a column. When they share a right edge, a reader can check your timeline at a glance."},
+{issue:"edge",piece:"Online store product card",title:"Text that misses the photo edge",
+ html:b=>{const x=b?46:32;return{w:300,h:400,bg:"#ecebe8",body:`${gv(32)}
+ <div class="ab" style="left:16px;right:16px;top:16px;bottom:16px;background:#fff;border-radius:10px"></div>
+ ${ph("left:32px;top:32px;width:236px;height:200px","#d9c7a3","#f4efe4","ab")}
+ <div class="ab lk" style="left:${x}px;top:248px;font:700 17px/1.2 ${SA}">Canvas Tote Bag</div>
+ <div class="ab lk" style="left:${x}px;top:273px;font:400 12.5px/1.2 ${SA};color:#666">Natural · 15 oz cotton canvas</div>
+ <div class="ab lk" style="left:${x}px;top:298px;font:700 16px/1.2 ${SA}">$28.00</div>
+ <div class="ab lk" style="left:${x}px;top:332px;background:#1c1c1c;color:#fff;border-radius:6px;padding:9px 16px;font:600 13px/1 ${SA}">Add to cart</div>`}},
+ yes:"Aligned the text and button to the left edge of the photo",
+ no:[["Made the photo wider","The photo is the same width and in the same place in both."],["Centered the text under the photo","The text in B is still flush left."]],
+ diff:"Text left edge: 46 px → 32 px (the photo's edge)",
+ why:"The photo creates a strong edge. Text set 14 px in from it looks like a near miss. Sharing the edge makes the card look built, not assembled."},
+
+/* ───────── CENTER AXIS ───────── */
+{issue:"center",piece:"Instagram post, 1080 × 1080",title:"Centered, but not quite",
+ html:b=>({w:320,h:320,bg:"#e8664a",body:`${gv(160)}
+ <div class="ab" style="left:0;right:0;top:54px;text-align:center;font:700 11px/1 ${SA};letter-spacing:.2em;color:#fff3e6">WORKSHOP</div>
+ <div class="ab lk" style="left:${b?48:0}px;right:0;top:80px;text-align:center;font:700 32px/1.05 ${SE};color:#fff">Intro to<br>Screen Printing</div>
+ <div class="ab" style="left:0;right:0;top:172px;text-align:center;font:400 13px/1 ${SA};color:#fff3e6">Saturday, Nov 8 · 1–4 PM</div>
+ <div class="ab" style="left:0;right:${b?36:0}px;top:226px;text-align:center"><span class="lk" style="display:inline-block;border:1.5px solid #fff;border-radius:999px;padding:8px 16px;font:600 12px/1 ${SA};color:#fff">Sign up · link in bio</span></div>`}),
+ yes:"Centered every element on the same vertical axis",
+ no:[["Changed the text to left alignment","The text in B is still centered."],["Enlarged the headline","The headline is the same size in both."]],
+ diff:"Headline 24 px right of center · button 18 px left → both on the center axis",
+ why:"Centered layouts depend on one shared axis. If one element is a little off, the whole post looks crooked."},
+{issue:"center",piece:"Wedding invitation, 5 × 7 in.",title:"Names that slid to the right",
+ html:b=>{const t=(top,txt,st,off=0,lk="")=>`<div class="ab ${lk}" style="left:${off>0?off*2:0}px;right:${off<0?-off*2:0}px;top:${top}px;text-align:center;${st}">${txt}</div>`;
+ return{w:280,h:390,bg:"#fbf6ee",body:`${gv(140)}
+ ${t(40,"Together with their families",`font:italic 400 13px/1 ${SE};color:#6b5d52`)}
+ ${t(76,"Maya Chen<br><span style='font-size:20px'>&amp;</span><br>Luis Ortega",`font:400 30px/1.15 ${SE};color:#3d2f28`,b?20:0,"lk")}
+ ${t(214,"request the pleasure of your company",`font:italic 400 12.5px/1 ${SE};color:#6b5d52`)}
+ ${t(250,"Saturday, June 13, 2026<br>at four o'clock",`font:600 13px/1.5 ${SA};letter-spacing:.04em;color:#3d2f28`)}
+ ${t(310,"Lakeside Pavilion · Fort Wayne",`font:400 12.5px/1 ${SA};color:#6b5d52`)}
+ ${t(346,"Kindly reply by May 1",`font:italic 400 11.5px/1 ${SE};color:#8a7b70`,b?-14:0,"lk")}`}},
+ yes:"Centered the names and reply line on the invitation's center axis",
+ no:[["Made the names smaller","The names are the same size in both."],["Changed the invitation to left alignment","Every line in B is still centered."]],
+ diff:"Names 20 px right · reply line 14 px left → on the center axis",
+ why:"A symmetrical design only works when every line shares the same center. Small shifts are easy to miss on screen and obvious once printed."},
+{issue:"center",piece:"Bakery sign logo",title:"An icon off the axis",
+ html:b=>({w:320,h:260,bg:"#ffffff",body:`${gv(160)}
+ <div class="ab lk" style="left:${b?110:132}px;top:34px;width:56px;height:56px;border-radius:50%;background:#c9793b;color:#fff8ef;font:700 26px/56px ${SE};text-align:center">G</div>
+ <div class="ab" style="left:0;right:0;top:108px;text-align:center;font:700 28px/1.1 ${SE};color:#3d2618">Greenline Bakery</div>
+ <div class="ab" style="left:0;right:0;top:152px;text-align:center;font:600 11px/1 ${SA};letter-spacing:.3em;color:#9a7a5e">EST. 1998</div>`}),
+ yes:"Centered the icon over the name",
+ no:[["Made the icon smaller","The icon is 56 px in both."],["Increased the space between the icon and the name","The icon sits at the same height in both."]],
+ diff:"Icon center: 22 px left of the axis → on the axis",
+ why:"In a stacked logo, the icon and wordmark share one center line. An off-center icon makes the whole mark look tilted."},
+
+/* ───────── PROXIMITY & GROUPING ───────── */
+{issue:"proximity",piece:"Restaurant dinner menu",title:"Descriptions drifting to the wrong dish",
+ html:b=>{const it=[["Roasted Chicken","Lemon, garlic, herbed potatoes, and pan jus","$22"],["Mushroom Risotto","Arborio rice, wild mushrooms, parmesan, and thyme","$18"],["Seared Salmon","Charred broccolini, farro, and dill yogurt","$26"],["Braised Short Rib","Creamy polenta, gremolata, and red wine sauce","$28"]];
+ return{w:300,h:420,bg:"#fbf7ef",body:`<div class="ab" style="left:28px;right:28px;top:26px">
+ <div style="font:700 11px/1 ${SA};letter-spacing:.2em;color:#9a5b2e;margin-bottom:6px">DINNER</div>
+ <div style="font:700 26px/1.1 ${SE};color:#2a211b;margin-bottom:18px">Mains</div>
+ ${it.map(([n,d,p])=>`<div class="lk" style="margin-bottom:${b?3:20}px"><div style="display:flex;justify-content:space-between;font:700 15px/1.3 ${SE};color:#2a211b;margin-bottom:${b?14:2}px"><span>${n}</span><span>${p}</span></div><div style="font:400 12.5px/1.4 ${SA};color:#6b5d52">${d}</div></div>`).join("")}</div>`}},
+ yes:"Moved each description closer to its dish name and added space between dishes",
+ no:[["Increased the leading in the descriptions","The lines inside each description are spaced the same in both."],["Right-aligned the prices","The prices sit on the same right edge in both."]],
+ diff:"Name → description: 14 → 2 px · Between dishes: 3 → 20 px",
+ why:"Items that belong together should sit closer to each other than to anything else. In A, each description looks like it belongs to the dish below it."},
+{issue:"proximity",piece:"Magazine article opener",title:"A caption that lost its photo",
+ html:b=>({w:300,h:420,bg:"#ffffff",body:`<div class="ab" style="left:24px;right:24px;top:24px">
+ <div style="font:700 10.5px/1 ${SA};letter-spacing:.18em;color:#1f6f5c;margin-bottom:8px">HISTORY</div>
+ <div style="font:700 22px/1.15 ${SE};margin-bottom:14px">Inside the Type Archive</div>
+ ${ph("height:150px","#b8a07e","#efe2c8")}
+ <p class="lk" style="margin-top:${b?28:6}px;font:italic 400 11px/1.4 ${SE};color:#777">Drawers of wood type in a community print shop.</p>
+ <p class="lk" style="margin-top:${b?6:26}px;font:400 12.5px/1.55 ${SE};color:#333">Volunteers sort, clean, and print from these letters every week. Many of the typefaces were never made in digital form, so each surviving piece is the only way to use them.</p></div>`}),
+ yes:"Moved the caption closer to the photo and away from the body text",
+ no:[["Made the photo smaller","The photo is the same size in both."],["Italicized the caption","The caption is italic in both."]],
+ diff:"Photo → caption: 28 → 6 px · Caption → text: 6 → 26 px",
+ why:"A caption describes the image above it, so it has to sit close to that image. In A it looks like the first line of the article."},
+{issue:"proximity",piece:"Concert poster, 11 × 17 in.",title:"Event details scattered to the corners",
+ html:b=>{const s=`font:400 14px/1.45 ${SA};color:#f3e9d2`;
+ const det=b?`<div class="ab lk" style="left:24px;top:262px;${s}">Friday, Nov 14</div><div class="ab lk" style="right:24px;top:262px;text-align:right;${s}">8 PM</div><div class="ab lk" style="left:24px;bottom:58px;${s}">The Clyde Theatre</div><div class="ab lk" style="right:24px;bottom:24px;text-align:right;${s}">Tickets $15</div>`
+  :`<div class="ab lk" style="left:24px;bottom:24px;${s}">Friday, Nov 14<br>8 PM<br>The Clyde Theatre<br>Tickets $15</div>`;
+ return{w:300,h:400,bg:"#25223f",body:`<div class="ab" style="left:24px;top:24px;font:600 64px/.9 ${OS};text-transform:uppercase;color:#f3e9d2">Late<br>Night<br>Jazz</div>
+ <div class="ab" style="left:24px;top:210px;font:italic 400 17px/1 ${SE};color:#e7b75f">with Trio Solstice</div>${det}`}},
+ yes:"Grouped the event details into one block",
+ no:[["Made the event details larger","The details are the same size in both."],["Changed the details to a different typeface","The details use the same typeface in both."]],
+ diff:"4 separate items in 3 corners → one 4-line block, bottom left",
+ why:"Date, time, place, and price answer one question: how do I go? Grouped together, they read in one glance instead of sending the eye around the poster."},
+
+/* ───────── CONSISTENT SPACING ───────── */
+{issue:"spacing",piece:"Portfolio web page",title:"Uneven gaps between photos",
+ html:b=>{const xs=b?[24,126,244]:[24,132,240],ys=b?[82,192]:[82,184],cols=[["#9cc0d6","#e4d3b0"],["#c9a27e","#f1e3c6"],["#7fa88f","#dfe8c9"],["#b59ac9","#f0d6d6"],["#8aa4c9","#d7e4f0"],["#d19a6a","#f5dcc0"]];let k=0,g="";
+ for(const y of ys)for(const x of xs){const c=cols[k++];g+=ph(`left:${x}px;top:${y}px;width:96px;height:90px`,c[0],c[1],"ab lk")}
+ return{w:360,h:300,bg:"#ffffff",body:`<div class="ab" style="left:24px;top:24px;font:700 20px/1 ${SA}">Recent Work</div><div class="ab" style="left:24px;top:52px;font:400 12px/1 ${SA};color:#777">Selected projects, 2024–2026</div>${g}`}},
+ yes:"Made all the gutters between the photos equal",
+ no:[["Resized some of the photos","Every photo is 96 × 90 px in both."],["Increased the outer margins","The grid starts at the same left edge and the same top in both."]],
+ diff:"Gutters: 6 / 22 px across, 20 px down → 12 px everywhere",
+ why:"Repeated items should repeat their spacing too. Random gaps look like mistakes and make the grid feel unstable."},
+{issue:"spacing",piece:"Annual report highlights",title:"Stats bunched to one side",
+ html:b=>{const xs=b?[24,128,280]:[24,152,280],s=[["1,240","students enrolled"],["86%","job placement in six months"],["42","community projects"]];
+ return{w:400,h:220,bg:"#f3efe7",body:`<div class="ab" style="left:24px;top:24px;font:700 20px/1 ${SE};color:#1f2a30">2025 at a Glance</div><div class="ab" style="left:24px;right:24px;top:58px;border-top:1px solid #d8cfbf"></div>
+ ${s.map(([n,l],i)=>`<div class="ab lk" style="left:${xs[i]}px;top:84px;width:96px;border-top:3px solid #c0612b;padding-top:8px"><div style="font:700 30px/1 ${SE};color:#1f4e5f">${n}</div><div style="font:400 11.5px/1.35 ${SA};color:#555;margin-top:6px">${l}</div></div>`).join("")}`}},
+ yes:"Spaced the three stats with equal gaps between them",
+ no:[["Aligned the stats to a shared top edge","The tops were already aligned in A. Only the horizontal gaps changed."],["Made the numbers the same size","The numbers are the same size in both."]],
+ diff:"Gaps between stats: 8 / 56 px → 32 / 32 px",
+ why:"Items of equal importance should have equal spacing. Uneven gaps make two stats look paired and the third look left out."},
+{issue:"spacing",piece:"Yoga studio website header",title:"Navigation links spaced at random",
+ html:b=>{const g=b?[0,8,34,14]:[0,22,22,22],L=["Classes","Teachers","Pricing","Contact"];
+ return{w:420,h:220,bg:"#f7f5f0",body:`<div class="ab" style="left:24px;top:24px;font:700 17px/1 ${SE};color:#2f4a3a">Harbor Yoga</div>
+ <div class="ab lk" style="right:24px;top:26px;display:flex;font:400 13px/1 ${SA};color:#333">${L.map((l,i)=>`<span style="margin-left:${g[i]}px">${l}</span>`).join("")}</div>
+ <div class="ab" style="left:24px;right:24px;top:58px;border-top:1px solid #e0dcd2"></div>
+ <div class="ab" style="left:24px;top:96px;font:700 28px/1.1 ${SE};color:#2f4a3a">Find your pace.</div>
+ <div class="ab" style="left:24px;top:138px;width:300px;font:400 14px/1.5 ${SA};color:#555">Small classes for every level, seven days a week.</div>`}},
+ yes:"Spaced the navigation links evenly",
+ no:[["Made the links bold","The links are the same weight in both."],["Moved the links to the center of the header","The links still end at the right margin in B."]],
+ diff:"Gaps between links: 8 / 34 / 14 px → 22 / 22 / 22 px",
+ why:"Navigation links are equals. Uneven gaps make some look grouped and others separate, which suggests a relationship that isn't there."},
+
+/* ───────── GUTTERS & COLUMNS ───────── */
+{issue:"gutter",piece:"Magazine feature page",title:"Columns that start at different heights",
+ html:b=>({w:440,h:330,bg:"#fffdf8",body:`${gh(92)}
+ <div class="ab" style="left:24px;top:22px;font:700 26px/1.1 ${SE}">The Return of Print</div>
+ <div class="ab" style="left:24px;top:56px;font:italic 400 13px/1.2 ${SE};color:#6b6358">Why small studios are buying presses again</div>
+ <p class="ab lk" style="left:24px;top:92px;width:185px;font:400 10.5px/1.5 ${SE};color:#333">Five years ago, the studio on Calhoun Street had no printing equipment at all. Today it runs two restored proof presses, a paper cutter older than its owners, and a waiting list for wedding invitations. Clients want something they can hold, and a printed piece gets kept long after an email is deleted.</p>
+ <p class="ab lk" style="left:231px;top:${b?116:92}px;width:185px;font:400 10.5px/1.5 ${SE};color:#333">Other studios are following. Regional print fairs keep growing, and design programs are adding letterpress electives. Students learn to set type by hand, one letter at a time, which teaches spacing in a way software cannot. The work is slow, but the results have a texture that screens cannot copy.</p>`}),
+ yes:"Aligned both columns to the same top edge",
+ no:[["Widened the gutter between the columns","The gap between the columns is 22 px in both."],["Increased the leading in the right column","The line spacing in both columns is identical."]],
+ diff:"Column 2 top: 116 → 92 px (matches column 1)",
+ why:"Columns on a grid share a top line. When one column drops, the page looks unfinished and the reader is not sure where the text continues."},
+{issue:"gutter",piece:"Blog post preview",title:"Text touching the photo",
+ html:b=>({w:420,h:250,bg:"#ffffff",body:`${ph("left:24px;top:30px;width:150px;height:190px","#7fa88f","#e8e2c8","ab")}
+ <div class="ab lk" style="left:${b?176:198}px;top:30px;width:190px">
+  <div style="font:700 10.5px/1 ${SA};letter-spacing:.18em;color:#1f6f5c;margin-bottom:8px">FIELD NOTES</div>
+  <div style="font:700 18px/1.2 ${SE};margin-bottom:8px">A Week at the Letterpress Studio</div>
+  <div style="font:400 12px/1.5 ${SA};color:#444">We spent five days setting type by hand, mixing ink, and printing a small run of posters. Here is what we learned about patience and spacing.</div></div>`}),
+ yes:"Added a gutter between the photo and the text",
+ no:[["Made the photo narrower","The photo is 150 px wide and in the same place in both."],["Increased the leading of the text","The line spacing is identical in both."]],
+ diff:"Photo → text gap: 2 → 24 px",
+ why:"Text that touches an image looks trapped. A clear gutter separates the two while keeping them close enough to read as one unit."},
+{issue:"gutter",piece:"Neighborhood newsletter",title:"Columns with no gutter",
+ html:b=>{const st=`width:175px;font:400 12px/1.5 ${SE};color:#2b2b2b`;return{w:420,h:260,bg:"#ffffff",body:`
+ <div class="ab" style="left:24px;top:22px;font:700 20px/1.1 ${SE}">Neighborhood News</div>
+ <div class="ab" style="left:24px;right:24px;top:54px;border-top:2px solid #222"></div>
+ <p class="ab lk" style="left:24px;top:68px;${st}">The Maple Street cleanup is Saturday at 9 AM. Gloves, bags, and coffee will be provided at the corner of Maple and Third. Volunteers of every age are welcome.</p>
+ <p class="ab lk" style="left:${b?203:221}px;top:68px;${st}">The library book sale runs all next week. Paperbacks are one dollar, and every sale supports the summer reading program for children and teens.</p>`}},
+ yes:"Widened the gutter between the two columns",
+ no:[["Reduced the size of the text","The type is the same size in both."],["Added a vertical rule between the columns","There is no rule in B, just more space."]],
+ diff:"Column gutter: 4 px → 22 px",
+ why:"Without a gutter, the eye can run straight across from one column into the next. A clear gap tells readers each column is its own path."},
+
+/* ───────── PADDING ───────── */
+{issue:"padding",piece:"Website landing page",title:"A cramped button",
+ html:b=>({w:380,h:260,bg:"#f5f7fb",body:`
+ <div class="ab" style="left:24px;top:20px;font:700 15px/1 ${SA};color:#121826">Tandem</div>
+ <div class="ab" style="right:24px;top:21px;display:flex;gap:16px;font:400 12px/1 ${SA};color:#4a5568"><span>Pricing</span><span>Docs</span><span>Log in</span></div>
+ <div class="ab" style="left:24px;top:66px;width:300px;font:700 26px/1.15 ${SA};color:#121826">Design tools for small teams</div>
+ <div class="ab" style="left:24px;top:136px;width:290px;font:400 13px/1.5 ${SA};color:#4a5568">Plan, review, and ship brand work in one shared workspace.</div>
+ <div class="ab lk" style="left:24px;top:190px;background:#3b5bdb;color:#fff;font:600 13px/1.2 ${SA};border-radius:6px;padding:${b?"3px 6px":"11px 20px"}">Start free trial</div>`}),
+ yes:"Added more padding inside the button",
+ no:[["Made the button label smaller","The label is the same size in both."],["Moved the button farther from the paragraph","The top of the button is in the same place in both."]],
+ diff:"Button padding: 3 / 6 px → 11 / 20 px",
+ why:"Padding is the space between content and the edge of its container. A label jammed against its border looks cramped and gives people a smaller target to click or tap."},
+{issue:"padding",piece:"Class assignment handout",title:"Text jammed against its box",
+ html:b=>({w:300,h:380,bg:"#ffffff",body:`<div class="ab" style="left:28px;top:28px;font:700 11px/1 ${SA};letter-spacing:.16em;color:#1f4e5f">ART 110 · ASSIGNMENT 2</div>
+ <div class="ab" style="left:28px;top:46px;font:700 22px/1.1 ${SE}">Poster Redesign</div>
+ <p class="ab" style="left:28px;top:84px;width:244px;font:400 13.5px/1.5 ${SE};color:#333">Choose a poster from the collection and redesign it using a clear grid and no more than two typefaces.</p>
+ <div class="ab lk" style="left:28px;top:170px;width:244px;border:2px solid #d99a2b;background:#fff7e6;padding:${b?"3px":"14px 16px"};font:400 13px/1.45 ${SA};color:#5a3d00"><b>Tip:</b> Print your layout at 100% before you submit. Spacing problems are much easier to see on paper.</div>`}),
+ yes:"Added padding inside the tip box",
+ no:[["Made the box wider","The box is 244 px wide in both. Only the space inside it grew."],["Reduced the size of the tip text","The type is the same size in both."]],
+ diff:"Box padding: 3 px → 14 / 16 px",
+ why:"When text touches its border, the box looks like it is squeezing the words. Padding gives the content room and makes the box read as a calm callout."},
+{issue:"padding",piece:"Garden store product listing",title:"Tags squeezed around their words",
+ html:b=>{const T=[["Organic","#e3f3ea","#1e7547"],["Non-GMO","#e8eefc","#2f4f9e"],["Easy to grow","#fdf1dc","#8a5a00"]];
+ return{w:320,h:280,bg:"#ffffff",body:`${ph("left:24px;top:24px;width:272px;height:120px","#c9793b","#f2dcc0","ab")}
+ <div class="ab" style="left:24px;top:158px;font:700 17px/1.2 ${SA}">Heirloom Tomato Seeds</div>
+ <div class="ab" style="left:24px;top:182px;font:400 13px/1.2 ${SA};color:#666">Packet of 50 · $3.99</div>
+ <div class="ab lk" style="left:24px;top:212px;display:flex;gap:6px">${T.map(([t,bg,c])=>`<span style="background:${bg};color:${c};border:1px solid ${c};border-radius:999px;padding:${b?"1px 3px":"5px 10px"};font:600 11.5px/1 ${SA}">${t}</span>`).join("")}</div>`}},
+ yes:"Added padding inside the tag labels",
+ no:[["Made the tag text smaller","The tag text is the same size in both."],["Increased the space between the tags","The gap between tags is 6 px in both."]],
+ diff:"Tag padding: 1 / 3 px → 5 / 10 px",
+ why:"A label's border should frame the word, not trace it. With padding, tags look deliberate and are easier to read at small sizes."},
+
+/* ───────── VERTICAL ALIGNMENT ───────── */
+{issue:"valign",piece:"Phone app settings screen",title:"Icons floating off their labels",
+ html:b=>{const r=[["Notifications","#ff3b30","flex-start"],["Privacy","#0a84ff","flex-end"],["Display","#34c759","flex-start"],["Storage","#8e8e93","flex-end"],["Help","#ff9f0a","flex-start"]];
+ return{w:320,h:350,bg:"#f2f2f7",body:`<div class="ab" style="left:20px;top:26px;font:700 26px/1 ${SA}">Settings</div>
+ <div class="ab" style="left:16px;right:16px;top:72px;background:#fff;border-radius:12px;overflow:hidden">${r.map(([l,c,al],i)=>`<div style="display:flex;align-items:center;height:52px;padding:0 14px;${i<4?"border-bottom:1px solid #e5e5ea":""}"><span class="lk" style="width:28px;height:28px;border-radius:7px;background:${c};${b?`align-self:${al};margin:${al==="flex-start"?"3px 0 0":"0 0 3px"}`:""}"></span><span style="flex:1;margin-left:12px;font:400 15px/1 ${SA}">${l}</span><span style="color:#c7c7cc;font:400 22px/1 ${SA}">›</span></div>`).join("")}</div>`}},
+ yes:"Vertically centered each icon on its row",
+ no:[["Made the icons larger","The icons are 28 px in both."],["Increased the height of each row","The rows are 52 px tall in both, and the dividers are in the same places."]],
+ diff:"Icons: top or bottom of the row → centered on the row",
+ why:"Items in the same row should share a center line. When icons drift up and down, the list looks unstable even though every label is in place."},
+{issue:"valign",piece:"Yoga studio website header",title:"Header items at three heights",
+ html:b=>({w:420,h:200,bg:"#f7f5f0",body:`<div class="ab" style="left:0;right:0;top:0;height:68px;background:#ffffff;border-bottom:1px solid #e0dcd2;display:flex;align-items:center;gap:14px;padding:0 24px;white-space:nowrap">
+ <span style="font:700 17px/1 ${SE};color:#2f4a3a;margin-right:auto">Harbor Yoga</span>
+ <span class="lk" style="display:flex;gap:14px;font:400 12.5px/1 ${SA};color:#333;${b?"align-self:flex-start;margin-top:8px":""}"><span>Classes</span><span>Pricing</span><span>Contact</span></span>
+ <span class="lk" style="background:#2f4a3a;color:#fff;border-radius:6px;padding:9px 14px;font:600 13px/1 ${SA};${b?"align-self:flex-end;margin-bottom:6px":""}">Book a class</span></div>
+ <div class="ab" style="left:24px;top:104px;font:700 26px/1.1 ${SE};color:#2f4a3a">Find your pace.</div>`}),
+ yes:"Vertically centered the links and button in the header bar",
+ no:[["Made the header bar taller","The bar is 68 px tall in both."],["Spaced the links farther apart","The gaps between links are the same in both."]],
+ diff:"Links: top of bar · button: bottom of bar → all centered",
+ why:"Items in a navigation bar should share one center line. When each item sits at a different height, the header looks broken."},
+{issue:"valign",piece:"Pricing card on a website",title:"A price label floating up",
+ html:b=>({w:300,h:360,bg:"#f5f7fb",body:`<div class="ab" style="left:24px;right:24px;top:24px;bottom:24px;background:#fff;border:1px solid #dfe3ea;border-radius:12px;padding:24px">
+ <div style="font:700 12px/1 ${SA};letter-spacing:.16em;color:#3b5bdb">STUDIO PLAN</div>
+ <div class="lk" style="display:flex;align-items:baseline;gap:4px;margin-top:16px;color:#121826">
+  <span style="align-self:flex-start;margin-top:8px;font:700 20px/1 ${SA}">$</span>
+  <span style="font:700 56px/1 ${SA}">29</span>
+  <span style="font:400 15px/1 ${SA};color:#666;${b?"align-self:flex-start;margin-top:8px":""}">/month</span></div>
+ <div style="margin-top:18px;font:400 13.5px/1.9 ${SA};color:#444">✓ Five team members<br>✓ Unlimited projects<br>✓ Shared brand library</div>
+ <div style="margin-top:18px;background:#3b5bdb;color:#fff;border-radius:6px;padding:11px 0;text-align:center;font:600 13px/1 ${SA}">Choose plan</div></div>`}),
+ yes:"Set /month on the same baseline as the price",
+ no:[["Made /month larger","The label is the same size in both."],["Moved /month farther from the price","The gap after the number is the same in both."]],
+ diff:"/month: top-aligned → baseline-aligned with 29",
+ why:"Text of different sizes in one line should sit on a shared baseline. A label floating at the top reads like a footnote marker instead of part of the price."}
+];
+C.forEach((c,i)=>{c.n=i+1;const same=C.filter(x=>x.issue===c.issue);c.id=c.issue+"-"+(same.indexOf(c)+1)});
+
+/* ───────── APP ───────── */
 const $=id=>document.getElementById(id);
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-const esc=s=>s.replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let mode="learn",scope="all",deck=[],pos=0,cur=null,opts=[],answered=false,learnStats={checked:0,right:0},test=null;
+let prog={};try{prog=JSON.parse(localStorage.getItem("tld-progress")||"{}")||{}}catch(e){prog={}}
+const saveProg=()=>{try{localStorage.setItem("tld-progress",JSON.stringify(prog))}catch(e){}};
 
-let mode="learn",deck=[],pos=0,cur=null,opts=[],answered=false,learnStats={checked:0,right:0},test=null;
+const inScope=()=>C.filter(c=>scope==="all"?true:(scope==="type"||scope==="layout")?IS[c.issue].c===scope:c.issue===scope);
+function scopeLabel(){return scope==="all"?"All issues":scope==="type"?"Typography":scope==="layout"?"Layout":IS[scope].n}
 
-$("terms").innerHTML=VOCAB.map(([k,t,d])=>`<div class="term" data-key="${k}"><dt>${t}</dt><dd>${d}</dd></div>`).join("");
+$("scopeSel").innerHTML=`<option value="all">All issues (${C.length} cases)</option><option value="type">Typography only (${C.filter(c=>IS[c.issue].c==="type").length})</option><option value="layout">Layout only (${C.filter(c=>IS[c.issue].c==="layout").length})</option>`+
+ ["type","layout"].map(g=>`<optgroup label="${g==="type"?"Typography":"Layout"}: one issue">${ISSUES.filter(i=>i[1]===g).map(([k,,n])=>`<option value="${k}">${n} (${C.filter(c=>c.issue===k).length})</option>`).join("")}</optgroup>`).join("");
 
-function frame(letter,label,cls,html){return `<figure class="frame ${cls}"><figcaption><span class="tag">${letter}</span>${label}</figcaption><div class="sheet"><div class="pg">${html}</div></div></figure>`}
+function renderTerms(){
+  $("terms").innerHTML=["type","layout"].map(g=>`<p class="group">${g==="type"?"Typography":"Layout"}</p><div class="terms">${ISSUES.filter(i=>i[1]===g).map(([k,,n,d])=>{const cs=C.filter(c=>c.issue===k),got=cs.filter(c=>prog[c.id]).length;return `<button type="button" class="term${scope===k?" sel":""}" data-key="${k}"><span class="tn"><span>${n}</span><span class="tp${got===cs.length?" done":""}">${got}/${cs.length}</span></span><span class="td">${d}</span></button>`}).join("")}</div>`).join("");
+  $("terms").querySelectorAll(".term").forEach(t=>t.onclick=()=>{setScope(t.dataset.key);if(mode!=="learn")setMode("learn");$("play").scrollIntoView({block:"start",behavior:reduced?"auto":"smooth"})});
+  if(cur&&answered)highlight(cur.issue);
+}
+function highlight(k){document.querySelectorAll(".term.on").forEach(t=>t.classList.remove("on"));const card=document.querySelector(`.term[data-key="${k}"]`);if(card){card.classList.add("on");const side=document.querySelector(".vocab");if(getComputedStyle(side).position==="sticky")side.scrollTop=card.offsetTop-side.offsetTop-60}}
+
+function frame(letter,label,cls,a){return `<figure class="frame ${cls}"><figcaption><span class="tag">${letter}</span>${label}</figcaption><div class="paste"><div class="fit" data-w="${a.w}" data-h="${a.h}"><div class="art" style="width:${a.w}px;height:${a.h}px;background:${a.bg}">${a.body}</div></div></div></figure>`}
+function fitAll(){document.querySelectorAll(".fit").forEach(f=>{const w=+f.dataset.w,h=+f.dataset.h,av=f.clientWidth;if(!av)return;const s=Math.min(1.3,av/w),art=f.firstElementChild;art.style.transform=`scale(${s})`;art.style.left=((av-w*s)/2)+"px";f.style.height=(h*s)+"px"})}
+new ResizeObserver(fitAll).observe($("compare"));
 
 function show(c){
   cur=c;answered=false;
-  const n=C.indexOf(c)+1;
-  $("caseLabel").textContent=mode==="learn"?`Case ${String(n).padStart(2,"0")} of ${C.length}`:`Question ${test.i+1} of ${test.n}`;
+  $("caseLabel").textContent=mode==="learn"?`Case ${String(c.n).padStart(2,"0")} of ${C.length}`:`Question ${test.i+1} of ${test.n}`;
   $("progress").textContent=mode==="learn"?`${learnStats.right} correct of ${learnStats.checked} checked`:`Score ${test.score}`;
   $("caseTitle").textContent="What changed between A and B?";
-  $("termChip").hidden=true;
+  $("piece").textContent=c.piece;$("termChip").hidden=true;
   const cmp=$("compare");cmp.className="compare"+(c.wide?" wide":"");
   cmp.innerHTML=frame("A","Problem","bad",c.html(true))+frame("B","Corrected","good",c.html(false));
+  fitAll();
   $("hintBtn").hidden=mode!=="learn";$("hintBtn").setAttribute("aria-pressed","false");
   opts=shuffle([{t:c.yes,ok:true},...c.no.map(([t,w])=>({t,ok:false,w}))]);
   $("opts").innerHTML=opts.map((o,i)=>`<label class="opt" for="opt${i}"><input type="radio" name="opt" id="opt${i}" value="${i}"><span>${esc(o.t)}</span><span class="why" hidden></span></label>`).join("");
@@ -358,67 +876,66 @@ function show(c){
   $("checkBtn").hidden=false;$("checkBtn").disabled=true;$("nextBtn").hidden=true;
   document.querySelectorAll(".term.on").forEach(t=>t.classList.remove("on"));
 }
-
 function check(){
   if(answered)return;
   const sel=$("opts").querySelector("input:checked");if(!sel)return;
   answered=true;
-  const pick=opts[+sel.value],ok=pick.ok,term=VOCAB.find(v=>v[0]===cur.key);
+  const ok=opts[+sel.value].ok,iss=IS[cur.issue];
   $("opts").querySelectorAll(".opt").forEach((lab,i)=>{
     const o=opts[i],w=lab.querySelector(".why");
     lab.classList.add("locked");lab.querySelector("input").disabled=true;
-    if(o.ok){lab.classList.add("right");w.innerHTML=`<b>Applied</b>This is the adjustment that turns A into B.`}
+    if(o.ok){lab.classList.add("right");w.innerHTML=`<b>Applied</b>This is the fix that turns A into B.`}
     else{if(i===+sel.value)lab.classList.add("wrong");w.innerHTML=`<b class="no">Not applied</b>${esc(o.w)}`}
     w.hidden=false;
   });
-  $("caseTitle").textContent=cur.title;
-  $("termChip").textContent=term[1];$("termChip").hidden=false;
-  $("feedback").innerHTML=`<div class="verdict">${ok?'<span class="pill ok">Correct</span>':'<span class="pill no">Not quite</span>'}<span>${ok?"You spotted the fix.":"The adjustment was: <b>"+esc(cur.yes)+"</b>"}</span></div><div class="diff"><span>What changed</span>${cur.diff}</div><p>${esc(cur.why)}</p>`;
-  const card=document.querySelector(`.term[data-key="${cur.key}"]`);
-  if(card){card.classList.add("on");const side=document.querySelector(".vocab");if(getComputedStyle(side).position==="sticky")side.scrollTop=card.offsetTop-side.offsetTop-60}
+  $("caseTitle").textContent=cur.title;$("termChip").textContent=iss.n;$("termChip").hidden=false;
+  if(mode==="learn"){$("compare").classList.add("hinting");$("hintBtn").setAttribute("aria-pressed","true")}
+  $("feedback").innerHTML=`<div class="verdict">${ok?'<span class="pill ok">Correct</span>':'<span class="pill no">Not quite</span>'}<span>${ok?"You spotted the fix.":"The fix was: <b>"+esc(cur.yes)+"</b>"}</span></div><div class="diff"><span>What changed</span>${esc(cur.diff)}</div><p>${esc(cur.why)}</p>`;
+  if(ok&&!prog[cur.id]){prog[cur.id]=true;saveProg()}
+  renderTerms();highlight(cur.issue);
   if(mode==="learn"){learnStats.checked++;if(ok)learnStats.right++;$("progress").textContent=`${learnStats.right} correct of ${learnStats.checked} checked`;$("nextBtn").textContent="Next case"}
   else{if(ok)test.score++;else test.missed.push(cur);$("progress").textContent=`Score ${test.score}`;$("nextBtn").textContent=test.i+1>=test.n?"See results":"Next question"}
   $("checkBtn").hidden=true;$("nextBtn").hidden=false;$("nextBtn").focus({preventScroll:true});
 }
-
 function toTop(){const r=$("play").getBoundingClientRect();if(r.top<0)$("play").scrollIntoView({block:"start",behavior:reduced?"auto":"smooth"})}
+function nextLearn(){if(pos>=deck.length){deck=shuffle(inScope());pos=0}show(deck[pos++])}
+function next(){if(mode==="learn"){nextLearn();toTop();return}if(test.i+1>=test.n)return results();test.i++;show(test.list[test.i]);toTop()}
 
-function nextLearn(){if(pos>=deck.length){deck=shuffle(C.map((_,i)=>i));pos=0}show(C[deck[pos++]])}
-function next(){
-  if(mode==="learn"){nextLearn();toTop();return}
-  if(test.i+1>=test.n)return results();
-  test.i++;show(test.list[test.i]);toTop();
+function renderSetup(){
+  const n=inScope().length,opts=[5,10,20,30].filter(x=>x<n);
+  $("setupInfo").textContent=`Testing from: ${scopeLabel()} (${n} cases). No hints; every question is a different case.`;
+  $("lengths").innerHTML=opts.map(x=>`<button type="button" data-n="${x}"><b>${x}</b><small>questions</small></button>`).join("")+`<button type="button" data-n="${n}"><b>${n}</b><small>every case</small></button>`;
+  $("lengths").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>startTest(+b.dataset.n));
 }
-
-function startTest(n){
-  test={n,i:0,score:0,missed:[],list:shuffle(C).slice(0,n)};
-  $("setup").hidden=true;$("results").hidden=true;$("play").hidden=false;show(test.list[0]);toTop();
-}
+function startTest(n){test={n,i:0,score:0,missed:[],list:shuffle(inScope()).slice(0,n)};$("setup").hidden=true;$("results").hidden=true;$("play").hidden=false;show(test.list[0]);toTop()}
 function results(){
   const pct=Math.round(test.score/test.n*100);
+  const byIssue={};test.missed.forEach(c=>{byIssue[c.issue]=(byIssue[c.issue]||0)+1});
+  const weak=Object.entries(byIssue).sort((a,b)=>b[1]-a[1]);
   $("play").hidden=true;
-  $("results").innerHTML=`<p class="meta" style="margin:0">Test complete</p><div class="big">${test.score} / ${test.n}</div><p class="muted" style="margin:0">${pct}% correct</p>`+
-   (test.missed.length?`<h2 style="margin-top:20px;font-size:20px">Review these</h2><ul class="missed">${test.missed.map(c=>`<li><b>${esc(c.title)}</b> · ${esc(VOCAB.find(v=>v[0]===c.key)[1])}<small>The fix: ${esc(c.yes)}</small></li>`).join("")}</ul>`:`<p style="margin-top:14px">Every answer correct.</p>`)+
+  $("results").innerHTML=`<p class="meta" style="margin:0">Test complete · ${esc(scopeLabel())}</p><div class="big">${test.score} / ${test.n}</div><p class="muted" style="margin:0">${pct}% correct</p>`+
+   (test.missed.length?`<h2 style="margin-top:20px;font-size:20px">Review these</h2>${weak.length?`<p class="muted" style="margin:6px 0 0">Issues to practice next: ${weak.map(([k,v])=>`${esc(IS[k].n)}${v>1?` (${v} missed)`:""}`).join(", ")}. Select one in the Issues list to practice all three of its cases.</p>`:""}<ul class="missed">${test.missed.map(c=>`<li><b>${esc(c.piece)}</b> · ${esc(IS[c.issue].n)}<small>The fix: ${esc(c.yes)}</small></li>`).join("")}</ul>`:`<p style="margin-top:14px">Every answer correct.</p>`)+
    `<div class="actions"><button type="button" class="primary" id="againBtn">Take another test</button><button type="button" class="secondary" id="toLearnBtn">Back to Learn</button></div>`;
   $("results").hidden=false;
   $("againBtn").onclick=()=>setMode("test");$("toLearnBtn").onclick=()=>setMode("learn");
   toTop();
 }
-
+function setScope(s){scope=s;$("scopeSel").value=s;const n=inScope().length;$("scopeInfo").textContent=n===3?"Three examples of the same issue, in different kinds of work.":"";deck=[];pos=0;renderTerms();if(mode==="learn")nextLearn();else{test=null;$("play").hidden=true;$("results").hidden=true;$("setup").hidden=false;renderSetup()}}
 function setMode(m){
   mode=m;
   $("mLearn").setAttribute("aria-pressed",m==="learn");$("mTest").setAttribute("aria-pressed",m==="test");
   $("results").hidden=true;
   if(m==="learn"){$("setup").hidden=true;$("play").hidden=false;nextLearn()}
-  else{test=null;$("play").hidden=true;$("setup").hidden=false}
+  else{test=null;$("play").hidden=true;$("setup").hidden=false;renderSetup()}
 }
-
+$("scopeSel").onchange=e=>setScope(e.target.value);
 $("mLearn").onclick=()=>setMode("learn");
 $("mTest").onclick=()=>setMode("test");
-document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>startTest(+b.dataset.n));
 $("checkBtn").onclick=check;
 $("nextBtn").onclick=next;
 $("hintBtn").onclick=()=>{const on=$("compare").classList.toggle("hinting");$("hintBtn").setAttribute("aria-pressed",on)};
+$("resetBtn").onclick=()=>{prog={};saveProg();renderTerms()};
+renderTerms();
 setMode("learn");
 </script>
 </body>
