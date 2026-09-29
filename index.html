@@ -1,215 +1,425 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Typography Detective</title><style>
-:root{--ink:#202124;--paper:#eeeae3;--line:#d7d3cb;--soft:#f5f2ec;--good:#246b3b;--bad:#a52f2f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif}.app{max-width:1180px;margin:auto;padding:18px}.hero{background:#202124;color:#fff;border-radius:18px;padding:28px;text-align:center}h1{font:700 clamp(34px,6vw,62px)/.95 Georgia,serif;margin:0 0 8px}.hero p{margin:0;color:#ddd}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0;box-shadow:0 3px 14px #0001}.modes,.lengths{display:grid;gap:10px}.modes{grid-template-columns:1fr 1fr}.mode,.btn,.choice{border:2px solid var(--line);background:#fff;border-radius:11px;padding:13px;cursor:pointer}.mode{text-align:left}.mode.active,.primary{background:#202124;color:#fff;border-color:#202124}.mode strong{display:block;font-size:18px}.mode small{opacity:.75}.lengths{grid-template-columns:repeat(5,1fr)}.hidden{display:none!important}.stats{display:flex;justify-content:space-between;flex-wrap:wrap;font-weight:bold}.instructions{background:var(--soft);padding:12px;border-radius:10px;line-height:1.5}.stage{background:#e5e0d7;padding:18px;border-radius:12px}.typewindow{max-width:850px;min-height:390px;margin:auto;background:#fff;border:1px solid #c8c3ba;border-radius:8px;overflow:hidden;box-shadow:0 4px 16px #0001}.toolbar{height:42px;background:#f2f0ec;border-bottom:1px solid #d5d0c7;padding:12px 16px;color:#687078;font-weight:bold;font-size:13px}.sample{margin:55px auto;max-width:650px;font:19px/1.55 Georgia,serif;padding:0 20px}.tightlead{line-height:1.02}.display{font:700 72px/1 Arial,sans-serif;text-align:center;letter-spacing:0}.loose{letter-spacing:12px}.center{text-align:center;font:700 56px/.95 Georgia,serif}.center small{font:18px Arial;font-weight:normal}.list{font:19px/2 Georgia,serif}.serif{font:700 40px Georgia}.sans{font:32px Arial}.just{text-align:justify}.long{display:block;max-width:950px;font-size:20px}
-.solutionLabel{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:18px;padding:14px 16px;background:#202124;color:#fff;border-radius:12px 12px 0 0}
-.solutionLabel strong{letter-spacing:.5px}.solutionLabel span{font-size:13px;color:#ddd}
-.choice{position:relative;min-height:58px;padding:14px 16px 14px 48px}
-.choice:before{content:"";position:absolute;left:16px;top:17px;width:18px;height:18px;border:2px solid #aaa;border-radius:4px;background:#fff}
-.choice.selected:before{content:"✓";font-weight:800;text-align:center;line-height:14px;background:#202124;color:#fff;border-color:#202124}
-.choice.correct:before{background:#246b3b;color:#fff;border-color:#246b3b}
-.choice.wrong:before{background:#a52f2f;color:#fff;border-color:#a52f2f}
-.solutionLabel + .choices{margin-top:0}
-.controlTag{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.7px;background:#eeeae3;padding:4px 7px;border-radius:5px;margin-right:7px;color:#555}
-.choices{display:grid;gap:10px;margin-top:15px}.choice{text-align:left;line-height:1.4}.choice.selected{border-color:#202124;box-shadow:0 0 0 2px #202124 inset}.correct{background:#eaf5ed;border-color:var(--good)!important}.wrong{background:#fae9e9;border-color:var(--bad)!important}.feedback{text-align:center;min-height:28px;font-size:18px;font-weight:bold;margin:12px 0}.good{color:var(--good)}.bad{color:var(--bad)}.actions{text-align:center;margin-top:14px}.score{font-size:54px;font-weight:800;text-align:center}.note{font-size:13px;color:#687078;line-height:1.55}.controlGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
-
-.guide{position:fixed;right:-430px;top:0;width:min(430px,92vw);height:100vh;background:#fff;z-index:20;box-shadow:-8px 0 30px #0002;transition:right .3s;padding:22px;overflow:auto}.guide.open{right:0}.close{float:right;border:0;background:#202124;color:#fff;border-radius:50%;width:34px;height:34px}.guideTab{position:fixed;right:0;top:45%;z-index:19;border:0;background:#202124;color:#fff;padding:14px 10px;border-radius:10px 0 0 10px;writing-mode:vertical-rl;color:#fff}.guide .box{background:var(--soft);border-radius:10px;padding:14px;margin:12px 0;line-height:1.55}@media(max-width:700px){.controlGrid{grid-template-columns:repeat(2,1fr)}.modes{grid-template-columns:1fr}.lengths{grid-template-columns:repeat(3,1fr)}.display{font-size:46px}}
-
-/* --- VISUAL DIAGNOSTIC EMPHASIS --- */
-.issueMark{
-  background:#ffe08a !important;
-  box-shadow:0 0 0 3px rgba(180,35,24,.18);
-  border-radius:4px;
-  padding:2px 5px;
-  position:relative;
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Typography Detective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Lobster&family=Newsreader:wght@500;600&family=Pacifico&family=Source+Sans+3:ital,wght@0,400;0,700;0,800;1,400&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: masthead, then a case card (two proof windows + answers) beside a sticky vocabulary rail. Proof windows stay white "paper" in both themes. */
+:root{
+  --bg:#eef1f5; --surface:#ffffff; --stage:#dfe4eb; --ink:#17202b; --muted:#5a6574; --line:#d3d9e1;
+  --pencil:#2f62c9; --pencil-soft:#e2eafb;
+  --good:#1e7547; --good-soft:#e3f3ea; --bad:#b3261e; --bad-soft:#fbe8e6;
+  --sheet:#ffffff; --sheet-ink:#1b1b1b; --mark:#2f62c9;
+  --display:"Newsreader",Georgia,serif; --ui:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
-.issueLine{
-  background:linear-gradient(90deg,rgba(255,224,138,.75),rgba(255,224,138,.22),transparent);
-  border-left:5px solid #b42318;
-  padding-left:10px !important;
-  border-radius:4px;
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11151b; --surface:#19202a; --stage:#0b0e12; --ink:#e6eaf0; --muted:#9aa5b3; --line:#2b3441;
+  --pencil:#86a8ff; --pencil-soft:#1e2a44; --good:#62c994; --good-soft:#15301f; --bad:#ff8d84; --bad-soft:#3a1d1b;
+  --sheet:#fbfaf7; --sheet-ink:#1b1b1b; --mark:#2f62c9; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11151b; --surface:#19202a; --stage:#0b0e12; --ink:#e6eaf0; --muted:#9aa5b3; --line:#2b3441;
+  --pencil:#86a8ff; --pencil-soft:#1e2a44; --good:#62c994; --good-soft:#15301f; --bad:#ff8d84; --bad-soft:#3a1d1b;
+  --sheet:#fbfaf7; --sheet-ink:#1b1b1b; --mark:#2f62c9; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--ui)}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:24px 48px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--pencil);outline-offset:2px}
+
+.mast{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--pencil);margin:0 0 10px}
+h1{font:600 clamp(32px,5vw,46px)/1.02 var(--display);letter-spacing:-.01em;margin:0 0 10px;text-wrap:balance}
+.lede{margin:0;max-width:60ch;color:var(--muted)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.seg button{border:0;background:none;padding:8px 20px;border-radius:999px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px;align-items:start}
+main{min-width:0;display:grid;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:clamp(16px,2.4vw,24px);min-width:0}
+.meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font:500 12px/1.2 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.titleRow{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin:8px 0 16px}
+h2{font:600 24px/1.2 var(--display);margin:0;text-wrap:balance}
+.chip{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:var(--pencil-soft);color:var(--pencil)}
+
+.stageWrap{container:stage/inline-size;background:var(--stage);padding:14px;border-radius:8px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.compare.wide{grid-template-columns:1fr}
+@container stage (max-width:640px){.compare{grid-template-columns:1fr}}
+.frame{margin:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);min-width:0}
+.frame figcaption{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tag{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:4px;font-weight:600}
+.frame.bad .tag{background:var(--bad-soft);color:var(--bad)}
+.frame.good .tag{background:var(--good-soft);color:var(--good)}
+.sheet{background:var(--sheet);color:var(--sheet-ink);padding:24px 20px;min-height:240px;overflow-x:auto}
+
+/* Sample typography: everything explicit so only the intended property differs */
+.pg{font-family:"Source Serif 4",Georgia,serif;font-size:15px;line-height:1.45;color:var(--sheet-ink)}
+.pg p,.pg h3,.pg div{margin:0}
+.pg .sans{font-family:"Source Sans 3","Helvetica Neue",Arial,sans-serif}
+.pg .lines div{white-space:nowrap}
+.compare.hinting .lk{outline:2px dashed var(--mark);outline-offset:5px;border-radius:2px}
+
+.hintRow{display:flex;justify-content:flex-end;margin-top:10px}
+.ghost{background:none;border:1px solid var(--line);border-radius:6px;padding:7px 12px;font-size:13px;font-weight:500;color:var(--muted)}
+.ghost[aria-pressed="true"]{border-color:var(--pencil);color:var(--pencil)}
+
+fieldset{border:0;padding:0;margin:18px 0 0;min-width:0}
+legend{font-weight:600;margin-bottom:10px;padding:0}
+.opts{display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:7px;background:var(--surface);cursor:pointer}
+.opt input{margin:3px 0 0;accent-color:var(--pencil);width:17px;height:17px}
+.opt:has(input:checked){border-color:var(--pencil);box-shadow:inset 0 0 0 1px var(--pencil)}
+.opt.right{border-color:var(--good);background:var(--good-soft);box-shadow:none}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft);box-shadow:none}
+.opt.locked{cursor:default}
+.why{grid-column:2;font-size:13.5px;color:var(--muted)}
+.why b{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
+.opt.right .why b{color:var(--good)} .opt .why b.no{color:var(--bad)}
+
+#feedback:empty{display:none}
+#feedback{margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;display:grid;gap:8px}
+.verdict{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.pill{font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:999px}
+.pill.ok{background:var(--good-soft);color:var(--good)} .pill.no{background:var(--bad-soft);color:var(--bad)}
+.diff{font-family:var(--mono);font-size:13px;background:var(--stage);padding:8px 10px;border-radius:6px;font-variant-numeric:tabular-nums;overflow-x:auto}
+.diff span{color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:11px;margin-right:8px}
+#feedback p{margin:0}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.primary{background:var(--ink);color:var(--bg);border:0;border-radius:7px;padding:11px 20px;font-weight:600}
+.primary:disabled{opacity:.4;cursor:not-allowed}
+.secondary{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:10px 18px;font-weight:600}
+
+.lengths{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.lengths button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:14px 22px;min-width:110px;text-align:left}
+.lengths b{display:block;font:600 26px/1 var(--display)}
+.lengths small{color:var(--muted)}
+.muted{color:var(--muted)}
+.big{font:600 64px/1 var(--display);margin:10px 0 4px;font-variant-numeric:tabular-nums}
+.missed{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.missed li{border:1px solid var(--line);border-radius:7px;padding:10px 12px}
+.missed small{display:block;color:var(--muted)}
+
+.vocab{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);max-height:calc(100vh - 32px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.vocab h2{font-size:20px}
+.vocab>p{font-size:12.5px;color:var(--muted);margin:6px 0 12px}
+.terms{display:grid;gap:6px;margin:0}
+.term{border:1px solid transparent;border-radius:7px;padding:7px 9px;transition:background .2s}
+.term dt{font-weight:600;font-size:13.5px}
+.term dd{margin:2px 0 0;font-size:12.5px;line-height:1.45;color:var(--muted)}
+.term.on{background:var(--pencil-soft);border-color:var(--pencil)}
+.colophon{margin-top:28px;font-size:12px;color:var(--muted)}
+@media (max-width:960px){.layout{grid-template-columns:1fr}.vocab{position:static;max-height:none}.terms{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <p class="kicker">Spot the difference · name the fix</p>
+      <h1>Typography Detective</h1>
+      <p class="lede">Window A has a typography problem. Window B shows the same text after one adjustment. Compare them, then choose the adjustment that was made.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Mode">
+      <button id="mLearn" type="button" aria-pressed="true">Learn</button>
+      <button id="mTest" type="button" aria-pressed="false">Test</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main>
+      <section id="setup" class="card" hidden>
+        <h2>Choose a test length</h2>
+        <p class="muted" style="margin:6px 0 0">No hints in Test mode. Every question is a different case.</p>
+        <div class="lengths">
+          <button type="button" data-n="5"><b>5</b><small>Quick check</small></button>
+          <button type="button" data-n="10"><b>10</b><small>Standard</small></button>
+          <button type="button" data-n="22"><b>22</b><small>Every case</small></button>
+        </div>
+      </section>
+
+      <section id="play" class="card">
+        <div class="meta"><span id="caseLabel">Case</span><span id="progress"></span></div>
+        <div class="titleRow"><h2 id="caseTitle">What changed between A and B?</h2><span id="termChip" class="chip" hidden></span></div>
+        <div class="stageWrap"><div id="compare" class="compare"></div></div>
+        <div class="hintRow"><button id="hintBtn" type="button" class="ghost" aria-pressed="false">Show where to look</button></div>
+        <fieldset>
+          <legend>Which adjustment turned A into B?</legend>
+          <div id="opts" class="opts"></div>
+        </fieldset>
+        <div id="feedback" aria-live="polite"></div>
+        <div class="actions">
+          <button id="checkBtn" type="button" class="primary" disabled>Check answer</button>
+          <button id="nextBtn" type="button" class="primary" hidden>Next case</button>
+        </div>
+      </section>
+
+      <section id="results" class="card" hidden></section>
+    </main>
+
+    <aside class="vocab" aria-labelledby="vocabHead">
+      <h2 id="vocabHead">Vocabulary</h2>
+      <p>After each answer, the related term is highlighted.</p>
+      <dl id="terms" class="terms"></dl>
+    </aside>
+  </div>
+  <p class="colophon">Headings set in Newsreader, interface in IBM Plex Sans. Sample text in Source Serif 4 and Source Sans 3.</p>
+</div>
+
+<script>
+const VOCAB=[
+ ["leading","Leading","Vertical distance from one baseline to the next. Written with size, e.g. 10/14 means 10 pt type on 14 pt leading."],
+ ["tracking","Tracking","Even spacing added or removed across a range of letters, measured in thousandths of an em."],
+ ["kerning","Kerning","Spacing adjusted between one specific pair of letters, such as T and o."],
+ ["space","Space Before / After","Space added above or below a paragraph. Separates ideas without typing extra returns."],
+ ["align","Alignment","How lines sit in the frame: left, right, centered, or justified."],
+ ["justify","Justification","Stretches word spacing so lines are flush on both edges. In narrow columns it creates rivers of white space."],
+ ["hyphen","Hyphenation","Rules for breaking words at line ends. Limit consecutive hyphens to two or fewer."],
+ ["tabs","Tabs","Stops at exact positions that line text up in columns. Typed spaces never line up in proportional fonts."],
+ ["lists","Bulleted & Numbered Lists","Automatic lists with a hanging indent, so bullets or numbers hang left and wrapped lines align with the text."],
+ ["pstyle","Paragraph Styles","A saved set of paragraph formatting (font, size, leading, spacing, alignment) applied to whole paragraphs."],
+ ["cstyle","Character Styles","A saved set of formatting applied to selected words, such as key terms, inside a paragraph."],
+ ["pairing","Font Pairing","Combining typefaces with distinct jobs, such as a serif headline and a sans-serif body."],
+ ["measure","Line Length (Measure)","Characters per line. Body text reads best at about 45 to 75."],
+ ["widows","Widows, Orphans & Runts","Stranded lines: a paragraph's first line alone at a column's bottom (orphan), its last line alone at the top (widow), or a single word on the last line (runt)."],
+ ["frames","Text Frame Alignment","Separate text frames lined up on shared edges so they read as one group."],
+ ["quotes","Quotes & Dashes","Curly quotes and apostrophes, en dashes for ranges (9–5), and em dashes for breaks in a sentence."],
+ ["scale","Horizontal Scale","Artificially stretching or squeezing letters. Distorts stroke weights; keep it at 100%."]
+];
+
+const nb=n=>'&nbsp;'.repeat(n);
+const C=[
+ {key:"leading",title:"Crowded lines",
+  html:b=>`<p class="lk" style="font-size:16px;line-height:${b?.78:1.5}">Typography is the craft of arranging type so written language is legible and readable. Good spacing lets the eye glide from the end of one line to the start of the next.</p>`,
+  yes:"Increased the leading (the space between lines)",
+  no:[["Added space after the paragraph","There is only one paragraph. The space that changed is between lines inside it."],["Increased the tracking","The letters inside each word are spaced exactly the same in both windows."]],
+  diff:"Size/leading: 16/12.5 → 16/24",
+  why:"When leading is smaller than the type size, descenders collide with the ascenders on the next line and the text turns into a dark mass."},
+ {key:"leading",title:"Floating lines",
+  html:b=>`<p class="lk" style="font-size:16px;line-height:${b?3.4:1.45}">Loose leading breaks a paragraph into floating strips. Each line starts to look like a separate item instead of part of one continuous thought.</p>`,
+  yes:"Reduced the leading",
+  no:[["Reduced the font size","The letters are the same height in both windows. Only the gaps between lines changed."],["Removed space before and after paragraphs","This is a single paragraph, so paragraph spacing never came into play. The gaps are between its own lines."]],
+  diff:"Size/leading: 16/54 → 16/23",
+  why:"Too much leading is as harmful as too little. Lines drift apart and stop reading as one block of text."},
+ {key:"tracking",title:"Letters drifting apart",
+  html:b=>`<h3 class="lk sans" style="font-size:30px;font-weight:700;line-height:1.1;letter-spacing:${b?'.5em':'.02em'}">GRAND OPENING</h3><p class="sans" style="margin-top:12px;font-size:15px">Saturday, 10 AM · Main Street Gallery</p>`,
+  yes:"Reduced the tracking on the headline",
+  no:[["Kerned one letter pair in the headline","Every gap in the headline shrank by the same amount. Kerning changes one pair at a time."],["Reduced the headline size","The capitals are the same height in both windows."]],
+  diff:"Headline tracking: +500 → +20",
+  why:"Tracking changes spacing evenly across a range of letters. Spread too wide, a word falls apart into separate letters."},
+ {key:"tracking",title:"Letters colliding",
+  html:b=>`<p class="lk" style="font-size:16px;letter-spacing:${b?'-.085em':'0'}">The museum's new wing opens this spring with three galleries dedicated to modern printmaking and book arts.</p>`,
+  yes:"Increased the tracking of the paragraph",
+  no:[["Increased the leading","The distance between lines is identical. The change is between the letters inside each line."],["Switched to a wider typeface","The letterforms are identical. Only the gaps between them changed."]],
+  diff:"Tracking: −85 → 0",
+  why:"Tight tracking can work on large display type, but on body text it makes letters touch and slows reading."},
+ {key:"kerning",title:"One gap too wide",
+  html:b=>`<div class="lk" style="font-size:68px;font-weight:700;line-height:1"><span style="display:inline-block;margin-right:${b?'.3em':'-.05em'}">T</span>oday</div><p style="margin-top:14px;font-size:15px">Daily specials, written fresh each morning.</p>`,
+  yes:"Kerned the pair T–o",
+  no:[["Reduced the tracking across the whole word","The spacing of o‑d‑a‑y is identical in both windows. Only one pair moved."],["Changed the typeface","The letterforms are identical in both windows."]],
+  diff:"Kerning T/o: +300 → −50",
+  why:"Kerning fixes the space between one specific pair. Letters like T, V, W and A leave visual holes that a manual kern tucks in."},
+ {key:"space",title:"Paragraphs run together",
+  html:b=>["Research comes first. Designers study the audience, the content, and the limits of the project before drawing anything.","Sketching comes next. Quick thumbnails explore many layouts before any one of them is refined.","Iteration closes the loop. Each round of feedback shows what works and what needs to change."].map(t=>`<p class="lk" style="font-size:15px;margin-bottom:${b?0:12}px">${t}</p>`).join(""),
+  yes:"Added space after each paragraph",
+  no:[["Increased the leading","Lines inside each paragraph are exactly as close together as before. Only the gaps between paragraphs grew."],["Added a first-line indent","No line in window B is indented."]],
+  diff:"Space After: 0 → 12 px",
+  why:"With no space and no indent, readers cannot see where one paragraph ends and the next begins. Space After separates ideas without typing extra returns."},
+ {key:"space",title:"A heading far from its text",
+  html:b=>`<p style="font-size:14px">Our studio has produced identity work for more than forty regional clients since 2012.</p><h3 class="lk sans" style="font-size:19px;font-weight:700;line-height:1.2;margin:${b?'0 0 34px':'26px 0 6px'}">Our Services</h3><p style="font-size:14px">We design logos, signage, publications, and websites that share one clear voice.</p>`,
+  yes:"Added space before the heading and reduced space after it",
+  no:[["Made the heading larger","The heading is the same size in both windows."],["Increased the leading of the body text","Line spacing inside both paragraphs is unchanged."]],
+  diff:"Heading Space Before: 0 → 26 px · Space After: 34 → 6 px",
+  why:"A heading belongs to the text that follows it. More space above and less below groups it with its own section instead of the previous one."},
+ {key:"align",title:"Four alignments in one frame",
+  html:b=>{const a=b?["center","right","center","left"]:["left","left","left","left"];const t=["Monday: hand lettering with brush pens and markers.","Wednesday: grid systems for posters, flyers, and magazine spreads.","Friday: critique session and final portfolio review."];return `<h3 class="lk sans" style="font-size:20px;font-weight:700;margin-bottom:10px;text-align:${a[0]}">Workshop Schedule</h3>`+t.map((x,i)=>`<p class="lk" style="font-size:15px;margin-bottom:8px;text-align:${a[i+1]}">${x}</p>`).join("")},
+  yes:"Set every paragraph to left alignment",
+  no:[["Justified all the paragraphs","The right edge in window B is still ragged. Justified text would be flush on both sides."],["Centered all the paragraphs","Every line in window B starts at the same left edge."]],
+  diff:"Alignment: center / right / center / left → left throughout",
+  why:"Related text should share one alignment. Mixed alignment gives the eye no consistent edge to return to."},
+ {key:"justify",title:"Rivers in a narrow column",
+  html:b=>`<p class="lk" style="width:190px;font-size:15px;text-align:${b?'justify':'left'}">Contemporary accessibility recommendations emphasize comprehensible typography, generous spacing, and consistent navigation throughout.</p>`,
+  yes:"Changed the alignment from justified to left (ragged right)",
+  no:[["Widened the column","The column is the same width in both windows."],["Turned on hyphenation","No word in window B is broken with a hyphen."]],
+  diff:"Alignment: Justify → Align Left",
+  why:"Justified text stretches word spaces to fill each line. In a narrow column with long words, the gaps get huge and form rivers of white space."},
+ {key:"hyphen",title:"A ladder of hyphens",
+  html:b=>`<div class="lk lines" style="font-size:16px">${(b?["Our spring bro-","chure intro-","duces new work-","shops in print-","making, book-","binding, and let-","terpress."]:["Our spring","brochure","introduces new","workshops in","printmaking,","bookbinding, and","letterpress."]).map(l=>`<div>${l}</div>`).join("")}</div>`,
+  yes:"Turned off hyphenation",
+  no:[["Increased the tracking","Letter spacing is identical in both windows."],["Changed the alignment to justified","Window B is ragged right, not justified."]],
+  diff:"Hyphenate: on, no limit → off",
+  why:"An occasional hyphen helps a ragged edge. Six in a row turn reading into a series of interruptions. InDesign's Hyphen Limit setting (2 or fewer) prevents this."},
+ {key:"tabs",title:"Times that won't line up",
+  html:b=>{const r=[["Doors open","6:00 PM",5],["Keynote","7:15 PM",8],["Student showcase","8:00 PM",2],["Awards","9:30 PM",11]];return `<h3 class="sans" style="font-size:18px;font-weight:700;margin-bottom:10px">Friday Program</h3><div class="lk sans" style="font-size:15px;width:240px">`+r.map(([l,t,n])=>b?`<div style="margin-bottom:6px;white-space:nowrap">${l}${nb(n)}${t}</div>`:`<div style="margin-bottom:6px;display:flex;justify-content:space-between;font-variant-numeric:tabular-nums"><span>${l}</span><span>${t}</span></div>`).join("")+`</div>`},
+  yes:"Replaced the typed spaces with a right-aligned tab stop",
+  no:[["Increased the word spacing","The event names are spaced the same. Only the times moved, into one column."],["Center-aligned each line","Every event name in window B starts at the left edge."]],
+  diff:"Typed spaces → right tab stop at 240 px",
+  why:"In a proportional font every letter has a different width, so typed spaces never line up. A tab stop puts the column at an exact position."},
+ {key:"lists",title:"Bullets buried in text",
+  html:b=>{const t=["Bring a sketchbook with at least forty blank pages for thumbnails","A 12-inch steel ruler and a sharp craft knife","Two fine-tip black pens, 0.3 mm and 0.5 mm"];return `<div class="lk" style="width:260px;font-size:15px">`+t.map(x=>b?`<div style="margin-bottom:8px">•&ensp;${x}</div>`:`<div style="margin-bottom:8px;display:grid;grid-template-columns:1.1em 1fr"><span>•</span><span>${x}</span></div>`).join("")+`</div>`},
+  yes:"Applied a hanging indent so wrapped lines align with the text",
+  no:[["Increased the leading","Line spacing inside each item is the same in both windows."],["Converted the bullets to a numbered list","Window B still uses bullets."]],
+  diff:"Left Indent 0 / First Line 0 → Left Indent 1.1 em / First Line −1.1 em",
+  why:"With a hanging indent the bullet hangs to the left and every line of text shares one edge, so the bullets stay clear and easy to scan."},
+ {key:"lists",title:"Numbers pushing text around",
+  html:b=>{const t=["Export the layout as a print-ready PDF with bleed","Print a proof at 100% scale","Mark corrections in blue pencil on the proof","Update the file and export a new version"];return `<div class="lk" style="width:270px;font-size:15px">`+t.map((x,i)=>b?`<div style="margin-bottom:8px">${i+8}. ${x}</div>`:`<div style="margin-bottom:8px;display:grid;grid-template-columns:1.5em 1fr;gap:.45em"><span style="text-align:right;font-variant-numeric:tabular-nums">${i+8}.</span><span>${x}</span></div>`).join("")+`</div>`},
+  yes:"Used an automatic numbered list with aligned numbers and a hanging indent",
+  no:[["Increased the tracking of the numbers","The numerals are spaced the same. What changed is where the text starts."],["Right-aligned the whole list","In window B the item text starts at one shared left edge."]],
+  diff:"Typed numbers → numbered list, numbers right-aligned, hanging indent",
+  why:"When numbers go from 9 to 10, typed numbering pushes the text over and wraps lines under the numbers. A real numbered list keeps every line of text on one edge."},
+ {key:"pstyle",title:"Three headings, three looks",
+  html:b=>{const bad=["font:700 22px/1.2 'Source Serif 4',Georgia,serif","font:italic 400 16px/1.2 'Source Sans 3',Arial,sans-serif","font:800 26px/1.1 'Source Sans 3',Arial,sans-serif;text-transform:uppercase"],good="font:700 19px/1.2 'Source Serif 4',Georgia,serif";const s=[["Harbor Coffee","Brand identity and packaging system."],["Field Notes","Editorial layouts for a quarterly magazine."],["City Jazz Festival","Poster series and outdoor signage."]];return s.map(([h,p],i)=>`<div style="margin-bottom:14px"><h3 class="lk" style="${b?bad[i]:good};margin-bottom:3px">${h}</h3><p style="font-size:14px">${p}</p></div>`).join("")},
+  yes:"Applied one paragraph style to all three headings",
+  no:[["Applied a character style to the body text","The body text is identical in both windows. Only the headings changed."],["Increased the space between sections","The spacing between sections is identical."]],
+  diff:"3 manual heading formats → one \"Project Head\" style: Serif Bold 19/23",
+  why:"Headings at the same level should look the same. A paragraph style guarantees it, and editing the style updates every heading at once."},
+ {key:"cstyle",title:"Emphasis all over the place",
+  html:b=>{const w=b?[`<b class="lk">kerning</b>`,`<i class="lk" style="text-decoration:underline">tracking</i>`,`<span class="lk" style="color:#c0392b;text-transform:uppercase;font-size:12px;letter-spacing:.08em">leading</span>`]:[`<b class="lk">kerning</b>`,`<b class="lk">tracking</b>`,`<b class="lk">leading</b>`];return `<p style="font-size:16px;line-height:1.6">Three spacing controls matter most: ${w[0]} for one letter pair, ${w[1]} for a range of letters, and ${w[2]} for the distance between lines. Learn which one each problem needs.</p>`},
+  yes:"Applied one character style to every key term",
+  no:[["Applied a new paragraph style","The rest of the paragraph (font, size, spacing, alignment) is unchanged. Only three words changed."],["Changed the font of the whole paragraph","The surrounding words use the same typeface in both windows."]],
+  diff:"3 local overrides → one \"Key Term\" character style (Bold)",
+  why:"Emphasis only means something when it is consistent. A character style gives every key term the same treatment, and you can change it in one place."},
+ {key:"pairing",title:"Two fonts fighting",
+  html:b=>`<h3 class="lk" style="font:${b?"400 32px/1.2 'Lobster',cursive":"700 30px/1.15 'Source Serif 4',Georgia,serif"};margin-bottom:10px">The Art of Making</h3><p class="lk" style="font:${b?"400 15px/1.6 'Pacifico',cursive":"400 15px/1.6 'Source Sans 3',Arial,sans-serif"}">Our open studio invites the public to watch printmakers, binders, and letter carvers at work. Admission is free every first Friday.</p>`,
+  yes:"Replaced both fonts with a serif headline and a sans-serif body",
+  no:[["Increased the body text size","The size setting is the same. The letterforms themselves changed."],["Added tracking to the headline","The headline letters in window B are not spread out. It is a different typeface."]],
+  diff:"Lobster + Pacifico → Source Serif 4 Bold + Source Sans 3",
+  why:"Two decorative scripts compete for attention, and a script is hard to read as body text. A good pair gives each face one clear job."},
+ {key:"measure",title:"A line that never ends",wide:true,
+  html:b=>`<p class="lk" style="font-size:13px;line-height:1.5;width:${b?640:320}px">Readers move through text in a steady rhythm: across the line, then back to the start of the next. When a line runs far past 75 characters, the return trip gets long and the eye can land on the wrong line. Most body text reads best at roughly 45 to 75 characters per line, counting spaces.</p>`,
+  yes:"Narrowed the text frame to shorten the line length",
+  no:[["Increased the font size","The type is the same size in both windows."],["Increased the leading","Line spacing is identical. Only the width of the lines changed."]],
+  diff:"Measure: about 115 characters per line → about 55",
+  why:"Very long lines make it hard to find the start of the next line. Aim for about 45 to 75 characters per line in body text."},
+ {key:"widows",title:"One word alone",
+  html:b=>`<div class="lk lines" style="font-size:16px;line-height:1.5">${(b?["Good typography is invisible:","readers notice the message,","not the letters that carry","it."]:["Good typography is invisible:","readers notice the message, not","the letters that carry it."]).map(l=>`<div>${l}</div>`).join("")}</div>`,
+  yes:"Rebalanced the line breaks so the last line is not a single word",
+  no:[["Justified the paragraph","The right edge in window B is still ragged."],["Reduced the font size","The letters are the same size in both windows."]],
+  diff:"Last line: 1 word → 5 words",
+  why:"A short word alone on the last line (a runt) leaves a hole and looks like a mistake. Fix it with a small tracking change or No Break on the last words."},
+ {key:"widows",title:"Stranded at the bottom",
+  html:b=>{const p1=["Letterpress uses","raised metal type","that is inked and","pressed into paper."],p2=["The second session","covers mixing ink","and locking type","into the press."];const L=a=>a.map(l=>`<div>${l}</div>`).join("");const c1=b?L(p1)+`<div class="lk" style="margin-top:12px">${p2[0]}</div>`:L(p1),c2=b?L(p2.slice(1)):`<div class="lk">${L(p2)}</div>`;return `<div class="lines" style="display:flex;gap:18px;font-size:14px;line-height:1.5"><div style="width:140px">${c1}</div><div style="width:140px;border-left:1px solid #d4d4d4;padding-left:18px">${c2}</div></div>`},
+  yes:"Used Keep Options so the paragraph's first line moves with the rest",
+  no:[["Reduced the leading to fit more lines","Line spacing is identical in both windows."],["Justified both columns","Both columns in window B are still ragged right."]],
+  diff:"Keep Options: off → keep first 2 lines together",
+  why:"An orphan is the first line of a paragraph stranded at the bottom of a column. Keep Options moves it to the next column so the paragraph stays together."},
+ {key:"frames",title:"Frames out of line",
+  html:b=>{const o=b?[0,38,12]:[0,0,0];const f=[["Brand Identity","Harbor Coffee · 2025"],["Editorial Layout","Field Notes magazine · 2025"],["Poster Series","City Jazz Festival · 2026"]];return f.map(([h,s],i)=>`<div class="lk sans" style="width:210px;margin:0 0 10px ${o[i]}px;border:1px solid #8fa9d9;padding:8px 10px;font-size:14px"><b>${h}</b><br>${s}</div>`).join("")},
+  yes:"Aligned all three text frames to one shared left edge",
+  no:[["Centered the text inside each frame","The text is still left-aligned inside each frame. The frames themselves moved."],["Increased the space between the frames","The vertical gaps between frames are identical."]],
+  diff:"Frame X positions: 0 / 38 / 12 px → 0 / 0 / 0",
+  why:"Separate frames read as one group when they share an edge. Small random offsets look like mistakes, not decisions."},
+ {key:"quotes",title:"Typewriter punctuation",
+  html:b=>`<p class="lk" style="font-size:22px;line-height:1.4">${b?"&quot;Don&#39;t miss it,&quot; she said -- the show runs 9-5, May 3-7.":"&ldquo;Don&rsquo;t miss it,&rdquo; she said&mdash;the show runs 9&ndash;5, May 3&ndash;7."}</p>`,
+  yes:"Replaced straight quotes and hyphens with curly quotes, an em dash, and en dashes",
+  no:[["Kerned the punctuation","The marks are different characters, not the same ones moved closer."],["Changed the typeface","The letters are identical. Only the punctuation changed."]],
+  diff:"&quot; &#39; -- - → &ldquo;&rdquo; &rsquo; &mdash; &ndash;",
+  why:"Straight marks are typewriter leftovers. Typeset text uses curly quotes and apostrophes, an en dash for ranges (9–5), and an em dash for a break in a sentence."},
+ {key:"scale",title:"Stretched letters",
+  html:b=>`<div class="lk sans" style="font-size:30px;font-weight:700;line-height:1.1;display:inline-block;transform-origin:left;transform:scaleX(${b?1.6:1})">Studio Night</div><p class="sans" style="margin-top:14px;font-size:15px">Open house, Friday at 7 PM.</p>`,
+  yes:"Reset the horizontal scale to 100%",
+  no:[["Reduced the tracking","The gaps between letters are not what changed. The letters themselves are wider in window A."],["Reduced the font size","The letters are the same height in both windows."]],
+  diff:"Horizontal Scale: 160% → 100%",
+  why:"Stretching distorts type: vertical strokes get heavy while horizontal ones stay thin. For more width, choose a wider version of the typeface or resize the type."}
+];
+
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>s.replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let mode="learn",deck=[],pos=0,cur=null,opts=[],answered=false,learnStats={checked:0,right:0},test=null;
+
+$("terms").innerHTML=VOCAB.map(([k,t,d])=>`<div class="term" data-key="${k}"><dt>${t}</dt><dd>${d}</dd></div>`).join("");
+
+function frame(letter,label,cls,html){return `<figure class="frame ${cls}"><figcaption><span class="tag">${letter}</span>${label}</figcaption><div class="sheet"><div class="pg">${html}</div></div></figure>`}
+
+function show(c){
+  cur=c;answered=false;
+  const n=C.indexOf(c)+1;
+  $("caseLabel").textContent=mode==="learn"?`Case ${String(n).padStart(2,"0")} of ${C.length}`:`Question ${test.i+1} of ${test.n}`;
+  $("progress").textContent=mode==="learn"?`${learnStats.right} correct of ${learnStats.checked} checked`:`Score ${test.score}`;
+  $("caseTitle").textContent="What changed between A and B?";
+  $("termChip").hidden=true;
+  const cmp=$("compare");cmp.className="compare"+(c.wide?" wide":"");
+  cmp.innerHTML=frame("A","Problem","bad",c.html(true))+frame("B","Corrected","good",c.html(false));
+  $("hintBtn").hidden=mode!=="learn";$("hintBtn").setAttribute("aria-pressed","false");
+  opts=shuffle([{t:c.yes,ok:true},...c.no.map(([t,w])=>({t,ok:false,w}))]);
+  $("opts").innerHTML=opts.map((o,i)=>`<label class="opt" for="opt${i}"><input type="radio" name="opt" id="opt${i}" value="${i}"><span>${esc(o.t)}</span><span class="why" hidden></span></label>`).join("");
+  $("opts").querySelectorAll("input").forEach(r=>r.addEventListener("change",()=>{$("checkBtn").disabled=false}));
+  $("feedback").innerHTML="";
+  $("checkBtn").hidden=false;$("checkBtn").disabled=true;$("nextBtn").hidden=true;
+  document.querySelectorAll(".term.on").forEach(t=>t.classList.remove("on"));
 }
-.issueBlock{
-  background:#fff1ee !important;
-  border:2px dashed #b42318 !important;
-  box-shadow:0 0 0 4px rgba(180,35,24,.08) !important;
-  border-radius:8px;
-  padding:10px !important;
-}
-.issueLabel{
-  display:inline-block;
-  margin:0 0 8px;
-  padding:4px 8px;
-  border-radius:999px;
-  background:#b42318;
-  color:white;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:.8px;
-  text-transform:uppercase;
-}
-.issueGuide{
-  margin-top:10px;
-  padding:9px 11px;
-  background:#fff8e6;
-  border-left:4px solid #e0a800;
-  color:#624900;
-  font-size:12px;
-  font-weight:700;
-  border-radius:4px;
+
+function check(){
+  if(answered)return;
+  const sel=$("opts").querySelector("input:checked");if(!sel)return;
+  answered=true;
+  const pick=opts[+sel.value],ok=pick.ok,term=VOCAB.find(v=>v[0]===cur.key);
+  $("opts").querySelectorAll(".opt").forEach((lab,i)=>{
+    const o=opts[i],w=lab.querySelector(".why");
+    lab.classList.add("locked");lab.querySelector("input").disabled=true;
+    if(o.ok){lab.classList.add("right");w.innerHTML=`<b>Applied</b>This is the adjustment that turns A into B.`}
+    else{if(i===+sel.value)lab.classList.add("wrong");w.innerHTML=`<b class="no">Not applied</b>${esc(o.w)}`}
+    w.hidden=false;
+  });
+  $("caseTitle").textContent=cur.title;
+  $("termChip").textContent=term[1];$("termChip").hidden=false;
+  $("feedback").innerHTML=`<div class="verdict">${ok?'<span class="pill ok">Correct</span>':'<span class="pill no">Not quite</span>'}<span>${ok?"You spotted the fix.":"The adjustment was: <b>"+esc(cur.yes)+"</b>"}</span></div><div class="diff"><span>What changed</span>${cur.diff}</div><p>${esc(cur.why)}</p>`;
+  const card=document.querySelector(`.term[data-key="${cur.key}"]`);
+  if(card){card.classList.add("on");const side=document.querySelector(".vocab");if(getComputedStyle(side).position==="sticky")side.scrollTop=card.offsetTop-side.offsetTop-60}
+  if(mode==="learn"){learnStats.checked++;if(ok)learnStats.right++;$("progress").textContent=`${learnStats.right} correct of ${learnStats.checked} checked`;$("nextBtn").textContent="Next case"}
+  else{if(ok)test.score++;else test.missed.push(cur);$("progress").textContent=`Score ${test.score}`;$("nextBtn").textContent=test.i+1>=test.n?"See results":"Next question"}
+  $("checkBtn").hidden=true;$("nextBtn").hidden=false;$("nextBtn").focus({preventScroll:true});
 }
 
+function toTop(){const r=$("play").getBoundingClientRect();if(r.top<0)$("play").scrollIntoView({block:"start",behavior:reduced?"auto":"smooth"})}
 
-.problemBanner .problemText strong,
-.problemBanner .problemText b{color:#8f2118}
-
-
-.contextExample{background:#fff;border:2px solid #d7d0c6;border-radius:12px;padding:24px 28px;min-height:250px;color:#242424;text-align:left}
-.contextExample.corrected{border-color:#65a779;background:#fbfffc}
-.contextExample .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;font-weight:900;color:#81786e;margin-bottom:12px}
-.contextExample h2{margin:0 0 16px;font-family:Georgia,serif;font-size:30px;line-height:1.05}
-.contextExample p{font-size:16px;line-height:1.55;margin:0 0 16px;max-width:680px}
-.badLeading{line-height:.78!important}
-.badTracking{letter-spacing:13px!important}
-.badKerning{font-size:64px;font-weight:800;letter-spacing:1px}
-.badKerning::first-letter{margin-right:22px}
-.badParaSpace{margin-top:0!important}
-.alignDemo{display:flex;flex-direction:column;gap:12px}
-.alignDemo p{margin:0;width:300px}
-.badAlign{margin-left:65px!important}
-.badJustify{text-align:justify;word-spacing:15px}
-.badHyphen{width:235px!important}
-.badTabs div,.badList div{margin:10px 0}
-.badTabs span{margin-left:55px}
-.badList div:nth-child(2){margin-left:28px}.badList div:nth-child(3){margin-left:5px}.badList div:nth-child(4){margin-left:35px}
-.badStyles h2:nth-of-type(2){font-size:21px}.badStyles h2:nth-of-type(3){font-size:36px}
-.badCharacter{font-size:23px;letter-spacing:2px;text-decoration:underline}
-.badPairing{font-family:cursive;letter-spacing:3px}
-.pairBody{font-family:Georgia,serif}
-.badLineLength{max-width:none!important}
-.badWidow{width:190px!important;margin-left:auto!important}
-.boxDemo{display:flex;flex-direction:column;gap:14px}
-.boxDemo>div{width:280px;border:1px solid #bbb2a6;padding:12px;font-weight:800}
-.boxDemo small{font-weight:400}
-.badBox{margin-left:60px}
-
-
-.hero{position:relative}
-.versionBadge{
-  position:absolute;
-  top:12px;
-  right:14px;
-  color:#bdbdbd;
-  font:700 11px/1 Arial,sans-serif;
-  letter-spacing:.8px;
-  text-transform:uppercase;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:6px;
-  padding:5px 7px;
+function nextLearn(){if(pos>=deck.length){deck=shuffle(C.map((_,i)=>i));pos=0}show(C[deck[pos++]])}
+function next(){
+  if(mode==="learn"){nextLearn();toTop();return}
+  if(test.i+1>=test.n)return results();
+  test.i++;show(test.list[test.i]);toTop();
 }
 
-.gameArea{display:grid;grid-template-columns:285px minmax(0,1fr);gap:18px;align-items:start;margin-top:16px}
-.gameMain{min-width:0}
-.gameMain>.panel{margin:0 0 16px}
-.vocabSidebar{position:sticky;top:16px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 3px 14px #0001;max-height:calc(100vh - 32px);overflow:auto}
-.vocabHead{border-bottom:2px solid #e5e0d7;padding-bottom:12px;margin-bottom:12px}
-.vocabHead h2{font-size:20px;margin:0 0 7px}
-.vocabHead p{font-size:12px;line-height:1.45;color:#687078;margin:0}
-.vocabList{display:flex;flex-direction:column;gap:8px}
-.vocabCard{padding:10px 11px;border:1px solid #ddd8d0;border-radius:9px;background:#f8f6f2}
-.vocabTerm{font-weight:800;font-size:13px;color:#202124;margin-bottom:4px}
-.vocabDef{font-size:11px;line-height:1.4;color:#5e646b}
-.vocabCard:hover{background:#fff;border-color:#bbb4aa}
-@media(max-width:850px){
- .gameArea{grid-template-columns:1fr}
- .vocabSidebar{position:relative;top:auto;max-height:none;order:2}
- .gameMain{order:1}
- .vocabList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+function startTest(n){
+  test={n,i:0,score:0,missed:[],list:shuffle(C).slice(0,n)};
+  $("setup").hidden=true;$("results").hidden=true;$("play").hidden=false;show(test.list[0]);toTop();
 }
-@media(max-width:520px){.vocabList{grid-template-columns:1fr}}
-</style></head><body><div class="app"><header class="hero"><div class="versionBadge">v11</div><h1>TYPOGRAPHY DETECTIVE</h1><p>Learn to diagnose and adjust what happens inside a text box.</p></header><section class="panel"><h2>Choose Your Mode</h2><div class="modes"><button id="learnMode" class="mode active"><strong>🟢 Learn Mode</strong><small>Identify the typographic adjustments that work together and learn why.</small></button><button id="testMode" class="mode"><strong>🔵 Test Mode</strong><small>Choose a length and work through typography challenges.</small></button></div></section><div class="gameArea"><aside class="vocabSidebar">
-<div class="vocabHead"><h2>Typography Vocabulary</h2><p>Reference these terms while you work. The definitions stay visible so students can learn the vocabulary while diagnosing each example.</p></div>
-<div class="vocabList"><div class="vocabCard"><div class="vocabTerm">Leading</div><div class="vocabDef">The vertical space between lines of text.</div></div><div class="vocabCard"><div class="vocabTerm">Tracking</div><div class="vocabDef">The overall spacing added or removed across a range of letters.</div></div><div class="vocabCard"><div class="vocabTerm">Kerning</div><div class="vocabDef">Fine-tuning the space between specific pairs of letters.</div></div><div class="vocabCard"><div class="vocabTerm">Space Before / After</div><div class="vocabDef">Space added before or after a paragraph to separate ideas without inserting blank lines.</div></div><div class="vocabCard"><div class="vocabTerm">Alignment</div><div class="vocabDef">How text sits horizontally inside its text box: left, center, right, or another alignment setting.</div></div><div class="vocabCard"><div class="vocabTerm">Justification</div><div class="vocabDef">Makes text align to both left and right edges by adjusting word spacing.</div></div><div class="vocabCard"><div class="vocabTerm">Hyphenation</div><div class="vocabDef">Controls where words can break at the ends of lines with hyphens.</div></div><div class="vocabCard"><div class="vocabTerm">Tabs</div><div class="vocabDef">Creates predictable columns of text, such as item names and prices, instead of using repeated spaces.</div></div><div class="vocabCard"><div class="vocabTerm">Bulleted Lists</div><div class="vocabDef">A list structure using bullets with consistent indentation and spacing.</div></div><div class="vocabCard"><div class="vocabTerm">Numbered Lists</div><div class="vocabDef">A list structure using numbers with consistent alignment and indentation.</div></div><div class="vocabCard"><div class="vocabTerm">Paragraph Styles</div><div class="vocabDef">A reusable set of paragraph-level formatting such as font, size, leading, alignment, and spacing.</div></div><div class="vocabCard"><div class="vocabTerm">Character Styles</div><div class="vocabDef">A reusable set of formatting applied to selected characters or words, such as bold, color, or emphasis.</div></div><div class="vocabCard"><div class="vocabTerm">Font Pairing</div><div class="vocabDef">Choosing typefaces that have complementary roles and create useful contrast without competing.</div></div><div class="vocabCard"><div class="vocabTerm">Line Length</div><div class="vocabDef">The approximate width of a line of text. Extremely long or short lines can make reading harder.</div></div><div class="vocabCard"><div class="vocabTerm">Widows / Orphans</div><div class="vocabDef">Controls that help prevent isolated lines of a paragraph from being stranded at the top or bottom of a page or column.</div></div><div class="vocabCard"><div class="vocabTerm">Text-box Alignment</div><div class="vocabDef">How separate text boxes use coordinated paragraph alignment and text edges to function as one typographic system.</div></div></div>
-</aside><main class="gameMain"><section id="setup" class="panel hidden"><h2>Choose Test Length</h2><div class="lengths"><button class="btn" data-n="10">10</button><button class="btn" data-n="20">20</button><button class="btn" data-n="30">30</button><button class="btn" data-n="40">40</button><button class="btn" data-n="50">50</button></div></section><section id="learn" class="panel"><div class="stats"><span>Challenge: <b id="round">1</b></span><span>Score: <b id="score">0</b></span><span>Streak: <b id="streak">0</b></span></div><div id="brief" class="instructions"></div><div class="stage"><div id="visual"></div></div><div class="solutionLabel"><strong>BUILD YOUR SOLUTION</strong><span>First identify what looks wrong in the example. Then select every typography adjustment you think will improve it.</span></div>
-<div id="choices" class="choices"></div><div id="feedback" class="feedback"></div><div id="explain" class="panel hidden"></div><div class="actions"><button id="check" class="btn primary">Check My Solutions</button> <button id="next" class="btn hidden">Next Challenge</button></div></section><section id="test" class="panel hidden"><div class="stats"><span>Question: <b id="q">1</b> / <b id="total">10</b></span><span>Score: <b id="tscore">0</b></span></div><div id="tbrief" class="instructions"></div><div class="stage"><div id="tvisual"></div></div><div id="tchoices" class="choices"></div><div id="tfeedback" class="feedback"></div></section><section id="results" class="panel hidden"></section><section class="panel note"><b>Typography reminder:</b> Leading, tracking, kerning, paragraph spacing, alignment, justification, hyphenation, tabs, lists, font pairing, line length, and paragraph/character styles solve different problems.</section></main></div></div><button id="guideTab" class="guideTab">💡 Design Guide</button><aside id="guide" class="guide"><button id="close" class="close">×</button><h2>💡 Typography Design Guide</h2><p id="guideIntro">Use these reminders to connect a visual problem to the correct typography control.</p><div class="box"><b>Leading</b><br>Controls vertical distance between lines.</div><div class="box"><b>Tracking</b><br>Changes spacing across a range of characters.</div><div class="box"><b>Kerning</b><br>Adjusts space between specific character pairs.</div><div class="box"><b>Paragraph spacing</b><br>Space Before/After separates paragraphs without empty lines.</div><div class="box"><b>Alignment & Justification</b><br>Change how text sits inside its text box. Full justification can create rivers in narrow columns.</div><div class="box"><b>Hyphenation</b><br>Controls where words can break.</div><div class="box"><b>Tabs & Lists</b><br>Use predictable columns, indents, bullets, and numbers.</div><div class="box"><b>Paragraph styles</b><br>Control repeated paragraph-level formatting.</div><div class="box"><b>Character styles</b><br>Control repeated formatting on selected words or characters.</div><div class="box"><b>Font pairing</b><br>Choose complementary roles with useful contrast.</div></aside><script>
-const D=[["Crowded Lines","Leading",["Increase the leading between lines.","Keep the paragraph font size consistent."],"Leading controls vertical distance between lines. Too little leading makes text dense."],["Air Between Ideas","Paragraph Spacing",["Use consistent space after each paragraph.","Remove extra blank paragraph breaks.","Keep the same leading within each paragraph."],"Paragraph Before/After separates ideas without pressing Enter repeatedly."],["Letters Fighting","Tracking",["Reduce the tracking of the heading.","Judge the word as a visual shape, not just individual letters."],"Tracking changes spacing across a range of characters."],["Awkward Pair","Kerning",["Adjust the kerning of the problem letter pair.","Leave overall tracking unchanged."],"Kerning fixes specific character pairs; tracking affects a range."],["The Ragged Edge","Alignment",["Change the paragraph to left alignment.","Keep the text edge consistent throughout the text block."],"Alignment should support scanning and reading."],["Forced Justification","Justification",["Use left-aligned/ragged-right text for the narrow paragraph.","Avoid forcing full justification when the column is too narrow."],"Justification changes word spacing to align both edges and can create rivers in narrow columns."],["Hyphen Highway","Hyphenation",["Reduce excessive hyphenation.","Consider less restrictive alignment if the column remains too narrow."],"Hyphenation can help fit justified text, but too much hurts reading flow."],["The Tab Test","Tabs",["Replace repeated spaces with a tab stop.","Set a consistent tab position for the prices."],"Tabs create predictable columns; repeated spaces are fragile."],["List Disorder","Bulleted Lists",["Set a consistent bullet position and text indent.","Align wrapped lines with the list text, not the bullet."],"Lists need predictable bullet, text, and wrapped-line alignment."],["Numbered Steps","Numbered Lists",["Create a consistent number column.","Use a hanging indent for wrapped list text."],"A predictable number column and hanging indent keep steps readable."],["Style Consistency","Paragraph Styles",["Create and apply one body paragraph style.","Use the style consistently instead of manual formatting."],"Paragraph styles make repeated formatting consistent and editable."],["Character Style","Character Styles",["Create a character style for emphasized terms.","Apply the same character style consistently."],"Character styles control selected words without changing the whole paragraph."],["Font Pairing","Font Pairing",["Choose typefaces with complementary roles.","Give headline and body type clear, readable roles."],"Good pairing creates useful contrast without unnecessary competition."],["Paragraph Hierarchy","Space Before / After",["Use paragraph-after spacing for the heading-to-body relationship.","Remove manual blank lines.","Keep heading spacing consistent."],"Paragraph spacing creates hierarchy without empty paragraphs."],["The Long Line","Line Length",["Reduce usable text width or increase text size appropriately.","Keep line length comfortable for the reading task."],"Very long lines make it harder to track from line to line."],["Widow Alert","Widows & Orphans",["Keep enough lines together to avoid a stranded line.","Use paragraph pagination controls rather than random line breaks."],"Widows and orphans interrupt reading continuity."],["Mixed Signals","Text Box Alignment",["Use a consistent alignment setting for related text boxes.","Coordinate the text edges of related boxes."],"Separate text boxes can still form one typographic system."],["Leading vs Paragraph Space","Leading vs Paragraph Spacing",["Use leading for line-to-line readability.","Use paragraph spacing to separate paragraphs."],"Leading and paragraph spacing solve different problems."],["Tracking vs Kerning","Tracking vs Kerning",["Use kerning for the individual problem pair.","Leave the rest of the heading tracking consistent."],"Use the smallest appropriate spacing control."],["Style System","Paragraph + Character Styles",["Create paragraph styles for repeated text structures.","Use character styles for repeated inline emphasis.","Keep the style system consistent."],"Paragraph styles control paragraphs; character styles control selected characters."]],V=["<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"tightlead\">Typography should make language readable.<br>Good typography creates rhythm and hierarchy.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"display loose\">TYPOGRAPHY</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"display\">AVATAR</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"center\">DESIGN<br><small>Make the message easy to follow.</small></span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"just\">Typography should help the reader move through information without distraction. Uneven word spacing can create distracting rivers.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">Design Book ........ $24.00 &nbsp; Grid Guide ........ $18.00<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">\u2022 &nbsp; Alignment and spacing<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">1. &nbsp; Define the problem<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"serif\">Design</span> <span class=\"sans\">makes information easier to understand.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"long\">Typography works best when the reader can comfortably travel from the end of one line back to the beginning of the next.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>"],C=["<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"tightlead\">Typography should make language readable.<br>Good typography creates rhythm and hierarchy.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"display \">TYPOGRAPHY</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"display\">AVATAR</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"center\">DESIGN<br><small>Make the message easy to follow.</small></span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"just\">Typography should help the reader move through information without distraction. Uneven word spacing can create distracting rivers.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">Design Book ........ $24.00 &nbsp; Grid Guide ........ $18.00<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">\u2022 &nbsp; Alignment and spacing<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><div class=\"list\">1. &nbsp; Define the problem<br>\u2022 Type hierarchy<br>\u2022 Visual rhythm</div></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"serif\">Design</span> <span class=\"sans\">makes information easier to understand.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\"><span class=\"long\">Typography works best when the reader can comfortably travel from the end of one line back to the beginning of the next.</span></div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>","<div class=\"typewindow\"><div class=\"toolbar\">Text Box &nbsp; \u00b6 &nbsp; T &nbsp; \u2261 &nbsp; \u2194</div><div class=\"sample\">Typography should make language readable, clear, and visually organized.</div></div>"];let S={cur:null,sel:new Set(),locked:false,round:0,score:0,streak:0,total:0,q:0,tscore:0,tlock:false};
-const $=x=>document.getElementById(x),pick=a=>a[Math.floor(Math.random()*a.length)],shuffle=a=>a.slice().sort(()=>Math.random()-.5);
-function updateSelectionCount(){const label=document.querySelector('.solutionLabel span');if(label)label.textContent=S.sel.size?`${S.sel.size} adjustment${S.sel.size===1?'':'s'} selected — choose all that apply.`:'First identify what looks wrong in the example. Then select every typography adjustment you think will improve it.';}
-function renderChoices(el,items,fn){el.innerHTML='';shuffle(items).forEach(text=>{const b=document.createElement('button');b.type='button';b.className='choice';b.dataset.answer=text;b.textContent=text;b.onclick=()=>fn(text,b);el.appendChild(b)})}
+function results(){
+  const pct=Math.round(test.score/test.n*100);
+  $("play").hidden=true;
+  $("results").innerHTML=`<p class="meta" style="margin:0">Test complete</p><div class="big">${test.score} / ${test.n}</div><p class="muted" style="margin:0">${pct}% correct</p>`+
+   (test.missed.length?`<h2 style="margin-top:20px;font-size:20px">Review these</h2><ul class="missed">${test.missed.map(c=>`<li><b>${esc(c.title)}</b> · ${esc(VOCAB.find(v=>v[0]===c.key)[1])}<small>The fix: ${esc(c.yes)}</small></li>`).join("")}</ul>`:`<p style="margin-top:14px">Every answer correct.</p>`)+
+   `<div class="actions"><button type="button" class="primary" id="againBtn">Take another test</button><button type="button" class="secondary" id="toLearnBtn">Back to Learn</button></div>`;
+  $("results").hidden=false;
+  $("againBtn").onclick=()=>setMode("test");$("toLearnBtn").onclick=()=>setMode("learn");
+  toTop();
+}
 
-function contextualExample(ch, corrected=false){
-  const cls=corrected?"contextExample corrected":"contextExample";
-  const p=(body)=>`<div class="${cls}">${body}</div>`;
-  switch(ch.topic){
-    case "Leading":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Why Typography Matters</h2>
-      <p class="${corrected?"":"badLeading"}">Good typography makes information easier to read and understand. When lines of text are packed too closely together, the reader's eye has difficulty moving from one line to the next.</p>
-      <p>Designers use spacing to guide readers through information and create a comfortable rhythm.</p>`);
-    case "Tracking":
-      return p(`<div class="eyebrow">${ch.title}</div><h2 class="${corrected?"":"badTracking"}">DESIGN FOR PEOPLE</h2>
-      <p>Display type needs enough space to remain clear while still feeling connected as a phrase.</p>`);
-    case "Kerning":
-      return p(`<div class="eyebrow">${ch.title}</div><div class="${corrected?"":"badKerning"}">WATER</div>
-      <p>The identity should feel balanced and intentional. Individual letter pairs should appear evenly spaced.</p>`);
-    case "Paragraph Spacing":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Design Process</h2>
-      <p>Research helps designers understand the audience and the problem they need to solve.</p>
-      <p class="${corrected?"":"badParaSpace"}">Sketching allows designers to explore many possible solutions before choosing a direction.</p>
-      <p>Iteration improves the final result by revealing what works and what needs adjustment.</p>`);
-    case "Alignment":
-      return p(`<div class="eyebrow">${ch.title}</div><div class="alignDemo">
-      <p>Research and discover<br>the problem first.</p>
-      <p class="${corrected?"":"badAlign"}">Create several<br>possible solutions.</p>
-      <p>Refine the strongest<br>direction.</p></div>`);
-    case "Justification":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Community Story</h2>
-      <p class="${corrected?"":"badJustify"}">A community project brings people together around a shared goal. Designers organize the information so readers can quickly understand what is happening, where it is happening, and how they can participate.</p>`);
-    case "Hyphenation":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Travel Notes</h2>
-      <p class="${corrected?"":"badHyphen"}">A narrow brochure column contains several long words that are forced onto new lines, creating uneven spacing and awkward breaks that interrupt the reading rhythm.</p>`);
-    case "Tabs":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Event Schedule</h2>
-      <div class="${corrected?"":"badTabs"}"><div>Opening Reception <span>6:00 PM</span></div><div>Guest Speaker <span>7:15 PM</span></div><div>Student Showcase <span>8:00 PM</span></div></div>`);
-    case "Bulleted Lists":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Materials</h2>
-      <div class="${corrected?"":"badList"}"><div>• Sketchbook</div><div>• Pencil</div><div>• Ruler</div><div>• Computer mouse</div></div>`);
-    case "Numbered Lists":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Project Steps</h2>
-      <div class="${corrected?"":"badList"}"><div>1. Research the audience</div><div>2. Sketch several ideas</div><div>3. Select a direction</div><div>4. Refine the final design</div></div>`);
-    case "Paragraph Styles":
-      return p(`<div class="eyebrow">${ch.title}</div><div class="${corrected?"":"badStyles"}">
-      <h2>Project One</h2><p>Brand identity exploration and final presentation.</p>
-      <h2>Project Two</h2><p>Editorial layout exploration and final presentation.</p>
-      <h2>Project Three</h2><p>Poster design exploration and final presentation.</p></div>`);
-    case "Character Styles":
-      return p(`<div class="eyebrow">${ch.title}</div>
-      <p>This portfolio includes <span class="${corrected?"":"badCharacter"}">important project information</span> that needs consistent emphasis throughout the document.</p>
-      <p>Each caption should use the same emphasis for project names and key terms.</p>`);
-    case "Font Pairing":
-      return p(`<div class="eyebrow">${ch.title}</div><h2 class="${corrected?"":"badPairing"}">The Art of Making</h2>
-      <p class="pairBody">Typography creates hierarchy, mood, and clarity. Supporting text should complement the headline rather than compete with it.</p>`);
-    case "Line Length":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Design and Reading</h2>
-      <p class="${corrected?"":"badLineLength"}">Readers move through lines of text in a predictable rhythm. When a line becomes extremely long, the eye has farther to travel before returning to the beginning of the next line.</p>`);
-    case "Widows / Orphans":
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Annual Report</h2>
-      <p>Our design program helps students develop visual communication skills through projects that combine research, typography, layout, and iteration.</p>
-      <p class="${corrected?"":"badWidow"}">Students present their work at the end of each term.</p>`);
-    case "Text-box Alignment":
-      return p(`<div class="eyebrow">${ch.title}</div><div class="boxDemo">
-      <div>Project Name<br><small>Brand Identity</small></div>
-      <div class="${corrected?"":"badBox"}">Project Name<br><small>Editorial Layout</small></div>
-      <div>Project Name<br><small>Poster Design</small></div></div>`);
-    default:
-      return p(`<div class="eyebrow">${ch.title}</div><h2>Typography Example</h2><p>${ch.problem}</p>`);
-  }
+function setMode(m){
+  mode=m;
+  $("mLearn").setAttribute("aria-pressed",m==="learn");$("mTest").setAttribute("aria-pressed",m==="test");
+  $("results").hidden=true;
+  if(m==="learn"){$("setup").hidden=true;$("play").hidden=false;nextLearn()}
+  else{test=null;$("play").hidden=true;$("setup").hidden=false}
 }
-function learn(){S.round++;S.cur=pick(D);S.sel=new Set();S.locked=false;$('round').textContent=S.round;$('score').textContent=S.score;$('streak').textContent=S.streak;const i=D.indexOf(S.cur);$('brief').innerHTML=`<b>${S.cur[0]}</b><br><b>${S.cur[1]}</b><br>Look closely at the text treatment shown below.<br><br><strong>Choose the typography controls that would fix the problem. There may be more than one correct answer.</strong>`;$('visual').innerHTML=V[i];$('feedback').textContent='';$('feedback').className='feedback';$('explain').classList.add('hidden');$('check').classList.remove('hidden');$('next').classList.add('hidden');
-let answers=S.cur[2].slice(), pool=D.flatMap(x=>x[2]).filter(x=>!answers.includes(x));while(answers.length<Math.min(5,S.cur[2].length+2)&&pool.length)answers.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);renderChoices($('choices'),answers,(text,b)=>{if(S.locked)return;if(S.sel.has(text)){S.sel.delete(text);b.classList.remove('selected')}else{S.sel.add(text);b.classList.add('selected')}updateSelectionCount()});updateSelectionCount()}
-function checkLearn(){if(S.locked)return;if(!S.sel.size){$('feedback').textContent='Choose at least one adjustment before checking.';$('feedback').className='feedback bad';return}S.locked=true;const correct=new Set(S.cur[2]),right=[...S.sel].filter(x=>correct.has(x)),wrong=[...S.sel].filter(x=>!correct.has(x)),miss=[...correct].filter(x=>!S.sel.has(x)),perfect=!wrong.length&&!miss.length;[...$('choices').children].forEach(b=>{b.disabled=true;if(correct.has(b.dataset.answer))b.classList.add('correct');if(S.sel.has(b.dataset.answer)&&!correct.has(b.dataset.answer))b.classList.add('wrong')});if(perfect){S.score++;S.streak++;$('feedback').textContent='🎉 Excellent typography diagnosis!';$('feedback').className='feedback good'}else if(right.length){S.streak=0;$('feedback').textContent='👍 Good start — you found part of the solution.';$('feedback').className='feedback good'}else{S.streak=0;$('feedback').textContent="🔎 Let's slow down and rebuild the typography fundamentals.";$('feedback').className='feedback bad'}$('score').textContent=S.score;$('streak').textContent=S.streak;const i=D.indexOf(S.cur);$('visual').innerHTML=C[i];let concept=S.cur[3];$('explain').innerHTML=perfect?`<h3>🎉 What you did well</h3><p>You identified every important adjustment.</p><p><b>Why:</b> ${concept}</p>`:right.length?`<h3>👍 What you got right</h3><p><b>Correct:</b> ${right.join('; ')}.</p><p><b>Still to notice:</b> ${miss.join('; ')}.</p><p>${concept}</p>`:`<h3>🔎 Let's review the fundamentals</h3><p>The goal is to connect the visual symptom to the typography control that changes it.</p><p><b>${S.cur[1]}:</b> ${concept}</p>`;$('explain').classList.remove('hidden');$('check').classList.add('hidden');$('next').classList.remove('hidden');openGuide(perfect?'Great job!':right.length?'Good start — keep going.':'Let’s review the basics.')}
-function startTest(n){S.total=n;S.q=0;S.tscore=0;$('setup').classList.add('hidden');$('learn').classList.add('hidden');$('results').classList.add('hidden');$('test').classList.remove('hidden');testQ()}
-function testQ(){if(S.q>=S.total)return finish();S.q++;S.tlock=false;S.cur=pick(D);const i=D.indexOf(S.cur);$('q').textContent=S.q;$('total').textContent=S.total;$('tscore').textContent=S.tscore;$('tbrief').innerHTML=`<b>${S.cur[0]}</b><br><b>${S.cur[1]}</b><br>Identify the most appropriate typography adjustment.<br><br><strong>Choose the best answer.</strong>`;$('tvisual').innerHTML=V[i];$('tfeedback').textContent='';renderChoices($('tchoices'),D[i][2],(text,b)=>{if(S.tlock)return;S.tlock=true;[...$('tchoices').children].forEach(x=>x.disabled=true);if(S.cur[2].includes(text)){S.tscore++;b.classList.add('correct');$('tfeedback').textContent='✓ Correct!'}else{b.classList.add('wrong');$('tfeedback').textContent='✗ Keep practicing.';[...$('tchoices').children].forEach(x=>{if(x.dataset.answer===S.cur[2][0])x.classList.add('correct')})}$('tscore').textContent=S.tscore;setTimeout(testQ,850)})}
-function finish(){ $('test').classList.add('hidden');const pct=Math.round(S.tscore/S.total*100);$('results').innerHTML=`<h2>Typography Test Complete</h2><div class='score'>${S.tscore} / ${S.total}</div><p><b>${pct}%</b></p><button class='btn primary' id='again'>Choose Another Test</button> <button class='btn' id='learnAgain'>Learn Mode</button>`;$('results').classList.remove('hidden');$('again').onclick=()=>{$('results').classList.add('hidden');$('setup').classList.remove('hidden')};$('learnAgain').onclick=()=>setMode('learn')}
-function setMode(m){$('learnMode').classList.toggle('active',m==='learn');$('testMode').classList.toggle('active',m==='test');$('setup').classList.toggle('hidden',m!=='test');$('learn').classList.toggle('hidden',m!=='learn');$('test').classList.add('hidden');$('results').classList.add('hidden');if(m==='learn'){S.round=0;S.score=0;S.streak=0;learn()}}
-function openGuide(msg){$('guideIntro').innerHTML=msg+'<br><br>Use these reminders to connect the visual problem to the correct typography control.';$('guide').classList.add('open')}
-$('guideTab').onclick=()=>openGuide('Typography controls solve different problems.');const closeGuide=document.getElementById('close')||document.getElementById('closeGuide');if(closeGuide)closeGuide.onclick=()=>$('guide').classList.remove('open');$('learnMode').onclick=()=>setMode('learn');$('testMode').onclick=()=>{$('learn').classList.add('hidden');$('test').classList.add('hidden');$('results').classList.add('hidden');$('setup').classList.remove('hidden');$('learnMode').classList.remove('active');$('testMode').classList.add('active')};document.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>startTest(Number(b.dataset.n)));$('check').onclick=checkLearn;$('next').onclick=learn;document.querySelectorAll('.vocab').forEach(v=>{v.tabIndex=0;v.setAttribute('aria-label',v.textContent+': '+v.dataset.tip)});setMode('learn');
-</script></body></html>
+
+$("mLearn").onclick=()=>setMode("learn");
+$("mTest").onclick=()=>setMode("test");
+document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>startTest(+b.dataset.n));
+$("checkBtn").onclick=check;
+$("nextBtn").onclick=next;
+$("hintBtn").onclick=()=>{const on=$("compare").classList.toggle("hinting");$("hintBtn").setAttribute("aria-pressed",on)};
+setMode("learn");
+</script>
+</body>
+</html>
