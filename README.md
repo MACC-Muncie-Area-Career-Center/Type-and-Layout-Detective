@@ -1,16 +1,8 @@
-# Typography Detective v9
+# Typography Detective v11
 
-MACC Digital Design typography game.
+## Interface fix
+The Typography Controls panel has now actually been moved into a left-side Typography Vocabulary reference column. It is no longer a separate full-width panel.
 
-## v9 interface changes
-- Typography Vocabulary is now a non-clickable reference sidebar on the left.
-- Every term has its definition permanently visible.
-- The vocabulary no longer looks like a collection of interactive answer buttons.
-- The challenge area moves directly beneath the Learn/Test mode selector.
-- Vocabulary remains visible while students work.
-- Sidebar becomes a responsive section below the challenge on smaller screens.
-- Existing contextual typography examples, Learn/Test logic, scoring, and feedback remain intact.
+The right-hand column contains the mode-dependent challenge area, beginning directly below the Learn/Test mode selector. Vocabulary definitions remain permanently visible on the left.
 
-
-## v10
-- Added a `v10` version badge in the upper-right corner of the black Typography Detective header.
+The header version badge is v11.
